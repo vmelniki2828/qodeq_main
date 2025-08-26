@@ -60,6 +60,68 @@ function TiltCard({ children, style }) {
   );
 }
 
+// Компонент анимированного звездопада
+function Starfall({ count = 60 }) {
+  const ref = useRef();
+  React.useEffect(() => {
+    const canvas = ref.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = canvas.offsetWidth;
+    let height = canvas.height = canvas.offsetHeight;
+    let stars = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: Math.random() * 1.2 + 0.5,
+      speed: Math.random() * 0.7 + 0.3
+    }));
+    let animationId;
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
+        ctx.fillStyle = 'rgba(255,255,255,0.85)';
+        ctx.shadowColor = '#fff';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        star.y += star.speed;
+        if (star.y > height) {
+          star.x = Math.random() * width;
+          star.y = -2;
+          star.r = Math.random() * 1.2 + 0.5;
+          star.speed = Math.random() * 0.7 + 0.3;
+        }
+      }
+      animationId = requestAnimationFrame(animate);
+    }
+    animate();
+    window.addEventListener('resize', handleResize);
+    function handleResize() {
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    }
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [count]);
+  return (
+    <canvas
+      ref={ref}
+      style={{
+        position: 'absolute',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 0,
+        pointerEvents: 'none',
+        opacity: 0.7,
+      }}
+    />
+  );
+}
+
 function App() {
   const mainBlockRef = useRef(null);
   const aboutRef = useRef(null);
@@ -86,6 +148,7 @@ function App() {
           id="main"
           className="main-block cursor-invert"
           ref={mainBlockRef}
+          style={{ position: 'relative', overflow: 'hidden' }}
           onMouseMove={handleMouseMove}
           onMouseLeave={() => {
             if (mainBlockRef.current) {
@@ -94,7 +157,20 @@ function App() {
             }
           }}
         >
-          <h1 className="main-title hero-title">
+          <Starfall count={70} />
+          <h1 className="main-title hero-title" style={{
+            maxWidth: 600,
+            padding: '24px 24px',
+            fontSize: '2.2rem',
+            margin: '0 auto 24px auto',
+            lineHeight: 1.1,
+            fontWeight: 700,
+            letterSpacing: '1.5px',
+            background: 'rgba(0,0,0,0.72)',
+            borderRadius: 18,
+            zIndex: 2,
+            position: 'relative',
+          }}>
             Qodeq — AI-платформа для саппорта, колл-центров и платежей
           </h1>
           <p className="hero-subtitle">
