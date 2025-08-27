@@ -1,45 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Navigation.css';
 
-// Кастомная функция очень плавного скролла
-function smoothScrollTo(target, duration = 2500) {
-  const startY = window.scrollY;
-  const endY = target.getBoundingClientRect().top + window.scrollY;
-  const distance = endY - startY;
-  let startTime = null;
-
-  function animation(currentTime) {
-    if (!startTime) startTime = currentTime;
-    const timeElapsed = currentTime - startTime;
-    // easeInOutCubic
-    const t = Math.min(timeElapsed / duration, 1);
-    const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    window.scrollTo(0, startY + distance * ease);
-    if (timeElapsed < duration) {
-      requestAnimationFrame(animation);
-    }
-  }
-  requestAnimationFrame(animation);
-}
-
 function Navigation() {
-  // Функция для плавного скролла к секции
-  const handleNavClick = (e, sectionId) => {
-    e.preventDefault();
-    const section = document.getElementById(sectionId);
-    if (section) {
-      smoothScrollTo(section, 2500);
-    }
-  };
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const startPoint = windowHeight * 0.5;
+      const endPoint = windowHeight * 1.2;
+      const progress = Math.min(1, Math.max(0, (scrollY - startPoint) / (endPoint - startPoint)));
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const isDark = scrollProgress < 0.5;
+  const navColor = isDark ? '#fff' : '#000';
 
   return (
     <nav className="nav-bar">
-      <div className="logo-text">QODEQ</div>
+      <div className="logo-text" style={{ color: navColor }}>QODEQ</div>
       <ul className="nav-list">
-        <li><a href="#main" className="active" aria-current="page" onClick={e => handleNavClick(e, 'main')}>Главная</a></li>
-        <li><a href="#about" onClick={e => handleNavClick(e, 'about')}>О нас</a></li>
-        <li><a href="#services" onClick={e => handleNavClick(e, 'services')}>Услуги</a></li>
-        <li><a href="#contacts" onClick={e => handleNavClick(e, 'contacts')}>Контакты</a></li>
+        <li><a href="#main" className="active" aria-current="page" style={{ color: navColor }}>Главная</a></li>
+        <li><a href="#about" style={{ color: navColor }}>Почему Qodeq</a></li>
       </ul>
     </nav>
   );
