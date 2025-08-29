@@ -23,7 +23,6 @@ body::before {
 #root, .main-title, .logo-text, .nav-list a, h1, h2, h3, h4, h5, h6, p, span, li, a {
   position: relative;
   z-index: 1;
-  mix-blend-mode: difference;
   color: #fff;
 }
 
@@ -104,7 +103,6 @@ body::before {
   margin: 0 0 32px 0;
   letter-spacing: 1px;
   line-height: 1.15;
-  mix-blend-mode: difference;
   z-index: 2;
   opacity: 0;
   transform: translateY(40px);
@@ -120,7 +118,6 @@ body::before {
   margin: 0 0 40px 0;
   line-height: 1.5;
   opacity: 0.85;
-  mix-blend-mode: difference;
   z-index: 2;
   opacity: 0;
   transform: translateY(40px);
@@ -222,7 +219,7 @@ html {
 }
 
 html, body, #root, h1, h2, h3, h4, h5, h6, p, span, li, a, button, input, textarea {
-  font-family: 'Oswald', Arial, sans-serif !important;
+  font-family: 'Oswald', Arial, sans-serif ;
 }
 
 .snap-container {
