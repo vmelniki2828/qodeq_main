@@ -6,7 +6,7 @@ function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['main', 'about', 'products', 'stats', 'target'];
+      const sections = ['main', 'about', 'products', 'stats', 'target', 'how', 'cta'];
       let currentSection = sections[0];
 
       // Находим текущую видимую секцию
@@ -21,7 +21,7 @@ function Navigation() {
       });
 
       // Определяем цвет текста в зависимости от секции
-      if (currentSection === 'about' || currentSection === 'stats') {
+      if (currentSection === 'about' || currentSection === 'stats' || currentSection === 'how') {
         setTextColor('#000'); // черный текст для белых секций
       } else {
         setTextColor('#fff'); // белый текст для темных секций
@@ -78,6 +78,22 @@ function Navigation() {
             style={{ color: textColor }}
           >
             For Business
+          </a>
+        </li>
+        <li>
+          <a 
+            href="#how"
+            style={{ color: textColor }}
+          >
+            How it Works
+          </a>
+        </li>
+        <li>
+          <a 
+            href="#cta"
+            style={{ color: textColor }}
+          >
+            Contact
           </a>
         </li>
       </ul>

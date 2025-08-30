@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-const Starfall = ({ count = 60, isDark = true }) => {
+const Starfall = ({ count = 120, isDark = true }) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const Starfall = ({ count = 60, isDark = true }) => {
     let stars = Array.from({ length: count }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      r: Math.random() * 1.2 + 0.5,
+      r: Math.random() * 1.5 + 0.8,
       speed: Math.random() * 0.7 + 0.3
     }));
 
@@ -24,9 +24,9 @@ const Starfall = ({ count = 60, isDark = true }) => {
       for (let star of stars) {
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
-        ctx.fillStyle = 'rgba(128,128,128,0.85)';
-        ctx.shadowColor = '#808080';
-        ctx.shadowBlur = 8;
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.shadowColor = '#fff';
+        ctx.shadowBlur = 12;
         ctx.fill();
         star.y += star.speed;
         if (star.y > height) {
@@ -64,7 +64,7 @@ const Starfall = ({ count = 60, isDark = true }) => {
         height: '100%',
         zIndex: 0,
         pointerEvents: 'none',
-        opacity: 0.7,
+        opacity: 0.8,
       }}
     />
   );
