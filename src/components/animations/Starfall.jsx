@@ -24,13 +24,8 @@ const Starfall = ({ count = 60, isDark = true }) => {
       for (let star of stars) {
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
-        if (isDark) {
-          ctx.fillStyle = 'rgba(255,255,255,0.85)';
-          ctx.shadowColor = '#fff';
-        } else {
-          ctx.fillStyle = 'rgba(0,0,0,0.85)';
-          ctx.shadowColor = '#000';
-        }
+        ctx.fillStyle = 'rgba(128,128,128,0.85)';
+        ctx.shadowColor = '#808080';
         ctx.shadowBlur = 8;
         ctx.fill();
         star.y += star.speed;

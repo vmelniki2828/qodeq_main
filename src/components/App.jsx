@@ -8,68 +8,68 @@ import PulsingSphere from './animations/PulsingSphere';
 const products = [
   {
     id: 'chat',
-    title: 'Чат-бот',
-    shortDescription: 'Отвечает в чате до 40% обращений.',
-    fullDescription: `Автоматизированный чат-бот с искусственным интеллектом для обработки запросов пользователей.
+    title: 'Chatbot',
+    shortDescription: 'Up to 40% of requests',
+    fullDescription: `AI-powered chatbot for automated processing of user requests.
     
-    Ключевые преимущества:
-    • Мгновенные ответы 24/7
-    • Поддержка множества языков
-    • Интеграция с популярными мессенджерами
-    • Автоматическая эскалация сложных запросов
-    • Аналитика и отчетность`,
-    features: ['AI-powered ответы', 'Мультиязычность', 'Интеграция с CRM', 'Аналитика запросов']
+    Key Benefits:
+    • 24/7 Instant Responses
+    • Multi-language Support
+    • Popular Messenger Integration
+    • Automatic Complex Case Escalation
+    • Analytics and Reporting`,
+    features: ['AI-powered Responses', 'Multi-language', 'CRM Integration', 'Request Analytics']
   },
   {
     id: 'call',
-    title: 'Колл-центр бот',
-    shortDescription: 'Обрабатывает до 80% звонков без оператора.',
-    fullDescription: `Интеллектуальная система обработки телефонных звонков с распознаванием речи.
+    title: 'Call Center Bot',
+    shortDescription: 'Up to 80% of calls',
+    fullDescription: `Intelligent phone call processing system with speech recognition.
     
-    Ключевые преимущества:
-    • Автоматическая обработка типовых запросов
-    • Распознавание речи на разных языках
-    • Естественный синтез речи
-    • Интеграция с существующей телефонией
-    • Детальная статистика звонков`,
-    features: ['Распознавание речи', 'Синтез речи', 'Маршрутизация', 'Запись разговоров']
+    Key Benefits:
+    • Automated Standard Request Processing
+    • Multi-language Speech Recognition
+    • Natural Speech Synthesis
+    • Existing Telephony Integration
+    • Detailed Call Statistics`,
+    features: ['Speech Recognition', 'Voice Synthesis', 'Call Routing', 'Call Recording']
   },
   {
     id: 'payment',
-    title: 'Пеймент-бот',
-    shortDescription: 'Закрывает до 70% тикетов по депозитам и выводам.',
-    fullDescription: `Автоматизированная система обработки платежных запросов и поддержки.
+    title: 'Payment Bot',
+    shortDescription: 'Up to 70% of tickets',
+    fullDescription: `Automated payment request and support processing system.
     
-    Ключевые преимущества:
-    • Автоматическая проверка статуса платежей
-    • Помощь с депозитами и выводами
-    • Интеграция с платежными системами
-    • Безопасная обработка данных
-    • Мониторинг транзакций`,
-    features: ['Проверка платежей', 'Автоматические выводы', 'Безопасность', 'История операций']
+    Key Benefits:
+    • Automatic Payment Status Verification
+    • Deposit and Withdrawal Assistance
+    • Payment System Integration
+    • Secure Data Processing
+    • Transaction Monitoring`,
+    features: ['Payment Verification', 'Automated Withdrawals', 'Security', 'Transaction History']
   },
   {
     id: 'qa',
-    title: 'QA-бот',
-    shortDescription: 'Проверяет до 80% чатов и звонков автоматически.',
-    fullDescription: `Система контроля качества обслуживания с использованием AI.
+    title: 'QA Bot',
+    shortDescription: 'Up to 80% of checks',
+    fullDescription: `AI-powered service quality control system.
     
-    Ключевые преимущества:
-    • Автоматическая проверка диалогов
-    • Оценка качества ответов
-    • Выявление проблемных моментов
-    • Рекомендации по улучшению
-    • Генерация отчетов`,
-    features: ['AI-анализ диалогов', 'Оценка качества', 'Рекомендации', 'Отчетность']
+    Key Benefits:
+    • Automated Dialogue Review
+    • Response Quality Assessment
+    • Issue Detection
+    • Improvement Recommendations
+    • Report Generation`,
+    features: ['AI Dialogue Analysis', 'Quality Assessment', 'Recommendations', 'Reporting']
   }
 ];
 
 const valueProps = [
-  'Автоматизация до 70% чатов, звонков и тикетов.',
-  'Экономия до $50,000 в месяц на поддержке.',
-  'Поддержка до 15 языков.',
-  'Интеграции с CRM, платежными системами и игровыми платформами.',
-  'Аналитика и контроль качества.',
+  'Automation of up to 70% of chats, calls, and tickets.',
+  'Save up to $50,000 monthly on support.',
+  'Support for up to 15 languages.',
+  'Integration with CRM, payment systems, and gaming platforms.',
+  'Analytics and quality control.',
 ];
 
 
@@ -90,15 +90,6 @@ function App() {
       <div style={{ position: 'relative' }}>
         {/* Фиксированные элементы */}
         <div style={{
-          position: 'fixed', 
-          inset: 0, 
-          zIndex: 1,
-          pointerEvents: 'none'
-        }}>
-          <Starfall count={90} isDark={true} />
-        </div>
-
-        <div style={{
           position: 'fixed',
           inset: 0,
           background: '#000',
@@ -107,6 +98,16 @@ function App() {
           zIndex: 0,
           pointerEvents: 'none'
         }} />
+        
+        <div style={{
+          position: 'fixed', 
+          inset: 0, 
+          zIndex: 3000,
+          pointerEvents: 'none',
+          mixBlendMode: 'difference'
+        }}>
+          <Starfall count={90} isDark={false} />
+        </div>
 
         {/* Навигация */}
         <div id="header-hover-zone" style={{
@@ -151,7 +152,8 @@ function App() {
                 marginBottom: 24
               }}
             >
-              Qodeq — AI-платформа для саппорта, колл-центров и платежей
+              
+              Qodeq — AI Platform for Support, Call Centers and Payments
             </motion.h1>
             <PulsingSphere scrollProgress={0} />
           </main>
@@ -188,7 +190,7 @@ function App() {
                   textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)'
                 }}
               >
-                Почему Qodeq
+                Why Qodeq
               </motion.h2>
 
             <div style={{
@@ -358,13 +360,11 @@ function App() {
                 marginBottom: 60,
                 fontWeight: 700
               }}
-            >
-              Продукты платформы
-            </motion.h2>
-
-            <div style={{
+              >
+              Platform Products
+            </motion.h2>            <div style={{
               display: 'grid',
-              gridTemplateColumns: '300px 1fr',
+              gridTemplateColumns: '320px 1fr',
               gap: '60px',
               position: 'relative',
               perspective: '1500px'
@@ -393,7 +393,7 @@ function App() {
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '20px'
+                  gap: '24px'
                 }}
               >
                 {products.map((product, idx) => (
@@ -431,8 +431,12 @@ function App() {
                       background: selectedProduct?.id === product.id ? 
                         'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)' : 
                         'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)',
-                      borderRadius: '20px',
+                      borderRadius: '22px',
                       padding: '24px',
+                      height: '80px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       cursor: 'pointer',
                       border: '1px solid',
                       borderColor: selectedProduct?.id === product.id ?
@@ -446,25 +450,18 @@ function App() {
                     onClick={() => setSelectedProduct(product)}
                   >
                     <h3 style={{
-                      fontSize: '1.4rem',
-                      marginBottom: '10px',
+                      fontSize: '1.6rem',
+                      margin: 0,
                       color: '#fff',
                       fontWeight: 700,
-                      letterSpacing: '0.5px',
+                      letterSpacing: '0.3px',
                       textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                      textAlign: 'center',
                       position: 'relative',
-                      display: 'inline-block'
+                      lineHeight: 1.2
                     }}>
                       {product.title}
                     </h3>
-                    <p style={{
-                      fontSize: '0.95rem',
-                      lineHeight: 1.4,
-                      color: 'rgba(255,255,255,0.7)',
-                      margin: 0
-                    }}>
-                      {product.shortDescription}
-                    </p>
                   </motion.div>
                 ))}
               </motion.div>
@@ -479,26 +476,35 @@ function App() {
                     key={selectedProduct?.id}
                     initial={{ 
                       opacity: 0,
-                      x: -100,
-                      rotateY: -30,
-                      scale: 0.9
+                      scale: 0.8,
+                      y: 100,
+                      rotateX: -20,
+                      transformPerspective: 1000
                     }}
-                    animate={{ 
+                    animate={isProductsInView ? { 
                       opacity: 1,
-                      x: 0,
-                      rotateY: 0,
-                      scale: 1
+                      scale: 1,
+                      y: 0,
+                      rotateX: 0
+                    } : {
+                      opacity: 0,
+                      scale: 0.8,
+                      y: 100,
+                      rotateX: -20
                     }}
                     exit={{
                       opacity: 0,
-                      x: 100,
-                      rotateY: 30,
-                      scale: 0.9
+                      scale: 0.8,
+                      y: -100,
+                      rotateX: 20
                     }}
                     transition={{ 
-                      duration: 0.5,
+                      duration: 0.35,
+                      delay: 0.15,
                       type: "spring",
-                      bounce: 0.3
+                      bounce: 0.3,
+                      stiffness: 120,
+                      damping: 12
                     }}
                     style={{
                       background: 'linear-gradient(165deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)',
@@ -519,13 +525,16 @@ function App() {
                             opacity: 0,
                             y: 20
                           }}
-                          animate={{ 
+                          animate={isProductsInView ? { 
                             opacity: 1,
                             y: 0
+                          } : {
+                            opacity: 0,
+                            y: 20
                           }}
                           transition={{ 
                             duration: 0.4,
-                            delay: 0.2,
+                            delay: 0.6,
                             type: "spring",
                             bounce: 0.3
                           }}
@@ -540,8 +549,8 @@ function App() {
                         </motion.h3>
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.4, delay: 0.3 }}
+                          animate={isProductsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                          transition={{ duration: 0.4, delay: 0.7 }}
                         >
                       <p style={{
                         fontSize: '1.1rem',
@@ -573,7 +582,7 @@ function App() {
                             }}
                             transition={{ 
                               duration: 0.4,
-                              delay: 1.0 + idx * 0.1,
+                              delay: 0.8 + idx * 0.1,
                               type: "spring",
                               bounce: 0.4
                             }}
@@ -622,6 +631,376 @@ function App() {
             </div>
           </div>
         </section>
+
+        <section
+          id="stats"
+          style={{
+            position: 'relative',
+            minHeight: '100vh',
+            background: '#fff',
+            zIndex: 20,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#000',
+            overflow: 'hidden'
+          }}
+        >
+          <div style={{
+            maxWidth: 1200,
+            width: '100%',
+            height: '100vh',
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            {/* Центральный элемент */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ 
+                duration: 0.8,
+                delay: 0.3,
+                type: "spring",
+                bounce: 0.4
+              }}
+              style={{
+                position: 'absolute',
+                background: 'linear-gradient(145deg, #000000, #1a1a1a)',
+                borderRadius: '50%',
+                width: '200px',
+                height: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '30px',
+                textAlign: 'center',
+                boxShadow: '0 25px 50px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.1)',
+                zIndex: 2,
+                border: '1px solid rgba(255,255,255,0.15)',
+                backdropFilter: 'blur(10px)'
+              }}
+            >
+              <p style={{
+                background: 'linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                fontSize: '3.2rem',
+                fontWeight: 800,
+                margin: 0,
+                lineHeight: 1,
+                marginBottom: '10px',
+                textShadow: '0 2px 10px rgba(255,255,255,0.2)'
+              }}>
+                70%
+              </p>
+              <p style={{
+                color: '#fff',
+                fontSize: '1rem',
+                fontWeight: 500,
+                margin: 0,
+                lineHeight: 1.5,
+                opacity: 0.95,
+                letterSpacing: '0.5px'
+              }}>
+                of total workload automated
+              </p>
+            </motion.div>
+
+            {/* Круговые элементы */}
+            {[
+                              { 
+                number: '40%',
+                description: 'of requests handled by chatbot',
+                angle: 270,
+                order: 1 // top
+              },
+              { 
+                number: '80%',
+                description: 'of calls processed by call bot',
+                angle: 0,
+                order: 2 // right
+              },
+              { 
+                number: '70%',
+                description: 'of payment tickets resolved by payment bot',
+                angle: 90,
+                order: 3 // bottom
+              },
+              { 
+                number: '80%',
+                description: 'of QA checks performed by AI',
+                angle: 180,
+                order: 4 // left
+              }
+            ].map((item, idx) => {
+              const radius = 250; // Радиус круга
+              const angle = (item.angle * Math.PI) / 180; // Преобразование в радианы
+              const x = radius * Math.cos(angle);
+              const y = radius * Math.sin(angle);
+
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ 
+                    opacity: 0, 
+                    scale: 0.5,
+                    x: x * 0.3,
+                    y: y * 0.3
+                  }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    scale: 1,
+                    x,
+                    y
+                  }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ 
+                    duration: 0.8,
+                    delay: 0.8 + item.order * 0.5, // Задержка базируется на порядке
+                    type: "spring",
+                    bounce: 0.4
+                  }}
+                  style={{
+                    position: 'absolute',
+                    background: 'linear-gradient(145deg, #000000, #1a1a1a)',
+                    color: '#fff',
+                    padding: '20px',
+                    borderRadius: '20px',
+                    width: '160px',
+                    height: '120px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.1)',
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 1,
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    backdropFilter: 'blur(10px)'
+                  }}
+                >
+                  <p style={{
+                    fontSize: '2.2rem',
+                    fontWeight: 800,
+                    margin: 0,
+                    lineHeight: 1.1,
+                    marginBottom: '8px',
+                    background: 'linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    textShadow: '0 2px 10px rgba(255,255,255,0.2)'
+                  }}>
+                    {item.number}
+                  </p>
+                  <p style={{
+                    fontSize: '1rem',
+                    fontWeight: 500,
+                    margin: 0,
+                    lineHeight: 1.5,
+                    opacity: 0.95,
+                    letterSpacing: '0.3px',
+                    padding: '0 10px'
+                  }}>
+                    {item.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+
+            {/* Декоративное кольцо */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5, rotate: -180 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ 
+                duration: 1.2,
+                delay: 0.1,
+                type: "spring",
+                bounce: 0.3
+              }}
+              style={{
+                position: 'absolute',
+                width: '450px',
+                height: '450px',
+                border: '2px solid rgba(0,0,0,0.1)',
+                borderRadius: '50%',
+                zIndex: 0,
+                boxShadow: 'inset 0 0 50px rgba(0,0,0,0.05)',
+                background: 'radial-gradient(circle at center, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0) 70%)'
+              }}
+            />
+          </div>
+        </section>
+
+        {/* Блок "Для кого" */}
+        <section
+          id="target"
+          style={{
+            position: 'relative',
+            height: '100vh',
+            background: '#000',
+            color: '#fff',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            overflow: 'hidden',
+            padding: 0
+          }}
+        >
+          <div style={{
+            maxWidth: '1200px',
+            width: '100%',
+            position: 'relative',
+            zIndex: 1,
+            padding: '0 20px',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center'
+          }}>
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.6 }}
+              style={{
+                fontSize: '2.5rem',
+                fontWeight: 700,
+                textAlign: 'center',
+                marginBottom: '20px',
+                background: 'linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textShadow: '0 2px 10px rgba(255,255,255,0.1)'
+              }}
+            >
+              Target Industries
+            </motion.h2>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              style={{
+                fontSize: '1.5rem',
+                textAlign: 'center',
+                marginBottom: '60px',
+                opacity: 0.9
+              }}
+            >
+              Qodeq is designed for:
+            </motion.p>
+
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '30px',
+              maxWidth: '800px',
+              margin: '0 auto'
+            }}>
+              {[
+                {
+                  icon: (
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                      <line x1="8" y1="21" x2="16" y2="21"/>
+                      <line x1="12" y1="17" x2="12" y2="21"/>
+                      <path d="M6 7h.01M6 11h.01M6 15h.01M18 7h.01M18 11h.01M18 15h.01"/>
+                    </svg>
+                  ),
+                  text: 'Online Casinos & Betting Companies'
+                },
+                {
+                  icon: (
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="5" width="20" height="14" rx="2"/>
+                      <path d="M2 10h20"/>
+                      <path d="M6 15h4"/>
+                      <circle cx="18" cy="15" r="1"/>
+                    </svg>
+                  ),
+                  text: 'Fintech & Payment Services'
+                },
+                {
+                  icon: (
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                  ),
+                  text: 'Call Centers & Support Departments'
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ 
+                    duration: 0.6,
+                    delay: 0.3 + index * 0.2,
+                    type: "spring",
+                    bounce: 0.4
+                  }}
+                  style={{
+                    background: 'linear-gradient(145deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 100%)',
+                    borderRadius: '24px',
+                    padding: '35px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '25px',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.3), inset 0 2px 10px rgba(255,255,255,0.05)',
+                    backdropFilter: 'blur(10px)',
+                    transform: 'translateZ(0)',
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}
+                >
+                  <div style={{
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)',
+                    borderRadius: '16px',
+                    padding: '20px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.1)'
+                  }}>
+                    {item.icon}
+                  </div>
+                  <p style={{
+                    fontSize: '1.3rem',
+                    margin: 0,
+                    fontWeight: 500,
+                    lineHeight: 1.4,
+                    opacity: 0.95,
+                    letterSpacing: '0.3px'
+                  }}>
+                    {item.text}
+                  </p>
+                  <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '1px',
+                    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
+                    opacity: 0.5
+                  }}/>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <Starfall />
+        </section>
+
         </div>
       </div>
     </ParallaxProvider>

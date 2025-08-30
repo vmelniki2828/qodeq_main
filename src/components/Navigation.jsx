@@ -6,7 +6,7 @@ function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['main', 'about', 'products'];
+      const sections = ['main', 'about', 'products', 'stats', 'target'];
       let currentSection = sections[0];
 
       // Находим текущую видимую секцию
@@ -21,8 +21,8 @@ function Navigation() {
       });
 
       // Определяем цвет текста в зависимости от секции
-      if (currentSection === 'about') {
-        setTextColor('#000'); // черный текст для белой секции
+      if (currentSection === 'about' || currentSection === 'stats') {
+        setTextColor('#000'); // черный текст для белых секций
       } else {
         setTextColor('#fff'); // белый текст для темных секций
       }
@@ -45,7 +45,7 @@ function Navigation() {
             aria-current="page"
             style={{ color: textColor }}
           >
-            Главная
+            Home
           </a>
         </li>
         <li>
@@ -53,7 +53,7 @@ function Navigation() {
             href="#about"
             style={{ color: textColor }}
           >
-            Почему Qodeq
+            Why Qodeq
           </a>
         </li>
         <li>
@@ -61,7 +61,23 @@ function Navigation() {
             href="#products"
             style={{ color: textColor }}
           >
-            Продукты
+            Products
+          </a>
+        </li>
+        <li>
+          <a 
+            href="#stats"
+            style={{ color: textColor }}
+          >
+            Stats
+          </a>
+        </li>
+        <li>
+          <a 
+            href="#target"
+            style={{ color: textColor }}
+          >
+            For Business
           </a>
         </li>
       </ul>
