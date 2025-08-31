@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Navigation.css';
 
 function Navigation() {
@@ -6,7 +7,7 @@ function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['main', 'about', 'products', 'stats', 'target', 'how', 'cta'];
+      const sections = ['main', 'about', 'stats', 'how'];
       let currentSection = sections[0];
 
       // Находим текущую видимую секцию
@@ -36,65 +37,16 @@ function Navigation() {
 
   return (
     <nav className="nav-bar">
-      <div className="logo-text" style={{ color: textColor }}>QODEQ</div>
+      <Link to="/" className="logo-text" style={{ color: textColor }}>QODEQ</Link>
       <ul className="nav-list">
         <li>
-          <a 
-            href="#main" 
-            className="active" 
-            aria-current="page"
-            style={{ color: textColor }}
-          >
-            Home
-          </a>
+          <Link to="/" style={{ color: textColor }}>Home</Link>
         </li>
         <li>
-          <a 
-            href="#about"
-            style={{ color: textColor }}
-          >
-            Why Qodeq
-          </a>
+          <Link to="/products" style={{ color: textColor }}>Products</Link>
         </li>
         <li>
-          <a 
-            href="#products"
-            style={{ color: textColor }}
-          >
-            Products
-          </a>
-        </li>
-        <li>
-          <a 
-            href="#stats"
-            style={{ color: textColor }}
-          >
-            Stats
-          </a>
-        </li>
-        <li>
-          <a 
-            href="#target"
-            style={{ color: textColor }}
-          >
-            For Business
-          </a>
-        </li>
-        <li>
-          <a 
-            href="#how"
-            style={{ color: textColor }}
-          >
-            How it Works
-          </a>
-        </li>
-        <li>
-          <a 
-            href="#cta"
-            style={{ color: textColor }}
-          >
-            Contact
-          </a>
+          <Link to="/price" style={{ color: textColor }}>Pricing</Link>
         </li>
       </ul>
     </nav>
