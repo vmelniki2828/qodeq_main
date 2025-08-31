@@ -46,7 +46,7 @@ function Navigation() {
           <Link to="/products" style={{ color: textColor }}>Products</Link>
         </li>
         <li>
-          <Link to="/price" style={{ color: textColor }}>Pricing</Link>
+          <Link to="/pricing" style={{ color: textColor }}>Pricing</Link>
         </li>
       </ul>
     </nav>
