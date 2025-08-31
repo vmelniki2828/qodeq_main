@@ -1,13 +1,15 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Starfall from './animations/Starfall';
 import PulsingSphere from './animations/PulsingSphere';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import Navigation from './Navigation';
+import { IoChatbubbleEllipsesOutline, IoCallOutline, IoWalletOutline, IoHelpCircleOutline } from 'react-icons/io5';
 const products = [
   {
     id: 'chat',
     title: 'Chatbot',
+    icon: IoChatbubbleEllipsesOutline,
     shortDescription: 'Up to 40% of requests',
     fullDescription: `AI-powered chatbot for automated processing of user requests.
     
@@ -22,6 +24,7 @@ const products = [
   {
     id: 'call',
     title: 'Call Center Bot',
+    icon: IoCallOutline,
     shortDescription: 'Up to 80% of calls',
     fullDescription: `Intelligent phone call processing system with speech recognition.
     
@@ -36,6 +39,7 @@ const products = [
   {
     id: 'payment',
     title: 'Payment Bot',
+    icon: IoWalletOutline,
     shortDescription: 'Up to 70% of tickets',
     fullDescription: `Automated payment request and support processing system.
     
@@ -50,6 +54,7 @@ const products = [
   {
     id: 'qa',
     title: 'QA Bot',
+    icon: IoHelpCircleOutline,
     shortDescription: 'Up to 80% of checks',
     fullDescription: `AI-powered service quality control system.
     
@@ -78,6 +83,43 @@ function Home() {
   const isAboutInView = useInView(aboutRef, { once: true, amount: 0.3 });
   const isProductsInView = useInView(productsRef, { once: true, amount: 0.5 });
   const [selectedProduct, setSelectedProduct] = useState(products[0]);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  const testimonials = [
+    {
+      text: "With Qodeq, we reduced support costs by 45% and accelerated payment ticket processing 5x.",
+      author: "Head of Support",
+      company: "Leading iGaming Brand"
+    },
+    {
+      text: "Our call center efficiency improved by 60%. The AI handles routine inquiries perfectly, letting our team focus on complex issues.",
+      author: "Operations Director",
+      company: "Online Casino Platform"
+    },
+    {
+      text: "Implementation was seamless. Within 2 weeks, we saw a 70% reduction in response time for customer queries.",
+      author: "Customer Success Manager",
+      company: "Fintech Startup"
+    },
+    {
+      text: "The multilingual support feature opened new markets for us. We now serve customers in 12 languages effortlessly.",
+      author: "International Business Lead",
+      company: "Global Betting Company"
+    },
+    {
+      text: "ROI was visible from day one. The platform pays for itself through cost savings and improved customer satisfaction.",
+      author: "Chief Technology Officer",
+      company: "Payment Processing Firm"
+    }
+  ];
+
+  // Автоматическая смена слайдов
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [testimonials.length]);
 
   return (
     <ParallaxProvider>
@@ -420,49 +462,92 @@ function Home() {
                     }}
                     whileHover={{
                       x: 15,
-                      scale: 1.02,
+                      scale: 1.05,
                       transition: { 
                         duration: 0.3,
                         type: "spring",
                         bounce: 0.4
-                      },
-                      boxShadow: '0 15px 30px -10px rgba(0,0,0,0.7), inset 0 0 20px rgba(255,255,255,0.15)'
+                      }
                     }}
                     style={{
                       background: selectedProduct?.id === product.id ? 
-                        'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)' : 
-                        'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)',
-                      borderRadius: '22px',
-                      padding: '24px',
-                      height: '80px',
+                        '#fff' : '#000',
+                      borderRadius: '20px',
+                      padding: '16px',
+                      height: '70px',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
+                      justifyContent: 'flex-start',
                       cursor: 'pointer',
-                      border: '1px solid',
+                      border: '2px solid',
                       borderColor: selectedProduct?.id === product.id ?
-                        'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)',
-                      transition: 'all 0.3s ease',
+                        '#000' : '#fff',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                       boxShadow: selectedProduct?.id === product.id ?
-                        '0 10px 30px -10px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.1)' :
-                        '0 5px 20px -5px rgba(0,0,0,0.3), inset 0 0 10px rgba(255,255,255,0.05)',
-                      backdropFilter: 'blur(10px)'
+                        '0 8px 25px rgba(255,255,255,0.2), inset 0 0 0 1px rgba(0,0,0,0.1)' :
+                        '0 4px 15px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.1)',
+                      position: 'relative',
+                      overflow: 'hidden'
                     }}
                     onClick={() => setSelectedProduct(product)}
                   >
-                    <h3 style={{
-                      fontSize: '1.6rem',
-                      margin: 0,
-                      color: '#fff',
-                      fontWeight: 700,
-                      letterSpacing: '0.3px',
-                      textShadow: '0 2px 4px rgba(0,0,0,0.3)',
-                      textAlign: 'center',
-                      position: 'relative',
-                      lineHeight: 1.2
+                    {/* Декоративная полоска */}
+                    <div style={{
+                      position: 'absolute',
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: '4px',
+                      background: selectedProduct?.id === product.id ? '#000' : '#fff',
+                      transition: 'all 0.4s ease'
+                    }} />
+                    
+                    {/* Иконка */}
+                    <div style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '10px',
+                      background: selectedProduct?.id === product.id ? '#000' : '#fff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginRight: '14px',
+                      transition: 'all 0.4s ease',
+                      boxShadow: selectedProduct?.id === product.id ? 
+                        '0 3px 10px rgba(0,0,0,0.15)' : 
+                        '0 3px 10px rgba(255,255,255,0.1)'
                     }}>
-                      {product.title}
-                    </h3>
+                      {React.createElement(product.icon, {
+                        size: 20,
+                        color: selectedProduct?.id === product.id ? '#fff' : '#000'
+                      })}
+                    </div>
+                    
+                    {/* Текст */}
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{
+                        fontSize: '1.2rem',
+                        margin: 0,
+                        color: selectedProduct?.id === product.id ? '#000' : '#fff',
+                        fontWeight: 600,
+                        letterSpacing: '0.1px',
+                        textAlign: 'left',
+                        lineHeight: 1.2,
+                        transition: 'color 0.4s ease'
+                      }}>
+                        {product.title}
+                      </h3>
+                      <p style={{
+                        fontSize: '0.8rem',
+                        margin: '2px 0 0 0',
+                        color: selectedProduct?.id === product.id ? 
+                          'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)',
+                        fontWeight: 400,
+                        transition: 'color 0.4s ease'
+                      }}>
+                        {product.shortDescription}
+                      </p>
+                    </div>
                   </motion.div>
                 ))}
               </motion.div>
@@ -500,23 +585,23 @@ function Home() {
                       rotateX: 20
                     }}
                     transition={{ 
-                      duration: 0.35,
-                      delay: 0.15,
+                      duration: 0.2,
+                      delay: 0.05,
                       type: "spring",
-                      bounce: 0.3,
-                      stiffness: 120,
-                      damping: 12
+                      bounce: 0.2,
+                      stiffness: 200,
+                      damping: 20
                     }}
                     style={{
-                      background: 'linear-gradient(165deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)',
-                      borderRadius: '30px',
+                      background: '#fff',
+                      borderRadius: '24px',
                       padding: '40px',
-                      backdropFilter: 'blur(10px)',
-                      border: '1px solid rgba(255,255,255,0.2)',
-                      boxShadow: '0 20px 40px -20px rgba(0,0,0,0.7), inset 0 0 30px rgba(255,255,255,0.05)',
+                      border: '2px solid #000',
+                      boxShadow: '0 20px 40px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05)',
                       position: 'absolute',
                       inset: 0,
-                      overflow: 'hidden'
+                      overflow: 'hidden',
+                      color: '#000'
                     }}
                   >
                     {selectedProduct ? (
@@ -534,39 +619,60 @@ function Home() {
                             y: 20
                           }}
                           transition={{ 
-                            duration: 0.4,
-                            delay: 0.6,
+                            duration: 0.2,
+                            delay: 0.1,
                             type: "spring",
-                            bounce: 0.3
+                            bounce: 0.2
                           }}
                           style={{
                             fontSize: '2.2rem',
-                            marginBottom: '25px',
-                            color: '#fff',
-                            fontWeight: 700
+                            margin: '0 0 25px 0',
+                            color: '#000',
+                            fontWeight: 700,
+                            borderBottom: '3px solid #000',
+                            paddingBottom: '15px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '15px'
                           }}
                         >
+                          <div style={{
+                            width: '50px',
+                            height: '50px',
+                            borderRadius: '12px',
+                            background: '#000',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}>
+                            {React.createElement(selectedProduct.icon, {
+                              size: 28,
+                              color: '#fff'
+                            })}
+                          </div>
                           {selectedProduct.title}
                         </motion.h3>
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={isProductsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                          transition={{ duration: 0.4, delay: 0.7 }}
+                          transition={{ duration: 0.2, delay: 0.15 }}
                         >
                       <p style={{
                         fontSize: '1.1rem',
                         lineHeight: 1.6,
-                        color: 'rgba(255,255,255,0.9)',
+                        color: '#000',
                         whiteSpace: 'pre-line',
-                        marginBottom: '30px'
+                        marginBottom: '30px',
+                        opacity: 0.8
                       }}>
                         {selectedProduct.fullDescription}
                       </p>
                       <div style={{
                         display: 'flex',
-                        flexWrap: 'wrap',
+                        flexWrap: 'nowrap',
                         gap: '12px',
-                        marginTop: '20px'
+                        marginTop: '20px',
+                        overflowX: 'auto'
                       }}>
                         {selectedProduct.features.map((feature, idx) => (
                           <motion.span
@@ -582,30 +688,25 @@ function Home() {
                               y: 0
                             }}
                             transition={{ 
-                              duration: 0.4,
-                              delay: 0.8 + idx * 0.1,
+                              duration: 0.2,
+                              delay: 0.2 + idx * 0.05,
                               type: "spring",
-                              bounce: 0.4
-                            }}
-                            whileHover={{
-                              scale: 1.1,
-                              transition: { 
-                                duration: 0.2,
-                                type: "spring",
-                                bounce: 0.4
-                              }
+                              bounce: 0.2
                             }}
                             style={{
-                              background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)',
-                              padding: '10px 20px',
-                              borderRadius: '25px',
-                              fontSize: '0.9rem',
-                              color: 'rgba(255,255,255,0.9)',
-                              border: '1px solid rgba(255,255,255,0.2)',
-                              boxShadow: '0 5px 15px -5px rgba(0,0,0,0.3), inset 0 0 15px rgba(255,255,255,0.05)',
-                              backdropFilter: 'blur(5px)',
-                              letterSpacing: '0.5px',
-                              fontWeight: 500
+                              background: '#000',
+                              padding: '10px 18px',
+                              borderRadius: '18px',
+                              fontSize: '0.85rem',
+                              color: '#fff',
+                              border: '2px solid #000',
+                              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                              letterSpacing: '0.2px',
+                              fontWeight: 600,
+                              position: 'relative',
+                              overflow: 'hidden',
+                              whiteSpace: 'nowrap',
+                              flexShrink: 0
                             }}
                           >
                             {feature}
@@ -620,8 +721,12 @@ function Home() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     height: '100%',
-                    color: 'rgba(255,255,255,0.6)',
-                    fontSize: '1.2rem'
+                    color: '#000',
+                    fontSize: '1.2rem',
+                    background: '#fff',
+                    borderRadius: '24px',
+                    border: '2px solid #000',
+                    padding: '40px'
                   }}>
                     Выберите продукт для просмотра деталей
                   </div>
@@ -948,52 +1053,64 @@ function Home() {
                     type: "spring",
                     bounce: 0.4
                   }}
-                  style={{
-                    background: 'linear-gradient(145deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 100%)',
-                    borderRadius: '24px',
-                    padding: '35px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '25px',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.3), inset 0 2px 10px rgba(255,255,255,0.05)',
-                    backdropFilter: 'blur(10px)',
-                    transform: 'translateZ(0)',
-                    position: 'relative',
-                    overflow: 'hidden'
+                  whileHover={{
+                    scale: 1.02,
+                    boxShadow: '0 12px 35px rgba(0,0,0,0.15)',
+                    transition: { 
+                      duration: 0.3,
+                      type: "spring",
+                      bounce: 0.4
+                    }
                   }}
-                >
-                  <div style={{
-                    background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)',
-                    borderRadius: '16px',
+                  style={{
+                    background: '#fff',
+                    borderRadius: '20px',
                     padding: '20px',
                     display: 'flex',
                     alignItems: 'center',
+                    gap: '20px',
+                    border: '2px solid #000',
+                    boxShadow: '0 8px 25px rgba(0,0,0,0.1)',
+                    transform: 'translateZ(0)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    transition: 'all 0.3s ease'
+                  }}
+                >
+                  {/* Декоративная полоска */}
+                  <div style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: '4px',
+                    background: '#000'
+                  }} />
+                  
+                  <div style={{
+                    background: '#000',
+                    borderRadius: '12px',
+                    padding: '15px',
+                    display: 'flex',
+                    alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.1)',
-                    border: '1px solid rgba(255,255,255,0.1)'
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                    border: '2px solid #000',
+                    minWidth: '60px',
+                    minHeight: '60px'
                   }}>
                     {item.icon}
                   </div>
                   <p style={{
-                    fontSize: '1.3rem',
+                    fontSize: '1.1rem',
                     margin: 0,
-                    fontWeight: 500,
-                    lineHeight: 1.4,
-                    opacity: 0.95,
-                    letterSpacing: '0.3px'
+                    fontWeight: 600,
+                    lineHeight: 1.3,
+                    color: '#000',
+                    letterSpacing: '0.1px'
                   }}>
                     {item.text}
                   </p>
-                  <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '1px',
-                    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
-                    opacity: 0.5
-                  }}/>
                 </motion.div>
               ))}
             </div>
@@ -1217,95 +1334,198 @@ function Home() {
               ))}
             </div>
 
-            {/* Enhanced Testimonial section */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              style={{
-                maxWidth: '600px',
-                margin: '0 auto',
-                background: 'linear-gradient(145deg, rgba(255,255,255,1) 0%, rgba(248,248,248,1) 100%)',
-                padding: '25px 30px',
-                borderRadius: '24px',
-                position: 'relative',
-                border: '1px solid rgba(0,0,0,0.06)',
-                boxShadow: '0 15px 30px rgba(0,0,0,0.06)'
-              }}
-            >
-              <div style={{
-                position: 'absolute',
-                top: '-20px',
-                left: '30px',
-                width: '40px',
-                height: '40px',
-                background: '#000',
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 6px 15px rgba(0,0,0,0.15)',
-                border: '2px solid #fff'
-              }}>
-                <svg 
-                  width="20" 
-                  height="20" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="#fff"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+            {/* Enhanced Testimonial Slider */}
+            <div style={{
+              maxWidth: '700px',
+              margin: '0 auto',
+              position: 'relative'
+            }}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentTestimonial}
+                  initial={{ opacity: 0, x: 50, scale: 0.95 }}
+                  animate={{ opacity: 1, x: 0, scale: 1 }}
+                  exit={{ opacity: 0, x: -50, scale: 0.95 }}
+                  transition={{ 
+                    duration: 0.5,
+                    type: "spring",
+                    bounce: 0.3
+                  }}
+                  style={{
+                    background: '#fff',
+                    padding: '40px',
+                    borderRadius: '24px',
+                    position: 'relative',
+                    border: '2px solid #000',
+                    boxShadow: '0 15px 35px rgba(0,0,0,0.1)'
+                  }}
                 >
-                  <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
-                  <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
-                </svg>
-              </div>
+                  {/* Quote icon */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '-20px',
+                    left: '40px',
+                    width: '40px',
+                    height: '40px',
+                    background: '#000',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '2px solid #fff'
+                  }}>
+                    <svg 
+                      width="20" 
+                      height="20" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="#fff"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
+                      <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
+                    </svg>
+                  </div>
 
-              <p style={{
-                fontSize: '1.2rem',
-                lineHeight: 1.4,
-                marginBottom: '15px',
-                fontWeight: 500,
-                color: '#000',
-                position: 'relative'
-              }}>
-                "With Qodeq, we reduced support costs by 45% and accelerated payment ticket processing 5x."
-              </p>
+                  <p style={{
+                    fontSize: '1.25rem',
+                    lineHeight: 1.5,
+                    marginBottom: '25px',
+                    fontWeight: 500,
+                    color: '#000',
+                    fontStyle: 'italic'
+                  }}>
+                    {testimonials[currentTestimonial].text}
+                  </p>
 
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '15px'
+                  }}>
+                    <div style={{
+                      width: '45px',
+                      height: '45px',
+                      borderRadius: '12px',
+                      background: '#000',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#fff',
+                      fontSize: '1.2rem',
+                      fontWeight: 'bold'
+                    }}>
+                      {testimonials[currentTestimonial].author.charAt(0)}
+                    </div>
+                    <div>
+                      <p style={{
+                        fontSize: '1rem',
+                        margin: 0,
+                        fontWeight: 600,
+                        color: '#000'
+                      }}>
+                        {testimonials[currentTestimonial].author}
+                      </p>
+                      <p style={{
+                        fontSize: '0.9rem',
+                        margin: '2px 0 0 0',
+                        color: '#666',
+                        fontWeight: 500
+                      }}>
+                        {testimonials[currentTestimonial].company}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Slider indicators */}
               <div style={{
                 display: 'flex',
-                alignItems: 'center',
-                gap: '12px'
+                justifyContent: 'center',
+                gap: '8px',
+                marginTop: '25px'
               }}>
-                <div style={{
-                  width: '35px',
-                  height: '35px',
-                  borderRadius: '10px',
-                  background: '#000',
-                  opacity: 0.1
-                }} />
-                <div>
-                  <p style={{
-                    fontSize: '0.95rem',
-                    margin: 0,
-                    fontWeight: 600,
-                    color: '#000'
-                  }}>
-                    Head of Support
-                  </p>
-                  <p style={{
-                    fontSize: '0.85rem',
-                    margin: '2px 0 0 0',
-                    opacity: 0.6,
-                    fontWeight: 500
-                  }}>
-                    Leading iGaming Brand
-                  </p>
-                </div>
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTestimonial(index)}
+                    style={{
+                      width: index === currentTestimonial ? '24px' : '8px',
+                      height: '8px',
+                      borderRadius: '4px',
+                      border: 'none',
+                      background: index === currentTestimonial ? '#000' : 'rgba(0,0,0,0.3)',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease'
+                    }}
+                  />
+                ))}
               </div>
-            </motion.div>
+
+              {/* Navigation arrows */}
+              <button
+                onClick={() => setCurrentTestimonial((prev) => prev === 0 ? testimonials.length - 1 : prev - 1)}
+                style={{
+                  position: 'absolute',
+                  left: '-60px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  border: '2px solid #000',
+                  background: '#fff',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = '#000';
+                  e.target.style.color = '#fff';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = '#fff';
+                  e.target.style.color = '#000';
+                }}
+              >
+                ←
+              </button>
+
+              <button
+                onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
+                style={{
+                  position: 'absolute',
+                  right: '-60px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  border: '2px solid #000',
+                  background: '#fff',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = '#000';
+                  e.target.style.color = '#fff';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = '#fff';
+                  e.target.style.color = '#000';
+                }}
+              >
+                →
+              </button>
+            </div>
           </div>
         </section>
 
