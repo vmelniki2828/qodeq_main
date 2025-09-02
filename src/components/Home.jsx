@@ -5,6 +5,7 @@ import PulsingSphere from './animations/PulsingSphere';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import Navigation from './Navigation';
 import { IoChatbubbleEllipsesOutline, IoCallOutline, IoWalletOutline, IoHelpCircleOutline } from 'react-icons/io5';
+import './ProductStyles.css';
 const products = [
   {
     id: 'chat',
@@ -405,7 +406,9 @@ function Home() {
               }}
               >
               Platform Products
-            </motion.h2>            <div style={{
+            </motion.h2>
+            
+            <div style={{
               display: 'grid',
               gridTemplateColumns: '320px 1fr',
               gap: '60px',
@@ -469,6 +472,7 @@ function Home() {
                         bounce: 0.4
                       }
                     }}
+                    whileTap={{ scale: 0.98 }}
                     style={{
                       background: selectedProduct?.id === product.id ? 
                         '#fff' : '#000',
@@ -523,7 +527,7 @@ function Home() {
                       })}
                     </div>
                     
-                    {/* Текст */}
+                    {/* Название услуги */}
                     <div style={{ flex: 1 }}>
                       <h3 style={{
                         fontSize: '1.2rem',
@@ -537,16 +541,6 @@ function Home() {
                       }}>
                         {product.title}
                       </h3>
-                      <p style={{
-                        fontSize: '0.8rem',
-                        margin: '2px 0 0 0',
-                        color: selectedProduct?.id === product.id ? 
-                          'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)',
-                        fontWeight: 400,
-                        transition: 'color 0.4s ease'
-                      }}>
-                        {product.shortDescription}
-                      </p>
                     </div>
                   </motion.div>
                 ))}
