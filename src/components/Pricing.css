@@ -26,7 +26,7 @@
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  padding: 40px;
+  padding: 25px;
   width: 350px;
   display: flex;
   flex-direction: column;
@@ -63,8 +63,8 @@
 }
 
 .pricing-card h2 {
-  font-size: 2rem;
-  margin: 0 0 20px;
+  font-size: 1.6rem;
+  margin: 0 0 15px;
   background: linear-gradient(135deg, #fff, #888);
   background-clip: text;
   -webkit-background-clip: text;
@@ -72,9 +72,9 @@
 }
 
 .price {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bold;
-  margin: 20px 0;
+  margin: 15px 0;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -97,19 +97,19 @@
 
 .description {
   color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 30px;
-  font-size: 1.1rem;
+  margin-bottom: 20px;
+  font-size: 1rem;
 }
 
 .features {
   list-style: none;
   padding: 0;
-  margin: 0 0 30px;
+  margin: 0 0 20px;
   flex-grow: 1;
 }
 
 .features li {
-  margin: 15px 0;
+  margin: 10px 0;
   padding-left: 30px;
   position: relative;
   color: rgba(255, 255, 255, 0.8);
@@ -126,9 +126,9 @@
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
-  padding: 15px 30px;
+  padding: 12px 25px;
   border-radius: 30px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100%;

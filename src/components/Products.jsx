@@ -206,9 +206,9 @@ function Products() {
                   <h3 className="section-title">Стоимость Обслуживания</h3>
                   
                   <div className="pricing-comparison">
-                    <motion.div className="pricing-card ai-pricing" whileHover={{ scale: 1.03 }}>
+                    <motion.div className="chatbot-pricing-card ai-pricing" whileHover={{ scale: 1.03 }}>
                       <div className="pricing-header">
-                        <div className="pricing-icon">
+                        <div className="chatbot-pricing-icon">
                           <IoChatbubbleEllipsesOutline />
                         </div>
                         <h4>ИИ-бот</h4>
@@ -223,9 +223,9 @@ function Products() {
                       </div>
                     </motion.div>
 
-                    <motion.div className="pricing-card operator-pricing" whileHover={{ scale: 1.03 }}>
+                    <motion.div className="chatbot-pricing-card operator-pricing" whileHover={{ scale: 1.03 }}>
                       <div className="pricing-header">
-                        <div className="pricing-icon">
+                        <div className="chatbot-pricing-icon">
                           <IoCallOutline />
                         </div>
                         <h4>Оператор</h4>
@@ -308,341 +308,111 @@ function Products() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.4, 0.0, 0.2, 1] }}
               >
-                <div className="callcenter-quality-control">
-                  <div className="quality-control-hero">
-                    <h3 className="quality-control-hero-title">Полная Автоматизация Контроля Звонков</h3>
-                    <p className="quality-control-hero-text">
-                      Полный контроль над качеством разговоров операторов без ручной проверки.
-                    </p>
-                  </div>
+                <div className="callcenter-hero">
+                  <h3 className="callcenter-hero-text">
+                    Автоматизируй до 80% звонков с помощью ИИ
+                  </h3>
+                  <p className="callcenter-hero-subtitle">
+                    ИИ-колл центр обрабатывает входящие и исходящие звонки так же естественно, как оператор, но в 10 раз быстрее и без дополнительных затрат.
+                  </p>
+                </div>
 
-                  <div className="quality-control-features">
-                    <motion.div className="quality-control-feature-card" whileHover={{ scale: 1.02 }}>
-                      <div className="quality-control-feature-icon">
-                        <IoAnalyticsOutline />
-                      </div>
-                      <h4>Распознавание Аудио-Звонков</h4>
-                      <p>Использование передовой технологии Whisper для анализа всех звонков в реальном времени.</p>
-                    </motion.div>
+                <div className="callcenter-stats-grid">
+                  <motion.div className="callcenter-stat-card" whileHover={{ scale: 1.05 }}>
+                    <div className="callcenter-stat-icon">
+                      <IoCallOutline />
+                    </div>
+                    <div className="callcenter-stat-label">До 80% типовых звонков</div>
+                    <div className="callcenter-stat-subtitle">без участия человека</div>
+                  </motion.div>
 
-                    <motion.div className="quality-control-feature-card" whileHover={{ scale: 1.02 }}>
-                      <div className="quality-control-feature-icon">
-                        <IoCheckmarkCircleOutline />
-                      </div>
-                      <h4>Анализ Соблюдения Скрипта</h4>
-                      <p>Проверка эмоционального фона, точности ответов и соблюдения установленных протоколов.</p>
-                    </motion.div>
+                  <motion.div className="callcenter-stat-card" whileHover={{ scale: 1.05 }}>
+                    <div className="callcenter-stat-icon">
+                      <IoWalletOutline />
+                    </div>
+                    <div className="callcenter-stat-label">Экономия до 60%</div>
+                    <div className="callcenter-stat-subtitle">бюджета колл-центра</div>
+                  </motion.div>
 
-                    <motion.div className="quality-control-feature-card" whileHover={{ scale: 1.02 }}>
-                      <div className="quality-control-feature-icon">
-                        <IoStatsChartOutline />
-                      </div>
-                      <h4>Детальная Оценка</h4>
-                      <p>Формирование подробной оценки и метрик по каждому оператору с персональными рекомендациями.</p>
-                    </motion.div>
+                  <motion.div className="callcenter-stat-card" whileHover={{ scale: 1.05 }}>
+                    <div className="callcenter-stat-icon">
+                      <IoGlobeOutline />
+                    </div>
+                    <div className="callcenter-stat-label">Мультиязычность</div>
+                    <div className="callcenter-stat-subtitle">поддержка языков</div>
+                  </motion.div>
 
-                    <motion.div className="quality-control-feature-card" whileHover={{ scale: 1.02 }}>
-                      <div className="quality-control-feature-icon">
+                  <motion.div className="callcenter-stat-card" whileHover={{ scale: 1.05 }}>
+                    <div className="callcenter-stat-icon">
+                      <IoFlashOutline />
+                    </div>
+                    <div className="callcenter-stat-label">Масштабируемость</div>
+                    <div className="callcenter-stat-subtitle">тысячи звонков одновременно</div>
+                  </motion.div>
+                </div>
+
+                <div className="callcenter-features">
+                  <h3 className="section-title">Что делает</h3>
+                  
+                  <div className="callcenter-features-grid">
+                    <motion.div className="callcenter-feature-card" whileHover={{ scale: 1.03 }}>
+                      <div className="callcenter-feature-icon">
                         <IoCallOutline />
                       </div>
-                      <h4>Универсальность</h4>
-                      <p>Подходит как для входящих (Inbound), так и для исходящих (Outbound) звонков любого типа.</p>
+                      <h4>Принимает звонки</h4>
+                      <p>Принимает звонки и отвечает на стандартные вопросы игроков.</p>
                     </motion.div>
-                  </div>
 
-                  <div className="quality-control-current-process">
-                    <motion.div className="quality-control-process-card" whileHover={{ scale: 1.02 }}>
-                      <h4>Вам больше не нужен контролёр, чтобы узнать, как общаются ваши операторы</h4>
-                      <div className="quality-control-stats-grid">
-                        <motion.div className="quality-control-stat-card" whileHover={{ scale: 1.05 }}>
-                          <div className="quality-control-stat-number">1,329</div>
-                          <div className="quality-control-stat-label">Проверок звонков</div>
-                          <div className="quality-control-stat-subtitle">1-2 специалиста по контролю качества</div>
-                        </motion.div>
-
-                        <motion.div className="quality-control-stat-card" whileHover={{ scale: 1.05 }}>
-                          <div className="quality-control-stat-number">190</div>
-                          <div className="quality-control-stat-label">Проверок на человека</div>
-                          <div className="quality-control-stat-subtitle">За смену</div>
-                        </motion.div>
-
-                        <motion.div className="quality-control-stat-card" whileHover={{ scale: 1.05 }}>
-                          <div className="quality-control-stat-number">3-5</div>
-                          <div className="quality-control-stat-label">Минут на проверку</div>
-                          <div className="quality-control-stat-subtitle">Ручной анализ</div>
-                        </motion.div>
-
-                        <motion.div className="quality-control-stat-card" whileHover={{ scale: 1.05 }}>
-                          <div className="quality-control-stat-number">9.5-16</div>
-                          <div className="quality-control-stat-label">Часов работы</div>
-                          <div className="quality-control-stat-subtitle">На человека</div>
-                        </motion.div>
+                    <motion.div className="callcenter-feature-card" whileHover={{ scale: 1.03 }}>
+                      <div className="callcenter-feature-icon">
+                        <IoCallOutline />
                       </div>
+                      <h4>Исходящие звонки</h4>
+                      <p>Совершает исходящие (напоминания, KYC, удержание клиентов).</p>
                     </motion.div>
-                  </div>
 
-                  <div className="quality-control-economics">
-                    <h3 className="section-title">Расчет Экономии</h3>
-                    
-                    <div className="quality-control-savings-table">
-                      <div className="quality-control-table-header">
-                        <div>Тип проверки</div>
-                        <div>Количество</div>
-                        <div>Время/проверка</div>
-                        <div>Экономия времени</div>
+                    <motion.div className="callcenter-feature-card" whileHover={{ scale: 1.03 }}>
+                      <div className="callcenter-feature-icon">
+                        <IoTimeOutline />
                       </div>
-                      <div className="quality-control-table-row">
-                        <div>Full AI</div>
-                        <div>446</div>
-                        <div>5-15 сек</div>
-                        <div>1,784 минуты (29.7 часов)</div>
+                      <h4>Работа 24/7</h4>
+                      <p>Работает 24/7 без перерывов и отпусков.</p>
+                    </motion.div>
+
+                    <motion.div className="callcenter-feature-card" whileHover={{ scale: 1.03 }}>
+                      <div className="callcenter-feature-icon">
+                        <IoAnalyticsOutline />
                       </div>
-                      <div className="quality-control-table-row">
-                        <div>AI + Специалист</div>
-                        <div>620</div>
-                        <div>5-7 мин</div>
-                        <div>1,240 минут (20.7 часов)</div>
-                      </div>
-                      <div className="quality-control-table-row">
-                        <div>Full Специалист</div>
-                        <div>85</div>
-                        <div>4 мин</div>
-                        <div>Без изменений</div>
-                      </div>
-                    </div>
-
-                    <div className="quality-control-savings-highlight">
-                      <h4>Ежедневная экономия на контроле качества звонков</h4>
-                    </div>
-                  </div>
-
-                  <div className="quality-control-daily-savings">
-                    <div className="quality-control-daily-grid">
-                      <motion.div className="quality-control-daily-card" whileHover={{ scale: 1.05 }}>
-                        <div className="quality-control-daily-number">50.4</div>
-                        <div className="quality-control-daily-label">Часа экономии</div>
-                        <div className="quality-control-daily-subtitle">Рабочего времени в день</div>
-                      </motion.div>
-
-                      <motion.div className="quality-control-daily-card" whileHover={{ scale: 1.05 }}>
-                        <div className="quality-control-daily-number">6.3</div>
-                        <div className="quality-control-daily-label">Рабочих места</div>
-                        <div className="quality-control-daily-subtitle">В эквиваленте полной занятости</div>
-                      </motion.div>
-
-                      <motion.div className="quality-control-daily-card" whileHover={{ scale: 1.05 }}>
-                        <div className="quality-control-daily-number">$1,260</div>
-                        <div className="quality-control-daily-label">Экономия в день</div>
-                        <div className="quality-control-daily-subtitle">На зарплатах</div>
-                      </motion.div>
-
-                      <motion.div className="quality-control-daily-card" whileHover={{ scale: 1.05 }}>
-                        <div className="quality-control-daily-number">$453,600</div>
-                        <div className="quality-control-daily-label">Годовая экономия</div>
-                        <div className="quality-control-daily-subtitle">Общая сумма</div>
-                      </motion.div>
-                    </div>
-                  </div>
-
-                  <div className="quality-control-automation-stats">
-                    <div className="quality-control-automation-grid">
-                      <motion.div className="quality-control-automation-card" whileHover={{ scale: 1.05 }}>
-                        <div className="quality-control-automation-number">95%</div>
-                        <div className="quality-control-automation-label">Автоматизация</div>
-                        <div className="quality-control-automation-subtitle">Проверок звонков ботом</div>
-                      </motion.div>
-
-                      <motion.div className="quality-control-automation-card" whileHover={{ scale: 1.05 }}>
-                        <div className="quality-control-automation-number">6.3</div>
-                        <div className="quality-control-automation-label">Рабочих мест</div>
-                        <div className="quality-control-automation-subtitle">Экономия в эквиваленте</div>
-                      </motion.div>
-
-                      <motion.div className="quality-control-automation-card" whileHover={{ scale: 1.05 }}>
-                        <div className="quality-control-automation-number">$37,800</div>
-                        <div className="quality-control-automation-label">Месячная экономия</div>
-                        <div className="quality-control-automation-subtitle">Только на зарплатах</div>
-                      </motion.div>
-                    </div>
-                  </div>
-
-                  <div className="quality-control-scaling">
-                    <motion.div className="quality-control-scaling-card" whileHover={{ scale: 1.02 }}>
-                      <h3>Масштабирование Результатов</h3>
-                      <p>
-                        Данные показывают, что при росте объемов Voice QA обеспечивает линейное масштабирование без увеличения штата специалистов по контролю качества. Каждые дополнительные 1000 проверок звонков в день экономят $28,500/месяц на зарплатах.
-                      </p>
+                      <h4>Интеграция с CRM</h4>
+                      <p>Записывает результаты и интегрируется с CRM.</p>
                     </motion.div>
                   </div>
                 </div>
 
-                <div className="voice-bot-section">
-                  <div className="voice-hero">
-                    <h3 className="voice-hero-text">
-                      ИИ Voice Bot: Звонки Без Колл-Центра. Наш ИИ Voice Bot эффективно заменит ваш отдел прозвона, работая круглосуточно на нескольких языках.
-                    </h3>
-                  </div>
-
-                  <div className="voice-features">
-                    <motion.div className="voice-feature-card" whileHover={{ scale: 1.02 }}>
-                      <div className="voice-feature-icon">
-                        <IoCallOutline />
+                <div className="callcenter-benefits">
+                  <h3 className="section-title">Преимущества</h3>
+                  
+                  <motion.div className="callcenter-benefit-card" whileHover={{ scale: 1.02 }}>
+                    <h4>Ключевые преимущества ИИ-колл центра</h4>
+                    <div className="callcenter-benefits-list">
+                      <div className="callcenter-benefit-item">
+                        <span>✓</span>
+                        <span>Уменьшение нагрузки на операторов</span>
                       </div>
-                      <h4>Автоматизированные Звонки</h4>
-                      <p>Осуществляет обзвон клиентов для подтверждения операций, проведения промо-кампаний и верификации данных.</p>
-                    </motion.div>
-
-                    <motion.div className="voice-feature-card" whileHover={{ scale: 1.02 }}>
-                      <div className="voice-feature-icon">
-                        <IoChatbubbleEllipsesOutline />
+                      <div className="callcenter-benefit-item">
+                        <span>✓</span>
+                        <span>Быстрое внедрение (запуск за 1–2 дня)</span>
                       </div>
-                      <h4>Диалоговые Возможности</h4>
-                      <p>Понимает голосовые ответы и поддерживает естественный, эффективный диалог с клиентом.</p>
-                    </motion.div>
-
-                    <motion.div className="voice-feature-card" whileHover={{ scale: 1.02 }}>
-                      <div className="voice-feature-icon">
-                        <IoLinkOutline />
+                      <div className="callcenter-benefit-item">
+                        <span>✓</span>
+                        <span>Подробная аналитика и записи звонков</span>
                       </div>
-                      <h4>Бесшовная Интеграция</h4>
-                      <p>Полная интеграция с CRM-системами и платформами через триггеры и API для максимальной операционной эффективности.</p>
-                    </motion.div>
-
-                    <motion.div className="voice-feature-card" whileHover={{ scale: 1.02 }}>
-                      <div className="voice-feature-icon">
-                        <IoTimeOutline />
-                      </div>
-                      <h4>Работа 24/7</h4>
-                      <p>Всегда следует заданному скрипту, сохраняет фокус и работает без перерывов, обеспечивая непрерывное обслуживание.</p>
-                    </motion.div>
-                  </div>
-
-                  <div className="voice-economics">
-                    <h3 className="section-title">Экономические Показатели</h3>
-                    <div className="voice-stats-grid">
-                      <motion.div className="voice-stat-card" whileHover={{ scale: 1.05 }}>
-                        <div className="voice-stat-number">$300</div>
-                        <div className="voice-stat-label">Стоимость создания</div>
-                        <div className="voice-stat-subtitle">1 бота</div>
-                      </motion.div>
-
-                      <motion.div className="voice-stat-card" whileHover={{ scale: 1.05 }}>
-                        <div className="voice-stat-number">$0.1</div>
-                        <div className="voice-stat-label">За минуту разговора</div>
-                        <div className="voice-stat-subtitle">Стоимость бота</div>
-                      </motion.div>
-
-                      <motion.div className="voice-stat-card" whileHover={{ scale: 1.05 }}>
-                        <div className="voice-stat-number">$0.12</div>
-                        <div className="voice-stat-label">Затраты на 1 лида</div>
-                        <div className="voice-stat-subtitle">Средняя стоимость</div>
-                      </motion.div>
-
-                      <motion.div className="voice-stat-card" whileHover={{ scale: 1.05 }}>
-                        <div className="voice-stat-number">28 сек</div>
-                        <div className="voice-stat-label">Длительность разговора</div>
-                        <div className="voice-stat-subtitle">В среднем</div>
-                      </motion.div>
-                    </div>
-
-                    <div className="voice-performance">
-                      <div className="voice-overview">
-                        <motion.div className="voice-overview-card" whileHover={{ scale: 1.02 }}>
-                          <h4>Показатели Эффективности</h4>
-                          <div className="voice-overview-stats">
-                            <div className="voice-overview-item">
-                              <span>Общий дозвон:</span>
-                              <span className="stat-number-large">~80%</span>
-                            </div>
-                            <div className="voice-overview-item">
-                              <span>Дозвон без автоответчиков:</span>
-                              <span className="stat-number-large">~25%</span>
-                            </div>
-                            <div className="voice-overview-item">
-                              <span>Замещение отдела:</span>
-                              <span className="stat-time">Полное</span>
-                            </div>
-                            <div className="voice-overview-item">
-                              <span>Языковая поддержка:</span>
-                              <span className="stat-time">Многоязычность</span>
-                            </div>
-                          </div>
-                        </motion.div>
+                      <div className="callcenter-benefit-item">
+                        <span>✓</span>
+                        <span>Повышение качества обслуживания и удержания клиентов</span>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="voice-comparison">
-                    <h3 className="section-title">Расчет Экономии</h3>
-                    <p style={{ textAlign: 'center', color: '#ccc', marginBottom: '40px' }}>
-                      Для примера, рассмотрим один бот, обрабатывающий до 2500 живых разговоров в день.
-                    </p>
-                    
-                    <div className="voice-comparison-table">
-                      <div className="voice-table-header">
-                        <div>Параметр</div>
-                        <div>Человек-оператор (за 8 часов)</div>
-                        <div>ИИ Voice Bot (за 24 часа)</div>
-                      </div>
-                      <div className="voice-table-row">
-                        <div>Объем живых разговоров/день</div>
-                        <div>250</div>
-                        <div>2500</div>
-                      </div>
-                      <div className="voice-table-row">
-                        <div>Средняя зарплата оператора/день</div>
-                        <div>$100</div>
-                        <div>N/A</div>
-                      </div>
-                      <div className="voice-table-row">
-                        <div>Стоимость 1 разговора</div>
-                        <div>$0.4</div>
-                        <div>$0.12</div>
-                      </div>
-                      <div className="voice-table-row">
-                        <div>Общие затраты на объем в 2500 разговоров</div>
-                        <div>$1000 (для 10 операторов)</div>
-                        <div>$300</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="voice-total-savings">
-                    <div className="voice-savings-grid">
-                      <motion.div className="voice-savings-card" whileHover={{ scale: 1.05 }}>
-                        <div className="voice-savings-number">$700</div>
-                        <div className="voice-savings-label">Ежедневная экономия</div>
-                        <div className="voice-savings-subtitle">На операционных расходах</div>
-                      </motion.div>
-
-                      <motion.div className="voice-savings-card" whileHover={{ scale: 1.05 }}>
-                        <div className="voice-savings-number">$21,000</div>
-                        <div className="voice-savings-label">Месячная экономия</div>
-                        <div className="voice-savings-subtitle">Средняя экономия</div>
-                      </motion.div>
-
-                      <motion.div className="voice-savings-card" whileHover={{ scale: 1.05 }}>
-                        <div className="voice-savings-number">$252,000</div>
-                        <div className="voice-savings-label">Годовая экономия</div>
-                        <div className="voice-savings-subtitle">Общая сумма</div>
-                      </motion.div>
-
-                      <motion.div className="voice-savings-card" whileHover={{ scale: 1.05 }}>
-                        <div className="voice-savings-number">24/7</div>
-                        <div className="voice-savings-label">Доступность</div>
-                        <div className="voice-savings-subtitle">Непрерывный режим работы</div>
-                      </motion.div>
-                    </div>
-                  </div>
-
-                  <div className="voice-replacement">
-                    <motion.div className="voice-replacement-card" whileHover={{ scale: 1.02 }}>
-                      <h3>Увеличение Объема</h3>
-                      <p>
-                        Один бот способен заменить целый отдел прозвона и выполнять эту работу одновременно на нескольких языках. Количество обрабатываемых звонков в день растет пропорционально месячной экономии на операционных расходах.
-                      </p>
-                    </motion.div>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             )}
