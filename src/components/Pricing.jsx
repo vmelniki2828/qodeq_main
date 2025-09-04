@@ -68,7 +68,7 @@ function Pricing() {
                 <li key={idx}>{feature}</li>
               ))}
             </ul>
-            <button className="select-plan">
+            <button className="select-plan btn-with-shine">
               Get Started
             </button>
           </div>

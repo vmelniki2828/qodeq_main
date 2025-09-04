@@ -1,11 +1,34 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence, animate } from 'framer-motion';
 import Starfall from './animations/Starfall';
 import PulsingSphere from './animations/PulsingSphere';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import Navigation from './Navigation';
 import { IoChatbubbleEllipsesOutline, IoCallOutline, IoWalletOutline, IoHelpCircleOutline } from 'react-icons/io5';
 import './ProductStyles.css';
+import './Home.css';
+
+// Хук для анимированного счетчика с задержкой
+function useDelayedCounter(ref, end, delay = 0, duration = 2000) {
+  const [counter, setCounter] = useState(0);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+  useEffect(() => {
+    if (isInView) {
+      const timer = setTimeout(() => {
+        const controls = animate(0, end, {
+          duration: duration / 1000,
+          onUpdate: (value) => setCounter(Math.floor(value))
+        });
+        return () => controls.stop();
+      }, delay);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isInView, end, delay, duration]);
+
+  return counter;
+}
 const products = [
   {
     id: 'chat',
@@ -81,10 +104,21 @@ function Home() {
   const mainBlockRef = useRef(null);
   const aboutRef = useRef(null);
   const productsRef = useRef(null);
+  const statsRef = useRef(null);
   const isAboutInView = useInView(aboutRef, { once: true, amount: 0.3 });
   const isProductsInView = useInView(productsRef, { once: true, amount: 0.5 });
   const [selectedProduct, setSelectedProduct] = useState(products[0]);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  // Анимированные счетчики для статистики
+  // Периферийные блоки анимируются сразу после выезда соответствующих блоков
+  const chatCounter = useDelayedCounter(statsRef, 40, 1300, 1500); // блок появляется в 1.3 сек, счетчик 1.5 сек
+  const callCounter = useDelayedCounter(statsRef, 80, 1800, 1500); // блок появляется в 1.8 сек, счетчик 1.5 сек  
+  const paymentCounter = useDelayedCounter(statsRef, 70, 2300, 1500); // блок появляется в 2.3 сек, счетчик 1.5 сек
+  const qaCounter = useDelayedCounter(statsRef, 80, 2800, 1500); // блок появляется в 2.8 сек, счетчик 1.5 сек
+  
+  // Центральный блок анимируется после всех периферийных
+  const centralCounter = useDelayedCounter(statsRef, 70, 4100, 1500); // блок появляется в 4.1 сек, счетчик 1.5 сек
 
   const testimonials = [
     {
@@ -733,6 +767,7 @@ function Home() {
         </section>
 
         <section
+          ref={statsRef}
           id="stats"
           style={{
             position: 'relative',
@@ -762,7 +797,7 @@ function Home() {
               viewport={{ once: true, amount: 0.6 }}
               transition={{ 
                 duration: 0.8,
-                delay: 0.3,
+                delay: 3.3, // Появляется после всех периферийных блоков
                 type: "spring",
                 bounce: 0.4
               }}
@@ -795,7 +830,7 @@ function Home() {
                 marginBottom: '10px',
                 textShadow: '0 2px 10px rgba(255,255,255,0.2)'
               }}>
-                70%
+                {centralCounter}%
               </p>
               <p style={{
                 color: '#fff',
@@ -812,26 +847,26 @@ function Home() {
 
             {/* Круговые элементы */}
             {[
-                              { 
-                number: '40%',
+              { 
+                counter: chatCounter,
                 description: 'of requests handled by chatbot',
                 angle: 270,
                 order: 1 // top
               },
               { 
-                number: '80%',
+                counter: callCounter,
                 description: 'of calls processed by call bot',
                 angle: 0,
                 order: 2 // right
               },
               { 
-                number: '70%',
+                counter: paymentCounter,
                 description: 'of payment tickets resolved by payment bot',
                 angle: 90,
                 order: 3 // bottom
               },
               { 
-                number: '80%',
+                counter: qaCounter,
                 description: 'of QA checks performed by AI',
                 angle: 180,
                 order: 4 // left
@@ -895,7 +930,7 @@ function Home() {
                     WebkitTextFillColor: 'transparent',
                     textShadow: '0 2px 10px rgba(255,255,255,0.2)'
                   }}>
-                    {item.number}
+                    {item.counter}%
                   </p>
                   <p style={{
                     fontSize: '1rem',
@@ -1446,15 +1481,7 @@ function Home() {
                   <button
                     key={index}
                     onClick={() => setCurrentTestimonial(index)}
-                    style={{
-                      width: index === currentTestimonial ? '24px' : '8px',
-                      height: '8px',
-                      borderRadius: '4px',
-                      border: 'none',
-                      background: index === currentTestimonial ? '#000' : 'rgba(0,0,0,0.3)',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease'
-                    }}
+                    className={`indicator-button ${index === currentTestimonial ? 'active' : 'inactive'}`}
                   />
                 ))}
               </div>
@@ -1462,29 +1489,12 @@ function Home() {
               {/* Navigation arrows */}
               <button
                 onClick={() => setCurrentTestimonial((prev) => prev === 0 ? testimonials.length - 1 : prev - 1)}
+                className="nav-button"
                 style={{
                   position: 'absolute',
                   left: '-60px',
                   top: '50%',
-                  transform: 'translateY(-50%)',
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  border: '2px solid #000',
-                  background: '#fff',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.background = '#000';
-                  e.target.style.color = '#fff';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = '#fff';
-                  e.target.style.color = '#000';
+                  transform: 'translateY(-50%)'
                 }}
               >
                 ←
@@ -1492,29 +1502,12 @@ function Home() {
 
               <button
                 onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
+                className="nav-button"
                 style={{
                   position: 'absolute',
                   right: '-60px',
                   top: '50%',
-                  transform: 'translateY(-50%)',
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  border: '2px solid #000',
-                  background: '#fff',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.background = '#000';
-                  e.target.style.color = '#fff';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = '#fff';
-                  e.target.style.color = '#000';
+                  transform: 'translateY(-50%)'
                 }}
               >
                 →
@@ -1586,18 +1579,7 @@ function Home() {
                 transition={{ duration: 0.6, delay: 1 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                style={{
-                  padding: '18px 40px',
-                  fontSize: '1.2rem',
-                  fontWeight: 600,
-                  background: '#fff',
-                  color: '#000',
-                  border: 'none',
-                  borderRadius: '30px',
-                  cursor: 'pointer',
-                  boxShadow: '0 15px 30px rgba(0,0,0,0.3)',
-                  transition: 'all 0.3s ease'
-                }}
+                className="cta-button cta-primary"
               >
                 Get Started
               </motion.button>

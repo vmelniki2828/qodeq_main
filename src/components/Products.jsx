@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import Starfall from './animations/Starfall';
 import Navigation from './Navigation';
 import './Products.css';
-import { IoChatbubbleEllipsesOutline, IoCallOutline, IoWalletOutline, IoHelpCircleOutline, IoStatsChartOutline, IoTimeOutline, IoGlobeOutline, IoSpeedometerOutline, IoEyeOutline, IoCheckmarkCircleOutline, IoAnalyticsOutline, IoShieldCheckmarkOutline, IoFlashOutline, IoLinkOutline, IoTimerOutline, IoDocumentTextOutline } from 'react-icons/io5';
+import { IoChatbubbleEllipsesOutline, IoCallOutline, IoWalletOutline, IoHelpCircleOutline, IoStatsChartOutline, IoGlobeOutline, IoEyeOutline, IoCheckmarkCircleOutline, IoAnalyticsOutline, IoFlashOutline, IoPersonOutline, IoDocumentTextOutline, IoLinkOutline, IoTimerOutline, IoVolumeHighOutline, IoCardOutline, IoCubeOutline, IoTrendingUpOutline, IoShieldCheckmarkOutline } from 'react-icons/io5';
 
 const services = [
   {
@@ -30,10 +30,51 @@ const services = [
 
 function Products() {
   const [selectedId, setSelectedId] = useState(null);
+  const [chatCount, setChatCount] = useState(100000);
+  const [operatorCostPerChat, setOperatorCostPerChat] = useState(0.60);
+  const [operatorCostPerCall, setOperatorCostPerCall] = useState(1.20);
+  const [operatorCostPerQA, setOperatorCostPerQA] = useState(2.00);
 
   const handleCardClick = (id) => {
     setSelectedId(id === selectedId ? null : id);
   };
+
+  const handleSliderChange = (e) => {
+    setChatCount(parseInt(e.target.value));
+  };
+
+  const handleOperatorCostChange = (e) => {
+    const newCost = parseFloat(e.target.value) || 0;
+    setOperatorCostPerChat(newCost);
+  };
+
+  const handleOperatorCallCostChange = (e) => {
+    const newCost = parseFloat(e.target.value) || 0;
+    setOperatorCostPerCall(newCost);
+  };
+
+  const handleOperatorQACostChange = (e) => {
+    const newCost = parseFloat(e.target.value) || 0;
+    setOperatorCostPerQA(newCost);
+  };
+
+  // Calculate costs for Chatbot
+  const operatorCost = Math.round(chatCount * operatorCostPerChat);
+  const aiCost = Math.round(chatCount * 0.15);
+  const savings = operatorCost - aiCost;
+
+  // Calculate costs for Call Center Bot (per minute)
+  const operatorCallCost = Math.round(chatCount * operatorCostPerCall);
+  const aiCallCost = Math.round(chatCount * 0.10);
+  const callSavings = operatorCallCost - aiCallCost;
+
+  // Calculate costs for QA Bot (per check)
+  const operatorQACost = Math.round(chatCount * operatorCostPerQA);
+  const aiQACost = Math.round(chatCount * 0.06);
+  const qaSavings = operatorQACost - aiQACost;
+
+  // Format numbers with commas
+  const formatNumber = (num) => num.toLocaleString();
 
   return (
     <div className="products-page">
@@ -107,195 +148,272 @@ function Products() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.4, 0.0, 0.2, 1] }}
               >
-                <div className="chatbot-hero">
-                  <h3 className="chatbot-hero-text">
-                    Наш ИИ чат-бот обрабатывает до 55% обращений без участия оператора, обеспечивая круглосуточную поддержку клиентов.
-                  </h3>
-                </div>
-
-                <div className="chatbot-features">
-                  <motion.div className="feature-card" whileHover={{ scale: 1.02 }}>
-                    <div className="feature-icon">
-                      <IoStatsChartOutline />
-                    </div>
-                    <h4>Работает на собственной генеративной модели</h4>
-                  </motion.div>
-
-                  <motion.div className="feature-card uptime-card" whileHover={{ scale: 1.02 }}>
-                    <div className="feature-icon">
-                      <IoTimeOutline />
-                    </div>
-                    <h4>UPTIME 97%</h4>
-                  </motion.div>
-
-                  <motion.div className="feature-card" whileHover={{ scale: 1.02 }}>
-                    <div className="feature-icon">
-                      <IoSpeedometerOutline />
-                    </div>
-                    <h4>Быстрый доступ к базы знаний без участия разработчиков</h4>
-                  </motion.div>
-                </div>
-
-                <div className="chatbot-capabilities">
-                  <h3 className="section-title">Возможности</h3>
-                  <div className="capabilities-grid">
-                    <motion.div className="capability-item" whileHover={{ x: 5 }}>
-                      <span className="capability-bullet">•</span>
-                      <span>Поддержка сложных сценариев: KYC, бонусы, лимиты, блокировки</span>
-                    </motion.div>
-                    <motion.div className="capability-item" whileHover={{ x: 5 }}>
-                      <span className="capability-bullet">•</span>
-                      <span>Бесшовная интеграция с iGaming-платформой через API</span>
-                    </motion.div>
-                    <motion.div className="capability-item" whileHover={{ x: 5 }}>
-                      <span className="capability-bullet">•</span>
-                      <span>Адаптация под любой язык и бренд вашего казино</span>
-                    </motion.div>
-                    <motion.div className="capability-item" whileHover={{ x: 5 }}>
-                      <span className="capability-bullet">•</span>
-                      <span>Анализ настроения пользователя: Понимание эмоционального состояния клиента</span>
-                    </motion.div>
-                    <motion.div className="capability-item" whileHover={{ x: 5 }}>
-                      <span className="capability-bullet">•</span>
-                      <span>Масштабируемость: Обработка тысячи запросов одновременно</span>
-                    </motion.div>
-                  </div>
-                </div>
-
-                <div className="chatbot-stats">
-                  <h3 className="section-title">Статистика Проектов</h3>
-                  
-                  <div className="case-study">
-                    <h4 className="case-study-title">Пример из практики: Проект Alev</h4>
-                    <p className="case-study-text">
-                      Наш бот обработал 4,324 из 9,827 чатов (43.9%) в разрешенных группах пользователей.
+                {/* Hero Section */}
+                <div className="chatbot-hero-new">
+                  <div className="hero-content">
+                    <h1 className="hero-title">
+                      Qodeq: автоматизируй до 55% запросов без операторов
+                    </h1>
+                    <p className="hero-subtitle">
+                      Сократи расходы на поддержку, ускорь ответы и обеспечь круглосуточную помощь клиентам.
                     </p>
-                    <p className="case-study-note">
-                      *Бот работал только с определенными группами пользователей. При полном развертывании потенциал значительно выше.
-                    </p>
+                    <motion.button 
+                      className="hero-cta-btn btn-with-shine"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Запросить демо
+                    </motion.button>
                   </div>
-
-                  <div className="stats-grid">
-                    <motion.div className="stat-card" whileHover={{ scale: 1.05 }}>
-                      <div className="stat-number">4,324</div>
-                      <div className="stat-label">Чатов обработано ботом</div>
-                      <div className="stat-subtitle">Проект Alev, июнь 2025</div>
-                    </motion.div>
-
-                    <motion.div className="stat-card" whileHover={{ scale: 1.05 }}>
-                      <div className="stat-number">87,210</div>
-                      <div className="stat-label">Чатов CIS направление</div>
-                      <div className="stat-subtitle">Из 171,704 общего количества (50.8%)</div>
-                    </motion.div>
-
-                    <motion.div className="stat-card" whileHover={{ scale: 1.05 }}>
-                      <div className="stat-number">24/7</div>
-                      <div className="stat-label">Время работы</div>
-                      <div className="stat-subtitle">Непрерывная поддержка клиентов</div>
-                    </motion.div>
-
-                    <motion.div className="stat-card" whileHover={{ scale: 1.05 }}>
-                      <div className="stat-number">2.5x</div>
-                      <div className="stat-label">Увеличение эффективности</div>
-                      <div className="stat-subtitle">Операторы обрабатывают сложные запросы</div>
-                    </motion.div>
-                  </div>
-                </div>
-
-                <div className="chatbot-pricing">
-                  <h3 className="section-title">Стоимость Обслуживания</h3>
-                  
-                  <div className="pricing-comparison">
-                    <motion.div className="chatbot-pricing-card ai-pricing" whileHover={{ scale: 1.03 }}>
-                      <div className="pricing-header">
-                        <div className="chatbot-pricing-icon">
-                          <IoChatbubbleEllipsesOutline />
+                  <div className="hero-animation">
+                    <div className="ai-sphere-placeholder">
+                      <div className="chat-header">
+                        <div className="ai-avatar"></div>
+                        <div className="chat-title">Qodeq</div>
+                        <div className="online-status"></div>
+                      </div>
+                      
+                      <div className="chat-messages">
+                        <div className="message user">
+                          Привет! Как дела?
                         </div>
-                        <h4>ИИ-бот</h4>
-                      </div>
-                      <div className="pricing-amount">$0.15</div>
-                      <div className="pricing-label">за один чат</div>
-                      <div className="pricing-features">
-                        <div className="pricing-feature">✓ Только техническое обслуживание</div>
-                        <div className="pricing-feature">✓ Работает 24/7</div>
-                        <div className="pricing-feature">✓ Неограниченная масштабируемость</div>
-                        <div className="pricing-feature">✓ Мгновенные обновления</div>
-                      </div>
-                    </motion.div>
-
-                    <motion.div className="chatbot-pricing-card operator-pricing" whileHover={{ scale: 1.03 }}>
-                      <div className="pricing-header">
-                        <div className="chatbot-pricing-icon">
-                          <IoCallOutline />
+                        <div className="message ai">
+                          Отлично! Готов помочь вам с любыми вопросами 😊
                         </div>
-                        <h4>Оператор</h4>
+                        <div className="message ai typing">
+                          <div className="typing-indicator">
+                            <div className="typing-dot"></div>
+                            <div className="typing-dot"></div>
+                            <div className="typing-dot"></div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="pricing-amount">$0.60</div>
-                      <div className="pricing-label">за один чат</div>
-                      <div className="pricing-features">
-                        <div className="pricing-feature">• Зарплата оператора</div>
-                        <div className="pricing-feature">• Оплата отпускных/больничных</div>
-                        <div className="pricing-feature">• Человеческий фактор</div>
-                        <div className="pricing-feature">• Ограниченное время работы</div>
-                      </div>
-                    </motion.div>
-                  </div>
-
-                  <div className="savings-highlight">
-                    <h4>Пример экономии на проекте CIS (87,210 чатов в июне 2025):</h4>
-                    <div className="savings-calculation">
-                      <div className="calculation-row">
-                        <span>Стоимость с операторами:</span>
-                        <span className="cost-operator">$52,326</span>
-                      </div>
-                      <div className="calculation-row">
-                        <span>Стоимость с ИИ-ботом:</span>
-                        <span className="cost-ai">$13,082</span>
-                      </div>
-                      <div className="calculation-row savings-total">
-                        <span>Экономия в месяц:</span>
-                        <span className="savings-amount">$39,244</span>
-                      </div>
-                      <div className="calculation-row yearly">
-                        <span>Годовая экономия:</span>
-                        <span className="yearly-amount">$470,928</span>
+                      
+                      <div className="chat-input">
+                        <div className="input-field"></div>
+                        <div className="send-button"></div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="chatbot-roadmap">
-                  <h3 className="section-title">Перспективы развития</h3>
-                  <div className="roadmap-items">
-                    <motion.div className="roadmap-item" whileHover={{ x: 10 }}>
-                      <div className="roadmap-icon">
-                        <IoGlobeOutline />
-                      </div>
-                      <div className="roadmap-content">
-                        <h4>Глубокое обучение на пользовательских данных</h4>
-                        <p>Самостоятельное выявление новых паттернов поведения и улучшение качества ответов</p>
-                      </div>
-                    </motion.div>
-
-                    <motion.div className="roadmap-item" whileHover={{ x: 10 }}>
-                      <div className="roadmap-icon">
-                        <IoCallOutline />
-                      </div>
-                      <div className="roadmap-content">
-                        <h4>Полная омниканальность</h4>
-                        <p>Единое взаимодействие через любой канал с сохранением истории диалога</p>
-                      </div>
-                    </motion.div>
-
-                    <motion.div className="roadmap-item" whileHover={{ x: 10 }}>
-                      <div className="roadmap-icon">
+                {/* Key Facts Cards */}
+                <div className="facts-section">
+                  <h3 className="section-title-black">Основные показатели</h3>
+                  <div className="facts-grid">
+                    <motion.div 
+                      className="fact-card glass-effect"
+                      whileHover={{ y: -5 }}
+                    >
+                      <div className="fact-icon">
                         <IoStatsChartOutline />
                       </div>
-                      <div className="roadmap-content">
-                        <h4>Интеграция с предиктивной аналитикой</h4>
-                        <p>Прогнозирование оттока игроков и автоматическая активация целевых предложений</p>
+                      <div className="fact-content">
+                        <div className="fact-number">UPTIME 97%</div>
+                        <div className="fact-description">Стабильная работа системы</div>
                       </div>
                     </motion.div>
+
+                    <motion.div 
+                      className="fact-card glass-effect"
+                      whileHover={{ y: -5 }}
+                    >
+                      <div className="fact-icon">
+                        <IoDocumentTextOutline />
+                      </div>
+                      <div className="fact-content">
+                        <div className="fact-number">База знаний</div>
+                        <div className="fact-description">Быстрый доступ без разработчиков</div>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="fact-card glass-effect highlight-card"
+                      whileHover={{ y: -5 }}
+                    >
+                      <div className="fact-icon">
+                        <IoAnalyticsOutline />
+                      </div>
+                      <div className="fact-content">
+                        <div className="fact-number">$15,000/мес</div>
+                        <div className="fact-description">Экономия при 100k чатов</div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Capabilities Grid */}
+                <div className="capabilities-section-new">
+                  <h3 className="section-title-black">Возможности системы</h3>
+                  <div className="capabilities-grid-new">
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoShieldCheckmarkOutline />
+                      </div>
+                      <h4>KYC, бонусы, лимиты, блокировки</h4>
+                      <p>Полная поддержка сложных сценариев</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoLinkOutline />
+                      </div>
+                      <h4>Интеграция с iGaming API</h4>
+                      <p>Бесшовная интеграция с платформой</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoGlobeOutline />
+                      </div>
+                      <h4>Поддержка любого языка и бренда</h4>
+                      <p>Адаптация под ваше казино</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoEyeOutline />
+                      </div>
+                      <h4>Анализ эмоций клиентов</h4>
+                      <p>Понимание эмоционального состояния</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoFlashOutline />
+                      </div>
+                      <h4>Масштабируемость</h4>
+                      <p>Тысячи запросов одновременно</p>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Economic Effect */}
+                <div className="economics-section">
+                  <h3 className="section-title-black">Экономия в цифрах</h3>
+                  
+                  {/* Interactive Cost Comparison */}
+                  <div className="cost-comparison-interactive">
+                    <div className="operator-cost-input">
+                      <label htmlFor="operatorCost">Стоимость оператора за чат:</label>
+                      <div className="cost-input-container">
+                        <span className="currency-symbol">$</span>
+                        <input 
+                          type="number" 
+                          id="operatorCost"
+                          className="cost-input"
+                          value={operatorCostPerChat}
+                          step="0.01"
+                          min="0"
+                          onChange={handleOperatorCostChange}
+                        />
+                        <span className="cost-label-small">за чат</span>
+                      </div>
+                    </div>
+                    
+                    <div className="comparison-bars">
+                      <div className="cost-bar operator-cost">
+                        <div className="cost-label">Оператор</div>
+                        <div className="cost-bar-fill operator-bar"></div>
+                        <div className="cost-value">${operatorCostPerChat.toFixed(2)} / чат</div>
+                      </div>
+                      <div className="cost-bar ai-cost">
+                        <div className="cost-label">ИИ-бот</div>
+                        <div className="cost-bar-fill ai-bar"></div>
+                        <div className="cost-value">$0.15 / чат</div>
+                      </div>
+                    </div>
+                    <div className="savings-highlight">
+                      <div className="savings-text">
+                        В {operatorCostPerChat > 0 ? (operatorCostPerChat / 0.15).toFixed(1) : 0}x дешевле
+                      </div>
+                      <div className="savings-percentage">
+                        {operatorCostPerChat > 0 ? ((operatorCostPerChat - 0.15) / operatorCostPerChat * 100).toFixed(1) : 0}% экономии
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Key Metrics */}
+                  <div className="metrics-grid">
+                    <motion.div 
+                      className="metric-card"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <div className="metric-number">55%</div>
+                      <div className="metric-label">запросов без участия человека</div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="metric-card"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <div className="metric-number">$500k/год</div>
+                      <div className="metric-label">экономия при 100k чатов в месяц</div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="metric-card"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <div className="metric-number">4x</div>
+                      <div className="metric-label">сокращение времени ответа</div>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Cost Calculator */}
+                <div className="calculator-section">
+                  <h3 className="section-title-black">Калькулятор экономии</h3>
+                  <div className="calculator-container">
+                    <div className="calculator-settings">
+                      <div className="setting-item">
+                        <label>Стоимость оператора за чат: ${operatorCostPerChat.toFixed(2)}</label>
+                        <p className="setting-note">(изменяется в разделе "Экономия в цифрах")</p>
+                      </div>
+                    </div>
+                    <div className="calculator-input">
+                      <label>Количество чатов в месяц:</label>
+                      <input 
+                        type="range" 
+                        min="1000" 
+                        max="200000" 
+                        value={chatCount}
+                        onChange={handleSliderChange}
+                        className="calculator-slider"
+                        id="chatCount"
+                      />
+                      <div className="slider-value">{formatNumber(chatCount)} чатов</div>
+                    </div>
+                    
+                    <div className="calculator-results">
+                      <div className="result-item">
+                        <span>С операторами:</span>
+                        <span className="operator-cost-result">${formatNumber(operatorCost)}/мес</span>
+                      </div>
+                      <div className="result-item">
+                        <span>С ИИ-ботом:</span>
+                        <span className="ai-cost-result">${formatNumber(aiCost)}/мес</span>
+                      </div>
+                      <div className="result-item savings-result">
+                        <span>Экономия:</span>
+                        <span className="savings-amount-result">${formatNumber(savings)}/мес</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -308,111 +426,346 @@ function Products() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.4, 0.0, 0.2, 1] }}
               >
-                <div className="callcenter-hero">
-                  <h3 className="callcenter-hero-text">
-                    Автоматизируй до 80% звонков с помощью ИИ
-                  </h3>
-                  <p className="callcenter-hero-subtitle">
-                    ИИ-колл центр обрабатывает входящие и исходящие звонки так же естественно, как оператор, но в 10 раз быстрее и без дополнительных затрат.
-                  </p>
+                {/* Hero Section */}
+                <div className="callcenter-hero-new">
+                  <div className="hero-content">
+                    <h1 className="hero-title">
+                      ИИ Call Center Bot: автоматизация звонков без операторов
+                    </h1>
+                    <p className="hero-subtitle">
+                      Сократи расходы на колл-центр до 70% и обеспечь круглосуточную поддержку по телефону.
+                    </p>
+                    <motion.button 
+                      className="hero-cta-btn btn-with-shine"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Запросить демо
+                    </motion.button>
+                  </div>
+                  <div className="hero-animation">
+                    <div className="ai-call-placeholder">
+                      <div className="call-core"></div>
+                      <div className="call-ring ring-1"></div>
+                      <div className="call-ring ring-2"></div>
+                      <div className="call-waves">
+                        {Array.from({length: 8}).map((_, i) => (
+                          <div key={i} className={`wave wave-${i}`}></div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="callcenter-stats-grid">
-                  <motion.div className="callcenter-stat-card" whileHover={{ scale: 1.05 }}>
-                    <div className="callcenter-stat-icon">
-                      <IoCallOutline />
-                    </div>
-                    <div className="callcenter-stat-label">До 80% типовых звонков</div>
-                    <div className="callcenter-stat-subtitle">без участия человека</div>
-                  </motion.div>
-
-                  <motion.div className="callcenter-stat-card" whileHover={{ scale: 1.05 }}>
-                    <div className="callcenter-stat-icon">
-                      <IoWalletOutline />
-                    </div>
-                    <div className="callcenter-stat-label">Экономия до 60%</div>
-                    <div className="callcenter-stat-subtitle">бюджета колл-центра</div>
-                  </motion.div>
-
-                  <motion.div className="callcenter-stat-card" whileHover={{ scale: 1.05 }}>
-                    <div className="callcenter-stat-icon">
-                      <IoGlobeOutline />
-                    </div>
-                    <div className="callcenter-stat-label">Мультиязычность</div>
-                    <div className="callcenter-stat-subtitle">поддержка языков</div>
-                  </motion.div>
-
-                  <motion.div className="callcenter-stat-card" whileHover={{ scale: 1.05 }}>
-                    <div className="callcenter-stat-icon">
-                      <IoFlashOutline />
-                    </div>
-                    <div className="callcenter-stat-label">Масштабируемость</div>
-                    <div className="callcenter-stat-subtitle">тысячи звонков одновременно</div>
-                  </motion.div>
-                </div>
-
-                <div className="callcenter-features">
-                  <h3 className="section-title">Что делает</h3>
-                  
-                  <div className="callcenter-features-grid">
-                    <motion.div className="callcenter-feature-card" whileHover={{ scale: 1.03 }}>
-                      <div className="callcenter-feature-icon">
+                {/* Key Facts Cards */}
+                <div className="facts-section">
+                  <h3 className="section-title-black">Основные показатели</h3>
+                  <div className="facts-grid">
+                    <motion.div 
+                      className="fact-card glass-effect"
+                      whileHover={{ y: -5 }}
+                    >
+                      <div className="fact-icon">
                         <IoCallOutline />
                       </div>
-                      <h4>Принимает звонки</h4>
-                      <p>Принимает звонки и отвечает на стандартные вопросы игроков.</p>
-                    </motion.div>
-
-                    <motion.div className="callcenter-feature-card" whileHover={{ scale: 1.03 }}>
-                      <div className="callcenter-feature-icon">
-                        <IoCallOutline />
+                      <div className="fact-content">
+                        <div className="fact-number">До 80%</div>
+                        <div className="fact-description">Обрабатывает звонков</div>
                       </div>
-                      <h4>Исходящие звонки</h4>
-                      <p>Совершает исходящие (напоминания, KYC, удержание клиентов).</p>
                     </motion.div>
 
-                    <motion.div className="callcenter-feature-card" whileHover={{ scale: 1.03 }}>
-                      <div className="callcenter-feature-icon">
-                        <IoTimeOutline />
-                      </div>
-                      <h4>Работа 24/7</h4>
-                      <p>Работает 24/7 без перерывов и отпусков.</p>
-                    </motion.div>
-
-                    <motion.div className="callcenter-feature-card" whileHover={{ scale: 1.03 }}>
-                      <div className="callcenter-feature-icon">
+                    <motion.div 
+                      className="fact-card glass-effect highlight-card"
+                      whileHover={{ y: -5 }}
+                    >
+                      <div className="fact-icon">
                         <IoAnalyticsOutline />
                       </div>
-                      <h4>Интеграция с CRM</h4>
-                      <p>Записывает результаты и интегрируется с CRM.</p>
+                      <div className="fact-content">
+                        <div className="fact-number">$25k/мес</div>
+                        <div className="fact-description">Экономия при 50k звонков</div>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="fact-card glass-effect"
+                      whileHover={{ y: -5 }}
+                    >
+                      <div className="fact-icon">
+                        <IoStatsChartOutline />
+                      </div>
+                      <div className="fact-content">
+                        <div className="fact-number">UPTIME 97%</div>
+                        <div className="fact-description">Стабильная работа системы</div>
+                      </div>
                     </motion.div>
                   </div>
                 </div>
 
-                <div className="callcenter-benefits">
-                  <h3 className="section-title">Преимущества</h3>
+                {/* Capabilities Grid */}
+                <div className="capabilities-section-new">
+                  <h3 className="section-title-black">Возможности системы</h3>
+                  <div className="capabilities-grid-new">
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoCallOutline />
+                      </div>
+                      <h4>Приём входящих и исходящих звонков</h4>
+                      <p>Полный цикл телефонной поддержки</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoVolumeHighOutline />
+                      </div>
+                      <h4>Голосовой синтез и распознавание речи</h4>
+                      <p>Естественное общение с клиентами</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoLinkOutline />
+                      </div>
+                      <h4>Интеграция с CRM и телефонией</h4>
+                      <p>Бесшовная работа с системами</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoGlobeOutline />
+                      </div>
+                      <h4>Поддержка до 15 языков</h4>
+                      <p>Международная поддержка клиентов</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoFlashOutline />
+                      </div>
+                      <h4>Массовая обзвонная кампания</h4>
+                      <p>Автоматизация обзвона тысяч клиентов</p>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Economic Effect */}
+                <div className="economics-section">
+                  <h3 className="section-title-black">Экономический эффект</h3>
                   
-                  <motion.div className="callcenter-benefit-card" whileHover={{ scale: 1.02 }}>
-                    <h4>Ключевые преимущества ИИ-колл центра</h4>
-                    <div className="callcenter-benefits-list">
-                      <div className="callcenter-benefit-item">
-                        <span>✓</span>
-                        <span>Уменьшение нагрузки на операторов</span>
-                      </div>
-                      <div className="callcenter-benefit-item">
-                        <span>✓</span>
-                        <span>Быстрое внедрение (запуск за 1–2 дня)</span>
-                      </div>
-                      <div className="callcenter-benefit-item">
-                        <span>✓</span>
-                        <span>Подробная аналитика и записи звонков</span>
-                      </div>
-                      <div className="callcenter-benefit-item">
-                        <span>✓</span>
-                        <span>Повышение качества обслуживания и удержания клиентов</span>
+                  {/* Interactive Cost Comparison */}
+                  <div className="cost-comparison-interactive">
+                    <div className="operator-cost-input">
+                      <label htmlFor="operatorCallCost">Стоимость оператора за минуту звонка:</label>
+                      <div className="cost-input-container">
+                        <span className="currency-symbol">$</span>
+                        <input 
+                          type="number" 
+                          id="operatorCallCost"
+                          className="cost-input"
+                          value={operatorCostPerCall}
+                          step="0.01"
+                          min="0"
+                          onChange={handleOperatorCallCostChange}
+                        />
+                        <span className="cost-label-small">за минуту</span>
                       </div>
                     </div>
-                  </motion.div>
+                    
+                    <div className="comparison-bars">
+                      <div className="cost-bar operator-cost">
+                        <div className="cost-label">Оператор</div>
+                        <div className="cost-bar-fill operator-bar"></div>
+                        <div className="cost-value">${operatorCostPerCall.toFixed(2)} / минута</div>
+                      </div>
+                      <div className="cost-bar ai-cost">
+                        <div className="cost-label">Call Bot</div>
+                        <div className="cost-bar-fill ai-bar"></div>
+                        <div className="cost-value">$0.10 / минута</div>
+                      </div>
+                    </div>
+                    <div className="savings-highlight">
+                      <div className="savings-text">
+                        В {operatorCostPerCall > 0 ? (operatorCostPerCall / 0.10).toFixed(1) : 0}x дешевле
+                      </div>
+                      <div className="savings-percentage">
+                        {operatorCostPerCall > 0 ? ((operatorCostPerCall - 0.10) / operatorCostPerCall * 100).toFixed(1) : 0}% экономии
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Key Metrics */}
+                  <div className="metrics-grid">
+                    <motion.div 
+                      className="metric-card"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <div className="metric-number">80%</div>
+                      <div className="metric-label">автоматизация звонков</div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="metric-card"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <div className="metric-number">70%</div>
+                      <div className="metric-label">сокращение расходов колл-центра</div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="metric-card"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <div className="metric-number">24/7</div>
+                      <div className="metric-label">круглосуточная поддержка</div>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Cost Calculator */}
+                <div className="calculator-section">
+                  <h3 className="section-title-black">Калькулятор экономии звонков</h3>
+                  <div className="calculator-container">
+                    <div className="calculator-settings">
+                      <div className="setting-item">
+                        <label>Стоимость оператора за минуту: ${operatorCostPerCall.toFixed(2)}</label>
+                        <p className="setting-note">(изменяется в разделе "Экономический эффект")</p>
+                      </div>
+                    </div>
+                    <div className="calculator-input">
+                      <label>Количество минут звонков в месяц:</label>
+                      <input 
+                        type="range" 
+                        min="1000" 
+                        max="100000" 
+                        value={chatCount}
+                        onChange={handleSliderChange}
+                        className="calculator-slider"
+                        id="callCount"
+                      />
+                      <div className="slider-value">{formatNumber(chatCount)} минут</div>
+                    </div>
+                    
+                    <div className="calculator-results">
+                      <div className="result-item">
+                        <span>С операторами:</span>
+                        <span className="operator-cost-result">${formatNumber(operatorCallCost)}/мес</span>
+                      </div>
+                      <div className="result-item">
+                        <span>С Call Bot:</span>
+                        <span className="ai-cost-result">${formatNumber(aiCallCost)}/мес</span>
+                      </div>
+                      <div className="result-item savings-result">
+                        <span>Экономия:</span>
+                        <span className="savings-amount-result">${formatNumber(callSavings)}/мес</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Pricing Comparison */}
+                <div className="pricing-section">
+                  <h3 className="section-title-black">Стоимость обслуживания</h3>
+                  <div className="pricing-comparison-new">
+                    <motion.div 
+                      className="pricing-card-new call-bot-card"
+                      whileHover={{ scale: 1.03 }}
+                    >
+                      <div className="pricing-header">
+                        <div className="pricing-icon">
+                          <IoCallOutline />
+                        </div>
+                        <h4>Call Bot</h4>
+                      </div>
+                      <div className="pricing-amount">$0.10</div>
+                      <div className="pricing-label">за минуту</div>
+                      <div className="pricing-features">
+                        <div className="pricing-feature">✓ Автоматическая обработка</div>
+                        <div className="pricing-feature">✓ Работает 24/7</div>
+                        <div className="pricing-feature">✓ Неограниченная масштабируемость</div>
+                        <div className="pricing-feature">✓ Интеграция с CRM</div>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="pricing-card-new operator-card"
+                      whileHover={{ scale: 1.03 }}
+                    >
+                      <div className="pricing-header">
+                        <div className="pricing-icon">
+                          <IoPersonOutline />
+                        </div>
+                        <h4>Оператор</h4>
+                      </div>
+                      <div className="pricing-amount">${operatorCostPerCall.toFixed(2)}</div>
+                      <div className="pricing-label">за минуту</div>
+                      <div className="pricing-features">
+                        <div className="pricing-feature">• Зарплата оператора</div>
+                        <div className="pricing-feature">• Отпускные/больничные</div>
+                        <div className="pricing-feature">• Человеческий фактор</div>
+                        <div className="pricing-feature">• Ограниченные часы работы</div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Future Prospects */}
+                <div className="prospects-section">
+                  <h3 className="section-title-black">Перспективы развития</h3>
+                  <div className="prospects-grid">
+                    <motion.div 
+                      className="prospect-card"
+                      whileHover={{ x: 10 }}
+                    >
+                      <div className="prospect-icon">
+                        <IoVolumeHighOutline />
+                      </div>
+                      <div className="prospect-content">
+                        <h4>Улучшение качества синтеза речи</h4>
+                        <p>Еще более естественное звучание и эмоциональная окраска голоса</p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="prospect-card"
+                      whileHover={{ x: 10 }}
+                    >
+                      <div className="prospect-icon">
+                        <IoChatbubbleEllipsesOutline />
+                      </div>
+                      <div className="prospect-content">
+                        <h4>Интеграция с WhatsApp/Telegram звонками</h4>
+                        <p>Расширение каналов коммуникации для максимального охвата</p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="prospect-card"
+                      whileHover={{ x: 10 }}
+                    >
+                      <div className="prospect-icon">
+                        <IoStatsChartOutline />
+                      </div>
+                      <div className="prospect-content">
+                        <h4>Smart-обзвоны с ИИ-персонализацией</h4>
+                        <p>Индивидуальный подход к каждому клиенту на основе поведенческой аналитики</p>
+                      </div>
+                    </motion.div>
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -424,222 +777,290 @@ function Products() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.4, 0.0, 0.2, 1] }}
               >
-                <div className="qa-hero">
-                  <h3 className="qa-hero-text">
-                    Автоматизируйте контроль качества обслуживания клиентов с помощью ИИ-анализа каждого чата в режиме реального времени.
-                  </h3>
+                {/* Hero Section */}
+                <div className="qa-hero-new">
+                  <div className="qa-hero-content">
+                    <h2>ИИ QA Bot: контроль качества поддержки</h2>
+                    <p>Проводи до 80% проверок чатов и звонков автоматически, экономь время тимлидов и супервайзеров</p>
+                  </div>
+                  <div className="ai-qa-placeholder">
+                    <div className="qa-core"></div>
+                    <div className="qa-ring ring-1"></div>
+                    <div className="qa-ring ring-2"></div>
+                    <div className="quality-indicator indicator-1"></div>
+                    <div className="quality-indicator indicator-2"></div>
+                    <div className="quality-indicator indicator-3"></div>
+                    <div className="quality-indicator indicator-4"></div>
+                    <div className="quality-indicator indicator-5"></div>
+                    <div className="quality-indicator indicator-6"></div>
+                  </div>
                 </div>
 
-                <div className="qa-features">
-                  <motion.div className="qa-feature-card" whileHover={{ scale: 1.02 }}>
-                    <div className="qa-feature-icon">
-                      <IoEyeOutline />
-                    </div>
-                    <h4>Мгновенный Анализ Чатов</h4>
-                    <p>Система обрабатывает каждое сообщение оператора, выявляя нарушения протокола и качества обслуживания.</p>
-                  </motion.div>
+                {/* Facts Grid */}
+                <div className="facts-section">
+                  <h3 className="section-title-black">Ключевые факты</h3>
+                  <div className="facts-grid">
+                    <motion.div 
+                      className="fact-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="fact-number">80%</div>
+                      <p>Выполняет до 80% QA-проверок</p>
+                    </motion.div>
 
-                  <motion.div className="qa-feature-card" whileHover={{ scale: 1.02 }}>
-                    <div className="qa-feature-icon">
-                      <IoCheckmarkCircleOutline />
-                    </div>
-                    <h4>15 Критериев Оценки</h4>
-                    <p>Вежливость, полнота ответа, соблюдение скрипта, время реакции, грамматика, работа с возражениями, предложение бонусов и 8 других параметров.</p>
-                  </motion.div>
+                    <motion.div 
+                      className="fact-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="fact-number">500</div>
+                      <p>Экономия до 500 часов работы QA в месяц</p>
+                    </motion.div>
 
-                  <motion.div className="qa-feature-card" whileHover={{ scale: 1.02 }}>
-                    <div className="qa-feature-icon">
-                      <IoAnalyticsOutline />
-                    </div>
-                    <h4>Персональная Аналитика</h4>
-                    <p>Еженедельные отчеты для каждого оператора с детализацией по слабым местам и рекомендациями для улучшения показателей на 25-40%.</p>
-                  </motion.div>
-
-                  <motion.div className="qa-feature-card" whileHover={{ scale: 1.02 }}>
-                    <div className="qa-feature-icon">
-                      <IoShieldCheckmarkOutline />
-                    </div>
-                    <h4>Неограниченная Масштабируемость</h4>
-                    <p>Обрабатывает 50,000 чатов в сутки одновременно, работая с любым количеством операторов без снижения качества анализа.</p>
-                  </motion.div>
+                    <motion.div 
+                      className="fact-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="fact-number">24/7</div>
+                      <p>Автоматический скоринг по KPI</p>
+                    </motion.div>
+                  </div>
                 </div>
 
-                <div className="qa-revolution">
-                  <motion.div className="revolution-card" whileHover={{ scale: 1.03 }}>
-                    <h3>Революция в QA</h3>
-                    <div className="revolution-comparison">
-                      <div className="revolution-old">
-                        <span className="revolution-number">2-3</span>
-                        <span>чата из 1000 вручную</span>
+                {/* Capabilities Grid */}
+                <div className="capabilities-section-new">
+                  <h3 className="section-title-black">Возможности системы</h3>
+                  <div className="capabilities-grid-new">
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoEyeOutline />
                       </div>
-                      <div className="revolution-arrow">→</div>
-                      <div className="revolution-new">
-                        <span className="revolution-number">1000</span>
-                        <span>чатов с точностью 94,2%</span>
+                      <h4>Проверка чатов и звонков по чек-листам</h4>
+                      <p>Комплексная проверка соблюдения стандартов</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoStatsChartOutline />
                       </div>
-                    </div>
-                  </motion.div>
+                      <h4>Формирование отчётов и метрик</h4>
+                      <p>Детальная аналитика по всем показателям</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoPersonOutline />
+                      </div>
+                      <h4>Автоматический скоринг операторов</h4>
+                      <p>Объективная оценка работы сотрудников</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoAnalyticsOutline />
+                      </div>
+                      <h4>Анализ тональности</h4>
+                      <p>Определение эмоциональной окраски общения</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoFlashOutline />
+                      </div>
+                      <h4>Масштабируемость до десятков тысяч чатов</h4>
+                      <p>Обработка больших объёмов без потери качества</p>
+                    </motion.div>
+                  </div>
                 </div>
 
-                <div className="qa-economics">
-                  <h3 className="section-title">Экономическая Эффективность</h3>
+                {/* Economic Effect */}
+                <div className="economics-section">
+                  <h3 className="section-title-black">Экономический эффект</h3>
                   
-                  <div className="qa-cost-highlight">
-                    <h4>Стоимость проверки 1000 чатов ботом составляет $60, что в 8 раз дешевле содержания QA-команды.</h4>
-                  </div>
-
-                  <div className="qa-pricing-comparison">
-                    <motion.div className="qa-pricing-card qa-team-card" whileHover={{ scale: 1.03 }}>
-                      <div className="qa-pricing-header">
-                        <div className="qa-pricing-icon">
-                          <IoCallOutline />
-                        </div>
-                        <h4>Традиционная QA-команда</h4>
+                  {/* Interactive Cost Comparison */}
+                  <div className="cost-comparison-interactive">
+                    <div className="operator-cost-input">
+                      <label htmlFor="operatorQACost">Стоимость оператора QA за проверку чата:</label>
+                      <div className="cost-input-container">
+                        <span className="currency-symbol">$</span>
+                        <input 
+                          type="number" 
+                          id="operatorQACost"
+                          className="cost-input"
+                          value={operatorCostPerQA}
+                          step="0.01"
+                          min="0"
+                          onChange={handleOperatorQACostChange}
+                        />
+                        <span className="cost-label-small">за проверку</span>
                       </div>
-                      <div className="qa-team-details">
-                        <div className="qa-detail-item">5 человек — проверяют 25,000 чатов/месяц</div>
-                        <div className="qa-detail-item">Зарплата команды: $5,000/месяц</div>
-                        <div className="qa-detail-item">Отпускные/Больничные</div>
-                        <div className="qa-detail-item">Человеческий фактор</div>
-                        <div className="qa-total-cost">Итого: $7,000/месяц</div>
-                        <div className="qa-per-thousand">Стоимость за 1000 чатов: <span className="cost-high">$280</span></div>
-                      </div>
-                    </motion.div>
-
-                    <motion.div className="qa-pricing-card qa-bot-card" whileHover={{ scale: 1.03 }}>
-                      <div className="qa-pricing-header">
-                        <div className="qa-pricing-icon">
-                          <IoShieldCheckmarkOutline />
-                        </div>
-                        <h4>QA Бот</h4>
-                      </div>
-                      <div className="qa-bot-details">
-                        <div className="qa-detail-item">Неограниченная проверка чатов</div>
-                        <div className="qa-detail-item">Без дополнительных расходов</div>
-                        <div className="qa-detail-item">Работает 24/7</div>
-                        <div className="qa-detail-item">100% покрытие всех чатов</div>
-                        <div className="qa-detail-item">Мгновенные результаты</div>
-                        <div className="qa-per-thousand">Стоимость за 1000 чатов: <span className="cost-low">$60</span></div>
-                      </div>
-                    </motion.div>
-                  </div>
-                </div>
-
-                <div className="qa-savings-table">
-                  <h3 className="section-title">Расчет экономии на реальных объемах</h3>
-                  <div className="qa-table">
-                    <div className="qa-table-header">
-                      <div>Объем чатов/месяц</div>
-                      <div>Стоимость QA-команды</div>
-                      <div>Стоимость QA Бота</div>
-                      <div>Экономия</div>
-                      <div>Экономия %</div>
                     </div>
-                    <motion.div className="qa-table-row" whileHover={{ backgroundColor: "rgba(255,255,255,0.05)" }}>
-                      <div>25,000</div>
-                      <div className="cost-high">$7,000</div>
-                      <div className="cost-low">$1,500</div>
-                      <div className="savings-amount">$5,500</div>
-                      <div>78.6%</div>
-                    </motion.div>
-                    <motion.div className="qa-table-row" whileHover={{ backgroundColor: "rgba(255,255,255,0.05)" }}>
-                      <div>50,000</div>
-                      <div className="cost-high">$14,000</div>
-                      <div className="cost-low">$3,000</div>
-                      <div className="savings-amount">$11,000</div>
-                      <div>78.6%</div>
-                    </motion.div>
-                    <motion.div className="qa-table-row" whileHover={{ backgroundColor: "rgba(255,255,255,0.05)" }}>
-                      <div>100,000</div>
-                      <div className="cost-high">$28,000</div>
-                      <div className="cost-low">$6,000</div>
-                      <div className="savings-amount">$22,000</div>
-                      <div>78.6%</div>
-                    </motion.div>
-                    <motion.div className="qa-table-row" whileHover={{ backgroundColor: "rgba(255,255,255,0.05)" }}>
-                      <div>200,000</div>
-                      <div className="cost-high">$56,000</div>
-                      <div className="cost-low">$12,000</div>
-                      <div className="savings-amount">$44,000</div>
-                      <div>78.6%</div>
-                    </motion.div>
+                    
+                    <div className="comparison-bars">
+                      <div className="cost-bar operator-cost">
+                        <div className="cost-label">Оператор QA</div>
+                        <div className="cost-bar-fill operator-bar"></div>
+                        <div className="cost-value">${operatorCostPerQA.toFixed(2)} / проверка</div>
+                      </div>
+                      <div className="cost-bar ai-cost">
+                        <div className="cost-label">QA Bot</div>
+                        <div className="cost-bar-fill ai-bar"></div>
+                        <div className="cost-value">$0.06 / проверка</div>
+                      </div>
+                    </div>
+                    <div className="savings-highlight">
+                      <div className="savings-text">
+                        В {operatorCostPerQA > 0 ? (operatorCostPerQA / 0.06).toFixed(1) : 0}x дешевле
+                      </div>
+                      <div className="savings-percentage">
+                        {operatorCostPerQA > 0 ? ((operatorCostPerQA - 0.06) / operatorCostPerQA * 100).toFixed(1) : 0}% экономии
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="qa-example">
-                  <motion.div className="qa-example-card" whileHover={{ scale: 1.02 }}>
-                    <h3>Пример экономии на 100,000 чатов в месяц</h3>
-                    <div className="qa-example-comparison">
-                      <div className="qa-example-item">
-                        <span>QA-команда (20 человек):</span>
-                        <span className="cost-high">$28,000/месяц</span>
+                {/* QA Cost Calculator */}
+                <div className="calculator-section">
+                  <h3 className="section-title-black">Калькулятор экономии QA</h3>
+                  <div className="calculator-container">
+                    <div className="calculator-settings">
+                      <div className="setting-item">
+                        <label>Стоимость QA-специалиста за проверку: ${operatorCostPerQA.toFixed(2)}</label>
+                        <p className="setting-note">(изменяется в разделе "Экономический эффект")</p>
                       </div>
-                      <div className="qa-example-item">
-                        <span>QA Бот:</span>
-                        <span className="cost-low">$6,000/месяц</span>
+                    </div>
+                    <div className="calculator-input">
+                      <label>Количество проверок чатов в месяц:</label>
+                      <input 
+                        type="range" 
+                        min="1000" 
+                        max="200000" 
+                        value={chatCount}
+                        onChange={handleSliderChange}
+                        className="calculator-slider"
+                        id="qaCount"
+                      />
+                      <div className="slider-value">{formatNumber(chatCount)} проверок</div>
+                    </div>
+                    
+                    <div className="calculator-results">
+                      <div className="result-item">
+                        <span>С QA-специалистами:</span>
+                        <span className="operator-cost-result">${formatNumber(operatorQACost)}/мес</span>
                       </div>
-                      <div className="qa-example-savings">
+                      <div className="result-item">
+                        <span>С QA Bot:</span>
+                        <span className="ai-cost-result">${formatNumber(aiQACost)}/мес</span>
+                      </div>
+                      <div className="result-item savings-result">
                         <span>Экономия:</span>
-                        <span className="savings-amount">$22,000/месяц</span>
+                        <span className="savings-amount-result">${formatNumber(qaSavings)}/мес</span>
                       </div>
-                      <div className="qa-example-yearly">
-                        <span>Годовая экономия:</span>
-                        <span className="yearly-amount">$264,000</span>
-                      </div>
-                    </div>
-                    <div className="qa-coverage-bonus">
-                      <strong>Плюс: 100% покрытие vs 10-15% при ручной проверке</strong>
-                    </div>
-                  </motion.div>
-                </div>
-
-                <div className="qa-functionality">
-                  <h3 className="section-title">Детальная Функциональность Системы</h3>
-                  <div className="qa-dashboard-preview">
-                    <h4>Панель Управления QA отображает результаты анализа всех чатов:</h4>
-                    <div className="qa-dashboard-features">
-                      <motion.div className="qa-dashboard-item" whileHover={{ x: 10 }}>
-                        <span className="qa-dashboard-bullet">•</span>
-                        <span><strong>Чат ID</strong> — уникальный номер для быстрого поиска (например: CHT-240315-001)</span>
-                      </motion.div>
-                      <motion.div className="qa-dashboard-item" whileHover={{ x: 10 }}>
-                        <span className="qa-dashboard-bullet">•</span>
-                        <span><strong>Общая оценка</strong> — балл от 1 до 100 на основе всех критериев</span>
-                      </motion.div>
-                      <motion.div className="qa-dashboard-item" whileHover={{ x: 10 }}>
-                        <span className="qa-dashboard-bullet">•</span>
-                        <span><strong>Цветовая индикация</strong> — зеленый (85-100), желтый (70-84), красный (менее 70)</span>
-                      </motion.div>
-                      <motion.div className="qa-dashboard-item" whileHover={{ x: 10 }}>
-                        <span className="qa-dashboard-bullet">•</span>
-                        <span><strong>Время обработки</strong> — длительность чата и среднее время ответа</span>
-                      </motion.div>
-                      <motion.div className="qa-dashboard-item" whileHover={{ x: 10 }}>
-                        <span className="qa-dashboard-bullet">•</span>
-                        <span><strong>Критические нарушения</strong> — автоматическое выделение серьезных ошибок</span>
-                      </motion.div>
-                      <motion.div className="qa-dashboard-item" whileHover={{ x: 10 }}>
-                        <span className="qa-dashboard-bullet">•</span>
-                        <span><strong>Дата и смена</strong> — временные метки для трендового анализа</span>
-                      </motion.div>
                     </div>
                   </div>
                 </div>
 
-                <div className="qa-results">
-                  <h3 className="section-title">Результаты внедрения</h3>
-                  <div className="qa-results-grid">
-                    <motion.div className="qa-result-card" whileHover={{ scale: 1.05 }}>
-                      <div className="qa-result-number">87%</div>
-                      <div className="qa-result-label">Сокращение времени QA-проверки</div>
+                {/* Pricing Section */}
+                <div className="pricing-section">
+                  <h3 className="section-title-black">Стоимость обслуживания</h3>
+                  <div className="pricing-comparison-new">
+                    <motion.div 
+                      className="pricing-card-new qa-bot-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="pricing-header">
+                        <div className="pricing-icon">
+                          <IoFlashOutline />
+                        </div>
+                        <h4>QA Bot</h4>
+                      </div>
+                      <div className="pricing-amount">$0.06</div>
+                      <div className="pricing-label">за проверку</div>
+                      <div className="pricing-features">
+                        <div className="pricing-feature">• Мгновенная обработка</div>
+                        <div className="pricing-feature">• 100% покрытие чатов</div>
+                        <div className="pricing-feature">• Работа 24/7</div>
+                        <div className="pricing-feature">• Автоматические отчёты</div>
+                      </div>
                     </motion.div>
-                    <motion.div className="qa-result-card" whileHover={{ scale: 1.05 }}>
-                      <div className="qa-result-number">31%</div>
-                      <div className="qa-result-label">Повышение качества обслуживания</div>
+
+                    <motion.div 
+                      className="pricing-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="pricing-header">
+                        <div className="pricing-icon">
+                          <IoPersonOutline />
+                        </div>
+                        <h4>QA-специалист</h4>
+                      </div>
+                      <div className="pricing-amount">${operatorCostPerQA.toFixed(2)}</div>
+                      <div className="pricing-label">за проверку</div>
+                      <div className="pricing-features">
+                        <div className="pricing-feature">• Время обработки 15-30 мин</div>
+                        <div className="pricing-feature">• Покрытие 2-5% чатов</div>
+                        <div className="pricing-feature">• Работа в смены</div>
+                        <div className="pricing-feature">• Субъективная оценка</div>
+                      </div>
                     </motion.div>
-                    <motion.div className="qa-result-card" whileHover={{ scale: 1.05 }}>
-                      <div className="qa-result-number">3.2x</div>
-                      <div className="qa-result-label">Выявление скрытых проблем быстрее</div>
+                  </div>
+                </div>
+
+                {/* Prospects Section */}
+                <div className="prospects-section">
+                  <h3 className="section-title-black">Перспективы развития</h3>
+                  <div className="prospects-grid">
+                    <motion.div 
+                      className="prospect-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="prospect-icon">
+                        <IoGlobeOutline />
+                      </div>
+                      <div className="prospect-content">
+                        <h4>Поддержка мультиязычных QA-скриптов</h4>
+                        <p>Расширение системы для работы с международными командами и многоязычной поддержкой клиентов</p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="prospect-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="prospect-icon">
+                        <IoLinkOutline />
+                      </div>
+                      <div className="prospect-content">
+                        <h4>Интеграция с HR и LMS-системами</h4>
+                        <p>Автоматическая синхронизация с системами управления персоналом и обучающими платформами</p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="prospect-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="prospect-icon">
+                        <IoCheckmarkCircleOutline />
+                      </div>
+                      <div className="prospect-content">
+                        <h4>Автоматическая выдача рекомендаций операторам</h4>
+                        <p>Персонализированные советы по улучшению качества работы на основе анализа ошибок</p>
+                      </div>
                     </motion.div>
                   </div>
                 </div>
@@ -653,241 +1074,230 @@ function Products() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.4, 0.0, 0.2, 1] }}
               >
-                <div className="payment-hero">
-                  <h3 className="payment-hero-text">
-                    Наш бот создан для автоматизации и упрощения процесса обработки заявок, поступающих от платёжной системы, и предназначен для оптимизации повседневной работы сотрудников.
-                  </h3>
+                {/* Hero Section */}
+                <div className="payment-hero-new">
+                  <div className="payment-hero-content">
+                    <h2>ИИ Payment Bot: автоматизация обработки платежей</h2>
+                    <p>Сократи нагрузку на саппорт, обрабатывай до 70% тикетов по платежам автоматически</p>
+                  </div>
+                  <div className="ai-payment-placeholder">
+                    <div className="payment-core"></div>
+                    <div className="payment-ring ring-1"></div>
+                    <div className="payment-ring ring-2"></div>
+                    <div className="transaction transaction-1"></div>
+                    <div className="transaction transaction-2"></div>
+                    <div className="transaction transaction-3"></div>
+                    <div className="transaction transaction-4"></div>
+                    <div className="transaction transaction-5"></div>
+                    <div className="transaction transaction-6"></div>
+                  </div>
                 </div>
 
-                <div className="payment-features">
-                  <motion.div className="payment-feature-card" whileHover={{ scale: 1.02 }}>
-                    <div className="payment-feature-icon">
-                      <IoFlashOutline />
-                    </div>
-                    <h4>Мгновенные Ответы</h4>
-                    <p>Время реакции на вопросы "где мой депозит/вывод?" сокращается с 3-5 минут до 1 секунды.</p>
-                  </motion.div>
-
-                  <motion.div className="payment-feature-card" whileHover={{ scale: 1.02 }}>
-                    <div className="payment-feature-icon">
-                      <IoLinkOutline />
-                    </div>
-                    <h4>Интеграция с ИИ Чат-Ботом</h4>
-                    <p>Чат-Бот автоматически создает тикет по запросу о непришедшем депозите, а Payment Бот берет их в работу.</p>
-                  </motion.div>
-
-                  <motion.div className="payment-feature-card" whileHover={{ scale: 1.02 }}>
-                    <div className="payment-feature-icon">
-                      <IoStatsChartOutline />
-                    </div>
-                    <h4>Прямая Связь с PSP</h4>
-                    <p>Получает информацию о транзакциях напрямую из платежной системы через API интеграцию.</p>
-                  </motion.div>
-
-                  <motion.div className="payment-feature-card" whileHover={{ scale: 1.02 }}>
-                    <div className="payment-feature-icon">
-                      <IoDocumentTextOutline />
-                    </div>
-                    <h4>Автоматизация Процессов</h4>
-                    <p>Автоматизация создания тикетов и передачи данных в платежную систему с полным контролем.</p>
-                  </motion.div>
-                </div>
-
-                <div className="payment-efficiency">
-                  <h3 className="section-title">Эффективность Автоматизации</h3>
-                  <div className="payment-stats-grid">
-                    <motion.div className="payment-stat-card" whileHover={{ scale: 1.05 }}>
-                      <div className="payment-stat-number">4%</div>
-                      <div className="payment-stat-label">Полностью решено ботом</div>
-                      <div className="payment-stat-subtitle">Из 100% обработанных тикетов</div>
+                {/* Facts Grid */}
+                <div className="facts-section">
+                  <h3 className="section-title-black">Ключевые факты</h3>
+                  <div className="facts-grid">
+                    <motion.div 
+                      className="fact-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="fact-number">70%</div>
+                      <p>Закрывает до 70% тикетов по депозитам/выводам</p>
                     </motion.div>
 
-                    <motion.div className="payment-stat-card" whileHover={{ scale: 1.05 }}>
-                      <div className="payment-stat-number">100%</div>
-                      <div className="payment-stat-label">Участие в обработке</div>
-                      <div className="payment-stat-subtitle">Создание тикетов и передача данных</div>
+                    <motion.div 
+                      className="fact-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="fact-number">$20k</div>
+                      <p>Экономия до $20k/мес при 30k тикетов</p>
                     </motion.div>
 
-                    <motion.div className="payment-stat-card" whileHover={{ scale: 1.05 }}>
-                      <div className="payment-stat-number">1 сек</div>
-                      <div className="payment-stat-label">Время ответа</div>
-                      <div className="payment-stat-subtitle">Вместо 3-5 минут</div>
-                    </motion.div>
-
-                    <motion.div className="payment-stat-card" whileHover={{ scale: 1.05 }}>
-                      <div className="payment-stat-number">24/7</div>
-                      <div className="payment-stat-label">Режим работы</div>
-                      <div className="payment-stat-subtitle">Критически важный этап</div>
+                    <motion.div 
+                      className="fact-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="fact-number">24/7</div>
+                      <p>Интеграция с платёжными системами</p>
                     </motion.div>
                   </div>
                 </div>
 
-                <div className="payment-real-data">
-                  <h3 className="section-title">Реальные Данные (CIS Проекты)</h3>
+                {/* Capabilities Grid */}
+                <div className="capabilities-section-new">
+                  <h3 className="section-title-black">Возможности системы</h3>
+                  <div className="capabilities-grid-new">
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoCardOutline />
+                      </div>
+                      <h4>Проверка статуса транзакций</h4>
+                      <p>Мгновенная проверка платежных операций</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoLinkOutline />
+                      </div>
+                      <h4>Интеграция с PSP/банками</h4>
+                      <p>Прямое подключение к платёжным провайдерам</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoTimerOutline />
+                      </div>
+                      <h4>Автоматические ответы по задержкам</h4>
+                      <p>Уведомления о статусе задержанных платежей</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoStatsChartOutline />
+                      </div>
+                      <h4>Логирование и аналитика</h4>
+                      <p>Детальная отчётность по всем операциям</p>
+                    </motion.div>
+
+                    <motion.div 
+                      className="capability-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="capability-icon-new">
+                        <IoFlashOutline />
+                      </div>
+                      <h4>Масштабируемость (десятки тысяч запросов)</h4>
+                      <p>Обработка больших объёмов транзакций</p>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Economic Effect */}
+                <div className="economics-section">
+                  <h3 className="section-title-black">Экономический эффект</h3>
                   
-                  <div className="payment-overview">
-                    <motion.div className="payment-overview-card" whileHover={{ scale: 1.02 }}>
-                      <h4>Июнь 2025 - Общие Показатели</h4>
-                      <div className="payment-overview-stats">
-                        <div className="payment-overview-item">
-                          <span>Всего тикетов:</span>
-                          <span className="stat-number-large">44,743</span>
-                        </div>
-                        <div className="payment-overview-item">
-                          <span>Человек в отделе:</span>
-                          <span className="stat-number-large">30</span>
-                        </div>
-                        <div className="payment-overview-item">
-                          <span>Среднее время (с ботом):</span>
-                          <span className="stat-time">4:20 мин</span>
-                        </div>
-                        <div className="payment-overview-item">
-                          <span>Среднее время (без бота):</span>
-                          <span className="stat-time">8:00 мин</span>
-                        </div>
+                  {/* Cost Comparison */}
+                  <div className="cost-comparison">
+                    <div className="comparison-bars">
+                      <div className="cost-bar operator-cost">
+                        <div className="cost-label">Оператор</div>
+                        <div className="cost-bar-fill operator-bar"></div>
+                        <div className="cost-value">$0.80 / тикет</div>
                       </div>
-                    </motion.div>
-                  </div>
-
-                  <div className="payment-monthly-comparison">
-                    <h4>Сравнение Июнь vs Июль</h4>
-                    <div className="payment-comparison-table">
-                      <div className="payment-table-header">
-                        <div>Показатель</div>
-                        <div>Июнь (среднее)</div>
-                        <div>Июль (среднее)</div>
+                      <div className="cost-bar ai-cost">
+                        <div className="cost-label">Payment Bot</div>
+                        <div className="cost-bar-fill ai-bar"></div>
+                        <div className="cost-value">$0.20 / тикет</div>
                       </div>
-                      <motion.div className="payment-table-row" whileHover={{ backgroundColor: "rgba(255,255,255,0.05)" }}>
-                        <div>Тикетов за смену (с дублями)</div>
-                        <div>1,418</div>
-                        <div>710</div>
-                      </motion.div>
-                      <motion.div className="payment-table-row" whileHover={{ backgroundColor: "rgba(255,255,255,0.05)" }}>
-                        <div>Дубликаты</div>
-                        <div>184</div>
-                        <div>9</div>
-                      </motion.div>
-                      <motion.div className="payment-table-row" whileHover={{ backgroundColor: "rgba(255,255,255,0.05)" }}>
-                        <div>Обработано ботом</div>
-                        <div>915</div>
-                        <div>523</div>
-                      </motion.div>
-                      <motion.div className="payment-table-row" whileHover={{ backgroundColor: "rgba(255,255,255,0.05)" }}>
-                        <div>Полностью решено ботом</div>
-                        <div>655</div>
-                        <div>234</div>
-                      </motion.div>
+                    </div>
+                    <div className="savings-highlight">
+                      <div className="savings-text">Экономия до 4x</div>
+                      <div className="savings-percentage">70% автоматизации</div>
                     </div>
                   </div>
                 </div>
 
-                <div className="payment-automation-analysis">
-                  <h3 className="section-title">Анализ Эффективности</h3>
-                  
-                  <div className="automation-comparison">
-                    <motion.div className="automation-card with-bot" whileHover={{ scale: 1.03 }}>
-                      <div className="automation-header">
-                        <div className="automation-icon">
-                          <IoTimerOutline />
+                {/* Pricing Section */}
+                <div className="pricing-section">
+                  <h3 className="section-title-black">Стоимость обслуживания</h3>
+                  <div className="pricing-comparison-new">
+                    <motion.div 
+                      className="pricing-card-new payment-bot-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="pricing-header">
+                        <div className="pricing-icon">
+                          <IoFlashOutline />
                         </div>
-                        <h4>С автоматизацией (июнь)</h4>
+                        <h4>Payment Bot</h4>
                       </div>
-                      <div className="automation-details">
-                        <div className="automation-item">44,743 тикетов обработано</div>
-                        <div className="automation-item">Средняя скорость: 4:20 мин</div>
-                        <div className="automation-item">Общее время: 3,230 часов/месяц</div>
-                        <div className="automation-item">Необходимый штат: ~20 человек</div>
-                        <div className="automation-highlight">Экономия: до 480 часов/месяц</div>
-                        <div className="automation-highlight">Мгновенные ответы клиентам</div>
+                      <div className="pricing-amount">$0.20</div>
+                      <div className="pricing-label">за тикет</div>
+                      <div className="pricing-features">
+                        <div className="pricing-feature">• Мгновенная обработка</div>
+                        <div className="pricing-feature">• Интеграция с PSP</div>
+                        <div className="pricing-feature">• Работа 24/7</div>
+                        <div className="pricing-feature">• Автоматическая аналитика</div>
                       </div>
                     </motion.div>
 
-                    <motion.div className="automation-card without-bot" whileHover={{ scale: 1.03 }}>
-                      <div className="automation-header">
-                        <div className="automation-icon">
-                          <IoTimeOutline />
+                    <motion.div 
+                      className="pricing-card-new"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="pricing-header">
+                        <div className="pricing-icon">
+                          <IoPersonOutline />
                         </div>
-                        <h4>Без автоматизации</h4>
+                        <h4>Оператор</h4>
                       </div>
-                      <div className="automation-details">
-                        <div className="automation-item">44,743 тикетов</div>
-                        <div className="automation-item">Средняя скорость: 8:00 мин</div>
-                        <div className="automation-item">Общее время: 5,966 часов/месяц</div>
-                        <div className="automation-item">Необходимый штат: ~37 человек</div>
-                        <div className="automation-problem">Требуется на 17+ операторов больше</div>
-                        <div className="automation-problem">Задержки в ответах клиентам</div>
+                      <div className="pricing-amount">$0.80</div>
+                      <div className="pricing-label">за тикет</div>
+                      <div className="pricing-features">
+                        <div className="pricing-feature">• Время обработки 3-5 мин</div>
+                        <div className="pricing-feature">• Работа в смены</div>
+                        <div className="pricing-feature">• Человеческий фактор</div>
+                        <div className="pricing-feature">• Дополнительные расходы</div>
                       </div>
                     </motion.div>
                   </div>
                 </div>
 
-                <div className="payment-savings">
-                  <h3 className="section-title">Месячная экономия на проекте CIS</h3>
-                  
-                  <div className="payment-savings-grid">
-                    <motion.div className="payment-savings-card" whileHover={{ scale: 1.05 }}>
-                      <div className="payment-savings-number">2,736</div>
-                      <div className="payment-savings-label">Часов сэкономлено</div>
-                      <div className="payment-savings-subtitle">Ежемесячно</div>
+                {/* Prospects Section */}
+                <div className="prospects-section">
+                  <h3 className="section-title-black">Перспективы развития</h3>
+                  <div className="prospects-grid">
+                    <motion.div 
+                      className="prospect-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="prospect-icon">
+                        <IoCubeOutline />
+                      </div>
+                      <div className="prospect-content">
+                        <h4>Подключение крипто-процессинга</h4>
+                        <p>Интеграция с блокчейн-сетями и криптовалютными платформами для обработки децентрализованных платежей</p>
+                      </div>
                     </motion.div>
 
-                    <motion.div className="payment-savings-card" whileHover={{ scale: 1.05 }}>
-                      <div className="payment-savings-number">17.1</div>
-                      <div className="payment-savings-label">Рабочих мест</div>
-                      <div className="payment-savings-subtitle">Экономия в эквиваленте</div>
+                    <motion.div 
+                      className="prospect-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="prospect-icon">
+                        <IoShieldCheckmarkOutline />
+                      </div>
+                      <div className="prospect-content">
+                        <h4>Smart-проверки аномалий</h4>
+                        <p>Машинное обучение для выявления подозрительных транзакций и предотвращения мошенничества</p>
+                      </div>
                     </motion.div>
 
-                    <motion.div className="payment-savings-card" whileHover={{ scale: 1.05 }}>
-                      <div className="payment-savings-number">$20,520</div>
-                      <div className="payment-savings-label">Месячная экономия</div>
-                      <div className="payment-savings-subtitle">Только на зарплатах</div>
-                    </motion.div>
-
-                    <motion.div className="payment-savings-card yearly-card" whileHover={{ scale: 1.05 }}>
-                      <div className="payment-savings-number">$246,240</div>
-                      <div className="payment-savings-label">Годовая экономия</div>
-                      <div className="payment-savings-subtitle">При средней ЗП $1,200/мес</div>
+                    <motion.div 
+                      className="prospect-card"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div className="prospect-icon">
+                        <IoTrendingUpOutline />
+                      </div>
+                      <div className="prospect-content">
+                        <h4>Предиктивная аналитика платежных сбоев</h4>
+                        <p>Прогнозирование возможных проблем с платежами и превентивные меры по их устранению</p>
+                      </div>
                     </motion.div>
                   </div>
-                </div>
-
-                <div className="payment-bot-functions">
-                  <h3 className="section-title">Функционал Бота</h3>
-                  <div className="payment-functions-card">
-                    <h4>Бот добавляет к запросу кнопки:</h4>
-                    <div className="payment-buttons-grid">
-                      <motion.div className="payment-button" whileHover={{ scale: 1.05 }}>Закрыто</motion.div>
-                      <motion.div className="payment-button" whileHover={{ scale: 1.05 }}>Выписка</motion.div>
-                      <motion.div className="payment-button" whileHover={{ scale: 1.05 }}>Нет платежа</motion.div>
-                      <motion.div className="payment-button" whileHover={{ scale: 1.05 }}>Другое</motion.div>
-                      <motion.div className="payment-button" whileHover={{ scale: 1.05 }}>Необходимо время</motion.div>
-                      <motion.div className="payment-button" whileHover={{ scale: 1.05 }}>Закрыли с изменением суммы</motion.div>
-                      <motion.div className="payment-button" whileHover={{ scale: 1.05 }}>Требуется финальный чек</motion.div>
-                      <motion.div className="payment-button" whileHover={{ scale: 1.05 }}>Не наши реквизиты</motion.div>
-                      <motion.div className="payment-button" whileHover={{ scale: 1.05 }}>Назад</motion.div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="payment-scaling">
-                  <motion.div className="payment-scaling-card" whileHover={{ scale: 1.02 }}>
-                    <h3>Масштабирование Результатов</h3>
-                    <p>
-                      Данные показывают, что при росте объемов Payment Bot обеспечивает значительное масштабирование 
-                      без пропорционального увеличения штата операторов. Каждые дополнительные 1,000 тикетов в день 
-                      могут приносить существенную экономию за счет автоматизации.
-                    </p>
-                  </motion.div>
-                </div>
-
-                <div className="payment-pilot-note">
-                  <motion.div className="pilot-note-card" whileHover={{ scale: 1.02 }}>
-                    <h4>📝 Примечание</h4>
-                    <p>
-                      Данный продукт находится в пилотной стадии. Фиксированная цена на данный момент отсутствует 
-                      и может быть сформирована и обсуждена индивидуально, исходя из объемов работы.
-                    </p>
-                  </motion.div>
                 </div>
               </motion.div>
             )}
