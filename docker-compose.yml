@@ -1,0 +1,22 @@
+services:
+  react-build:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - qodeq_front:/qodeq_front
+    command: >
+      sh -c "rm -rf /qodeq_front/* &&
+             cp -r /app/build/* /qodeq_front/"
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf.template:/etc/nginx/nginx.conf.template
+      - qodeq_front:/var/www/html/qodeq_front
+
+volumes:
+  qodeq_front:
