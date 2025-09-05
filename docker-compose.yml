@@ -15,7 +15,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx.conf.template:/etc/nginx/nginx.conf.template
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - qodeq_front:/var/www/html/qodeq_front
       - ./nginx/certs/fullchain.pem:/tmp/ssl/fullchain.pem
       - ./nginx/certs/privkey.pem:/tmp/ssl/privkey.pem
