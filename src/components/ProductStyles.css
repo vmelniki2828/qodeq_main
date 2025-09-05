@@ -1,3 +1,10 @@
+/* CSS Reset для устранения дефолтных стилей браузера */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* Дополнительные стили для крутого дизайна продуктов */
 @keyframes shimmer {
   0% {
