@@ -32,72 +32,72 @@ function useDelayedCounter(ref, end, delay = 0, duration = 2000) {
 const products = [
   {
     id: 'chat',
-    title: 'Chatbot',
+    title: 'Чат-бот',
     icon: IoChatbubbleEllipsesOutline,
-    shortDescription: 'Up to 40% of requests',
-    fullDescription: `AI-powered chatbot for automated processing of user requests.
+    shortDescription: 'До 40% запросов',
+    fullDescription: `Чат-бот на базе ИИ для автоматической обработки обращений пользователей.
     
-    Key Benefits:
-    • 24/7 Instant Responses
-    • Multi-language Support
-    • Popular Messenger Integration
-    • Automatic Complex Case Escalation
-    • Analytics and Reporting`,
-    features: ['AI-powered Responses', 'Multi-language', 'CRM Integration', 'Request Analytics']
+    Основные преимущества:
+    • Мгновенные ответы 24/7
+    • Поддержка нескольких языков
+    • Интеграция с популярными мессенджерами
+    • Автоматическая эскалация сложных случаев
+    • Аналитика и отчёты`,
+    features: ['Ответы на базе ИИ', 'Мультиязычность', 'Интеграция с CRM', 'Аналитика запросов']
   },
   {
     id: 'call',
-    title: 'Call Center Bot',
+    title: 'Бот для колл-центра',
     icon: IoCallOutline,
-    shortDescription: 'Up to 80% of calls',
-    fullDescription: `Intelligent phone call processing system with speech recognition.
+    shortDescription: 'До 80% звонков',
+    fullDescription: `Интеллектуальная система обработки телефонных звонков с распознаванием речи.
     
-    Key Benefits:
-    • Automated Standard Request Processing
-    • Multi-language Speech Recognition
-    • Natural Speech Synthesis
-    • Existing Telephony Integration
-    • Detailed Call Statistics`,
-    features: ['Speech Recognition', 'Voice Synthesis', 'Call Routing', 'Call Recording']
+    Основные преимущества:
+    • Автоматическая обработка стандартных запросов
+    • Мультиязычное распознавание речи
+    • Естественный синтез голоса
+    • Интеграция с существующей телефонией
+    • Детальная статистика звонков`,
+    features: ['Распознавание речи', 'Синтез голоса', 'Маршрутизация звонков', 'Запись звонков']
   },
   {
     id: 'payment',
-    title: 'Payment Bot',
+    title: 'Платёжный бот',
     icon: IoWalletOutline,
-    shortDescription: 'Up to 70% of tickets',
-    fullDescription: `Automated payment request and support processing system.
+    shortDescription: 'До 70% тикетов',
+    fullDescription: `Автоматизированная система обработки платёжных запросов и поддержки.
     
-    Key Benefits:
-    • Automatic Payment Status Verification
-    • Deposit and Withdrawal Assistance
-    • Payment System Integration
-    • Secure Data Processing
-    • Transaction Monitoring`,
-    features: ['Payment Verification', 'Automated Withdrawals', 'Security', 'Transaction History']
+    Основные преимущества:
+    • Автоматическая проверка статуса платежа
+    • Помощь с депозитами и выводами
+    • Интеграция с платёжными системами
+    • Безопасная обработка данных
+    • Мониторинг транзакций`,
+    features: ['Проверка платежей', 'Автоматизация выводов', 'Безопасность', 'История транзакций']
   },
   {
     id: 'qa',
-    title: 'QA Bot',
+    title: 'QA-бот',
     icon: IoHelpCircleOutline,
-    shortDescription: 'Up to 80% of checks',
-    fullDescription: `AI-powered service quality control system.
+    shortDescription: 'До 80% проверок',
+    fullDescription: `Система контроля качества сервиса на базе искусственного интеллекта.
     
-    Key Benefits:
-    • Automated Dialogue Review
-    • Response Quality Assessment
-    • Issue Detection
-    • Improvement Recommendations
-    • Report Generation`,
-    features: ['AI Dialogue Analysis', 'Quality Assessment', 'Recommendations', 'Reporting']
+    Основные преимущества:
+    • Автоматический анализ диалогов
+    • Оценка качества ответов
+    • Выявление проблем
+    • Рекомендации по улучшению
+    • Формирование отчётов`,
+    features: ['Анализ диалогов ИИ', 'Оценка качества', 'Рекомендации', 'Отчёты']
   }
 ];
 
 const valueProps = [
-  'Automation of up to 70% of chats, calls, and tickets.',
-  'Save up to $50,000 monthly on support.',
-  'Support for up to 15 languages.',
-  'Integration with CRM, payment systems, and gaming platforms.',
-  'Analytics and quality control.',
+  'Автоматизация до 70% чатов, звонков и обращений.',
+  'Экономия до $50,000 в месяц на поддержке.',
+  'Поддержка до 15 языков.',
+  'Интеграция с CRM, платёжными системами и игровыми платформами.',
+  'Аналитика и контроль качества.',
 ];
 
 function Home() {
@@ -122,29 +122,29 @@ function Home() {
 
   const testimonials = [
     {
-      text: "With Qodeq, we reduced support costs by 45% and accelerated payment ticket processing 5x.",
-      author: "Head of Support",
-      company: "Leading iGaming Brand"
+      text: "С Qodeq мы сократили расходы на поддержку на 45% и ускорили обработку платёжных тикетов в 5 раз.",
+      author: "Руководитель поддержки",
+      company: "Ведущий iGaming бренд"
     },
     {
-      text: "Our call center efficiency improved by 60%. The AI handles routine inquiries perfectly, letting our team focus on complex issues.",
-      author: "Operations Director",
-      company: "Online Casino Platform"
+      text: "Эффективность колл-центра выросла на 60%. ИИ отлично справляется с рутинными запросами, а команда фокусируется на сложных случаях.",
+      author: "Операционный директор",
+      company: "Платформа онлайн-казино"
     },
     {
-      text: "Implementation was seamless. Within 2 weeks, we saw a 70% reduction in response time for customer queries.",
-      author: "Customer Success Manager",
-      company: "Fintech Startup"
+      text: "Внедрение прошло без проблем. Уже через 2 недели время ответа на запросы клиентов сократилось на 70%.",
+      author: "Менеджер по работе с клиентами",
+      company: "Финтех-стартап"
     },
     {
-      text: "The multilingual support feature opened new markets for us. We now serve customers in 12 languages effortlessly.",
-      author: "International Business Lead",
-      company: "Global Betting Company"
+      text: "Мультиязычная поддержка открыла для нас новые рынки. Теперь обслуживаем клиентов на 12 языках без усилий.",
+      author: "Руководитель международного бизнеса",
+      company: "Глобальная беттинг-компания"
     },
     {
-      text: "ROI was visible from day one. The platform pays for itself through cost savings and improved customer satisfaction.",
-      author: "Chief Technology Officer",
-      company: "Payment Processing Firm"
+      text: "ROI был заметен с первого дня. Платформа окупается за счёт экономии и роста удовлетворённости клиентов.",
+      author: "Технический директор",
+      company: "Платёжная компания"
     }
   ];
 
@@ -224,7 +224,7 @@ function Home() {
               }}
             >
               
-              Qodeq — AI Platform for Support, Call Centers and Payments
+              Qodeq — мульти-бот AI для автоматизации поддержки, колл-центра и платежей
             </motion.h1>
             <motion.div
               initial={{ opacity: 0 }}
@@ -268,7 +268,7 @@ function Home() {
                   textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)'
                 }}
               >
-                Why Qodeq
+                Почему Qodeq
               </motion.h2>
 
             <div style={{
@@ -439,7 +439,7 @@ function Home() {
                 fontWeight: 700
               }}
               >
-              Platform Products
+              Продукты платформы
             </motion.h2>
             
             <div style={{
@@ -698,9 +698,8 @@ function Home() {
                       <div style={{
                         display: 'flex',
                         flexWrap: 'nowrap',
-                        gap: '12px',
-                        marginTop: '20px',
-                        overflowX: 'auto'
+                        gap: '8px',
+                        marginTop: '20px'
                       }}>
                         {selectedProduct.features.map((feature, idx) => (
                           <motion.span
@@ -841,7 +840,7 @@ function Home() {
                 opacity: 0.95,
                 letterSpacing: '0.5px'
               }}>
-                of total workload automated
+                всего объёма работы автоматизировано
               </p>
             </motion.div>
 
@@ -849,25 +848,25 @@ function Home() {
             {[
               { 
                 counter: chatCounter,
-                description: 'of requests handled by chatbot',
+                description: 'запросов обработано чат-ботом',
                 angle: 270,
                 order: 1 // top
               },
               { 
                 counter: callCounter,
-                description: 'of calls processed by call bot',
+                description: 'звонков обработано ботом колл-центра',
                 angle: 0,
                 order: 2 // right
               },
               { 
                 counter: paymentCounter,
-                description: 'of payment tickets resolved by payment bot',
+                description: 'платёжных тикетов решено платёжным ботом',
                 angle: 90,
                 order: 3 // bottom
               },
               { 
                 counter: qaCounter,
-                description: 'of QA checks performed by AI',
+                description: 'проверок проведено AI-ботом качества',
                 angle: 180,
                 order: 4 // left
               }
@@ -1014,7 +1013,7 @@ function Home() {
                 textShadow: '0 2px 10px rgba(255,255,255,0.1)'
               }}
             >
-              Target Industries
+              Для кого
             </motion.h2>
             
             <motion.p
@@ -1029,7 +1028,7 @@ function Home() {
                 opacity: 0.9
               }}
             >
-              Qodeq is designed for:
+              Qodeq подходит для:
             </motion.p>
 
             <div style={{
@@ -1049,7 +1048,7 @@ function Home() {
                       <path d="M6 7h.01M6 11h.01M6 15h.01M18 7h.01M18 11h.01M18 15h.01"/>
                     </svg>
                   ),
-                  text: 'Online Casinos & Betting Companies'
+                  text: 'Онлайн-казино и букмекерские компании'
                 },
                 {
                   icon: (
@@ -1060,7 +1059,7 @@ function Home() {
                       <circle cx="18" cy="15" r="1"/>
                     </svg>
                   ),
-                  text: 'Fintech & Payment Services'
+                  text: 'Финтех и платёжные сервисы'
                 },
                 {
                   icon: (
@@ -1068,7 +1067,7 @@ function Home() {
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                     </svg>
                   ),
-                  text: 'Call Centers & Support Departments'
+                  text: 'Колл-центры и отделы поддержки'
                 }
               ].map((item, index) => (
                 <motion.div
@@ -1209,7 +1208,7 @@ function Home() {
                   textShadow: '0 2px 10px rgba(0,0,0,0.05)'
                 }}
               >
-                How Qodeq Works
+                Как работает Qodeq
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -1223,7 +1222,7 @@ function Home() {
                   margin: '0 auto'
                 }}
               >
-                Streamlined process for maximum efficiency
+                Оптимизированный процесс для максимальной эффективности
               </motion.p>
             </motion.div>
 
@@ -1236,8 +1235,8 @@ function Home() {
             }}>
               {[
                 {
-                  title: 'Integration Setup',
-                  description: 'Connect to chats, calls, and payments through our unified API.',
+                  title: 'Интеграция',
+                  description: 'Подключение чатов, звонков и платежей через единый API.',
                   icon: (
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
@@ -1246,8 +1245,8 @@ function Home() {
                   )
                 },
                 {
-                  title: 'AI-Powered Processing',
-                  description: 'Smart bots handle up to 70% of standard requests automatically.',
+                  title: 'Обработка на базе ИИ',
+                  description: 'Умные боты автоматически обрабатывают до 70% стандартных запросов.',
                   icon: (
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2" />
@@ -1257,8 +1256,8 @@ function Home() {
                   )
                 },
                 {
-                  title: 'Smart Escalation',
-                  description: 'Complex cases are intelligently routed to human operators.',
+                  title: 'Умная эскалация',
+                  description: 'Сложные случаи направляются операторам.',
                   icon: (
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -1269,8 +1268,8 @@ function Home() {
                   )
                 },
                 {
-                  title: 'Analytics & Insights',
-                  description: 'Comprehensive reports and performance analytics for management.',
+                  title: 'Аналитика и отчёты',
+                  description: 'Подробные отчёты и аналитика для руководства.',
                   icon: (
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M21 21H3" />
@@ -1562,7 +1561,7 @@ function Home() {
                 WebkitTextFillColor: 'transparent',
                 textShadow: '0 2px 10px rgba(255,255,255,0.1)'
               }}>
-                Qodeq — Customer Support Automation That Works From Day One
+                Qodeq — автоматизация поддержки, которая работает с первого дня
               </h2>
               <p style={{
                 fontSize: '1.5rem',
@@ -1570,7 +1569,7 @@ function Home() {
                 opacity: 0.9,
                 marginBottom: '40px'
               }}>
-                Discover how our AI bots can reduce your costs and improve service quality
+                Узнайте, как наши ИИ-боты помогут сократить расходы и повысить качество сервиса
               </p>
               <motion.button
                 initial={{ opacity: 0, y: 20 }}
@@ -1581,7 +1580,7 @@ function Home() {
                 whileTap={{ scale: 0.95 }}
                 className="cta-button cta-primary"
               >
-                Get Started
+                Начать
               </motion.button>
             </motion.div>
           </div>
@@ -1605,39 +1604,22 @@ function Home() {
                 fontWeight: 600,
                 opacity: 0.8
               }}>
-                © 2025 Qodeq. All rights reserved.
+                © 2025 Qodeq. Все права защищены.<br/>
+                <span style={{fontSize: '0.95rem', opacity: 0.7}}>created by softqod.com</span>
               </div>
               <div style={{
                 display: 'flex',
-                gap: '30px'
+                flexDirection: 'column',
+                alignItems: 'flex-end',
+                gap: '8px'
               }}>
-                <a href="#privacy" style={{
-                  color: '#fff',
-                  opacity: 0.7,
-                  textDecoration: 'none',
-                  fontSize: '0.95rem',
-                  transition: 'opacity 0.3s ease'
-                }}>
-                  Privacy Policy
-                </a>
-                <a href="#terms" style={{
-                  color: '#fff',
-                  opacity: 0.7,
-                  textDecoration: 'none',
-                  fontSize: '0.95rem',
-                  transition: 'opacity 0.3s ease'
-                }}>
-                  Terms of Service
-                </a>
-                <a href="#contact" style={{
-                  color: '#fff',
-                  opacity: 0.7,
-                  textDecoration: 'none',
-                  fontSize: '0.95rem',
-                  transition: 'opacity 0.3s ease'
-                }}>
-                  Contact
-                </a>
+                <div style={{fontSize:'0.95rem',opacity:0.7}}>
+                  TG: <a href="https://t.me/qodeq_bot" style={{color:'#fff',textDecoration:'underline',opacity:0.7}}>@qodeq_bot</a>
+                </div>
+                <div style={{fontSize:'0.95rem',opacity:0.7}}>
+                  <a href="mailto:manager@softqod.com" style={{color:'#fff',textDecoration:'underline',opacity:0.7}}>manager@softqod.com</a>
+                </div>
+                {/* ссылки удалены по запросу */}
               </div>
             </div>
           </footer>

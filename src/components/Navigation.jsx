@@ -40,14 +40,14 @@ function Navigation() {
       <Link to="/" className="logo-text" style={{ color: textColor }}>QODEQ</Link>
       <ul className="nav-list">
         <li>
-          <Link to="/" style={{ color: textColor }}>Home</Link>
+          <Link to="/" style={{ color: textColor }}>Главная</Link>
         </li>
         <li>
-          <Link to="/products" style={{ color: textColor }}>Products</Link>
+          <Link to="/products" style={{ color: textColor }}>Продукты</Link>
         </li>
-        <li>
-          <Link to="/pricing" style={{ color: textColor }}>Pricing</Link>
-        </li>
+        {/* <li>
+          <Link to="/pricing" style={{ color: textColor }}>Тарифы</Link>
+        </li> */}
       </ul>
     </nav>
   );

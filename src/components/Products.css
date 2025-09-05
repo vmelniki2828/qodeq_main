@@ -1,3 +1,71 @@
+/* Диалог в стиле мессенджера для блока вопросов */
+.messenger-dialogue {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
+  z-index: 20;
+  min-width: 340px;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+  background: linear-gradient(135deg, #f7f7fa 80%, #e6f0ff 100%);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.16), 0 1.5px 0 #e6f0ff;
+  padding: 28px 26px 24px 26px;
+  border: 1.5px solid #e0e7ef;
+  animation: fadeInMessenger 0.35s cubic-bezier(.4,0,.2,1);
+  pointer-events: auto;
+}
+@keyframes fadeInMessenger {
+  from { opacity: 0; transform: translate(-50%, 20px) scale(0.96); }
+  to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+.examples-section {
+  position: relative;
+}
+.messenger-bubble {
+  padding: 12px 20px;
+  border-radius: 16px;
+  font-size: 1.08rem;
+  font-weight: 500;
+  max-width: 95%;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  margin-bottom: 2px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+.messenger-bubble.user {
+  background: #e6f0ff;
+  color: #1a3a6b;
+  align-self: flex-end;
+  border: 1px solid #cce0ff;
+}
+.messenger-bubble.bot {
+  background: #fff;
+  color: #222;
+  border: 1px solid #eee;
+}
+/* Белый блок для бегущих вопросов */
+.white-block {
+  background: #fff;
+  color: #222;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+  padding: 12px 28px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin-right: 32px;
+  display: inline-block;
+  transition: box-shadow 0.2s;
+  border: 1px solid #eee;
+  white-space: nowrap;
+}
+.white-block:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.16);
+}
 .products-page {
   background: #000;
   color: #fff;
@@ -870,6 +938,226 @@
   padding: 0 20px;
 }
 
+/* Hero Buttons Container */
+.hero-buttons-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.hero-example-btn {
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #000000;
+  border-radius: 25px;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero-example-btn:hover {
+  background: #000000;
+  color: #ffffff;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.hero-example-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.hero-example-btn:hover::before {
+  left: 100%;
+}
+
+/* QA Modal Styles */
+.qa-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.qa-modal-content {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 95vw;
+  max-height: 95vh;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.qa-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.qa-modal-close:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+.qa-zoom-btn {
+  position: absolute;
+  top: 15px;
+  right: 70px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 45px;
+  height: 40px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.qa-zoom-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+.qa-modal-image {
+  width: 100%;
+  height: 70vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+}
+
+.qa-modal-image img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.qa-modal-image.zoomed {
+  height: 85vh;
+  overflow: auto;
+  cursor: grab;
+}
+
+.qa-modal-image.zoomed:active {
+  cursor: grabbing;
+}
+
+.qa-modal-image.zoomed img {
+  max-width: 150%;
+  max-height: 150%;
+  transform: scale(1.2);
+  cursor: zoom-out;
+}
+
+.qa-modal-image:not(.zoomed) img:hover {
+  transform: scale(1.02);
+  cursor: zoom-in;
+}
+
+.qa-placeholder-image {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.placeholder-content {
+  text-align: center;
+  color: #666;
+}
+
+.placeholder-content svg {
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.placeholder-content h3 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.placeholder-content p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.qa-modal-description {
+  padding: 30px;
+  text-align: center;
+  background: #ffffff;
+}
+
+.qa-modal-description h3 {
+  color: #000000;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.qa-modal-description p {
+  color: #000000;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
 .qa-hero {
   text-align: center;
   margin-bottom: 60px;
@@ -1497,6 +1785,12 @@
   .revolution-arrow {
     transform: rotate(90deg);
   }
+
+  .hero-buttons-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1522,6 +1816,49 @@
     width: 100%;
     max-width: none;
     padding: 25px 20px;
+  }
+
+  .hero-buttons-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero-example-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .qa-modal-content {
+    max-width: 98vw;
+    max-height: 98vh;
+    margin: 1vh 1vw;
+  }
+
+  .qa-modal-image {
+    height: 60vh;
+  }
+
+  .qa-modal-image.zoomed {
+    height: 75vh;
+  }
+
+  .qa-zoom-btn {
+    right: 60px;
+    width: 40px;
+    height: 35px;
+    font-size: 14px;
+  }
+
+  .qa-modal-description {
+    padding: 20px;
+  }
+
+  .qa-modal-description h3 {
+    font-size: 1.3rem;
+  }
+
+  .qa-modal-description p {
+    font-size: 1rem;
   }
 }
 
@@ -4529,7 +4866,7 @@
   font-size: 1.2rem;
   color: rgba(0,0,0,0.7);
   line-height: 1.5;
-  margin-bottom: 0;
+  margin-bottom: 2rem;
 }
 
 /* QA Animation Placeholder */
@@ -4821,7 +5158,7 @@
   font-size: 1.2rem;
   color: rgba(0,0,0,0.7);
   line-height: 1.5;
-  margin-bottom: 0;
+  margin-bottom: 2rem;
 }
 
 /* Payment Animation Placeholder */
