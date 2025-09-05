@@ -17,6 +17,8 @@ services:
     volumes:
       - ./nginx.conf.template:/etc/nginx/nginx.conf.template
       - qodeq_front:/var/www/html/qodeq_front
+      - ./nginx/certs/fullchain.pem:/tmp/ssl/fullchain.pem
+      - ./nginx/certs/privkey.pem:/tmp/ssl/privkey.pem
 
 volumes:
   qodeq_front:
