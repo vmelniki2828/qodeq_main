@@ -20,7 +20,7 @@ body::before {
   transition: background 0.2s;
 }
 
-#root, .main-title, .logo-text, .nav-list a, h1, h2, h3, h4, h5, h6, p, span, li, a {
+#root, .main-title, .logo-text, h1, h2, h3, h4, h5, h6, p, span, li, a {
   position: relative;
   z-index: 1;
   color: #fff;
