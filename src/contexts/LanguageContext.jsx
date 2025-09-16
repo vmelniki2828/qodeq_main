@@ -312,6 +312,9 @@ const translations = {
     perCheckValue: '/ проверка',
     timesCheaper: 'x дешевле',
     savingsPercentage: '% экономии',
+    // How Qodeq Works
+    analyticsReports: 'Аналитика и отчёты',
+    detailedReportsAnalytics: 'Подробные отчёты и аналитика для руководства.',
     // Example questions
     exampleQ1: 'Как пополнить счет?',
     exampleQ2: 'Подскажите, какие документы нужны для верификации?',
@@ -683,6 +686,9 @@ const translations = {
     perCheckValue: '/ check',
     timesCheaper: 'x cheaper',
     savingsPercentage: '% savings',
+    // How Qodeq Works
+    analyticsReports: 'Analytics and Reports',
+    detailedReportsAnalytics: 'Detailed reports and analytics for management.',
     // Example questions
     exampleQ1: 'How to top up my account?',
     exampleQ2: 'What documents are needed for verification?',
@@ -760,7 +766,7 @@ const translations = {
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
     const savedLanguage = localStorage.getItem('language');
-    return savedLanguage || 'ru';
+    return savedLanguage || 'en';
   });
 
   useEffect(() => {

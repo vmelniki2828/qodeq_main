@@ -1972,8 +1972,8 @@ function Home() {
                   )
                 },
                 {
-                  title: 'Аналитика и отчёты',
-                  description: 'Подробные отчёты и аналитика для руководства.',
+                  title: t('analyticsReports'),
+                  description: t('detailedReportsAnalytics'),
                   icon: (
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M21 21H3" />
