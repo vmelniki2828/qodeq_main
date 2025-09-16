@@ -1,4 +1,12 @@
-@import-normalize; /* bring in normalize.css styles */
+@import 'normalize.css'; /* bring in normalize.css styles */
+
+:root {
+  --color-deep: #0D0D0D;
+  --color-primary: #FFFFFF;
+  --color-accent1: #00FF85;
+  --color-accent2: #1E90FF;
+  --color-hover: #FF0099;
+}
 
 body {
   background: #000;
@@ -8,6 +16,8 @@ body {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body::before {
@@ -219,7 +229,24 @@ html {
 }
 
 html, body, #root, h1, h2, h3, h4, h5, h6, p, span, li, a, button, input, textarea {
-  font-family: 'Oswald', Arial, sans-serif ;
+  font-family: 'Oswald', Arial, sans-serif;
+}
+
+/* Ensure consistent box-sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure proper text rendering */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 .snap-container {
