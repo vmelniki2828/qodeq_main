@@ -366,7 +366,7 @@ function Products() {
           justify-content: center;
           align-items: center;
           min-height: calc(100vh - 80px);
-          padding: 80px 20px 40px 20px;
+
         }
         
         .products-grid {
@@ -2261,6 +2261,21 @@ function Products() {
             gap: 15px;
           }
           
+          .capabilities-grid-new {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          
+          .metrics-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          
+          .pricing-comparison-new {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          
           .capability-card-new {
             padding: 15px 10px;
           }
@@ -2308,6 +2323,89 @@ function Products() {
           
           .hero-animation {
             display: none !important;
+          }
+          
+          /* Hero Sections Mobile Optimization */
+          .chatbot-hero-new,
+          .callcenter-hero-new,
+          .qa-hero-new,
+          .payment-hero-new {
+            grid-template-columns: 1fr !important;
+            gap: 30px !important;
+            padding: 30px 15px !important;
+            text-align: center !important;
+          }
+          
+          .chatbot-hero-new .hero-content h1,
+          .callcenter-hero-new .hero-content h1 {
+            font-size: 2rem !important;
+            line-height: 1.3 !important;
+            margin-bottom: 15px !important;
+          }
+          
+          .chatbot-hero-new .hero-subtitle,
+          .callcenter-hero-new .hero-subtitle {
+            font-size: 1rem !important;
+            margin-bottom: 25px !important;
+            line-height: 1.5 !important;
+          }
+          
+          .payment-hero-new .payment-hero-content h2,
+          .qa-hero-new .qa-hero-content h2 {
+            font-size: 2rem !important;
+            line-height: 1.3 !important;
+            margin-bottom: 15px !important;
+          }
+          
+          .payment-hero-new .payment-hero-content p,
+          .qa-hero-new .qa-hero-content p {
+            font-size: 1rem !important;
+            margin-bottom: 25px !important;
+            line-height: 1.5 !important;
+          }
+          
+          .hero-buttons-container {
+            flex-direction: column !important;
+            gap: 12px !important;
+            align-items: center !important;
+            width: 100% !important;
+          }
+          
+          /* Audio Players Mobile Optimization */
+          .callcenter-audio-players {
+            flex-direction: column !important;
+            gap: 15px !important;
+            align-items: center !important;
+            margin: 20px 0 !important;
+          }
+          
+          .callcenter-audio-players audio {
+            width: 100% !important;
+            max-width: 300px !important;
+            height: 40px !important;
+          }
+          
+          /* Image Modal Mobile Optimization */
+          .qa-modal-image {
+            max-height: 50vh !important;
+            overflow: hidden !important;
+          }
+          
+          .qa-modal-image img {
+            width: 100% !important;
+            height: auto !important;
+            max-height: 50vh !important;
+            object-fit: contain !important;
+          }
+          
+          .qa-modal-image.zoomed {
+            max-height: 80vh !important;
+            overflow: auto !important;
+          }
+          
+          .qa-modal-image.zoomed img {
+            max-height: none !important;
+            transform: scale(1.5) !important;
           }
           
           .calculator-section {
@@ -2421,6 +2519,21 @@ function Products() {
             gap: 20px !important;
           }
           
+          .capabilities-grid-new {
+            grid-template-columns: 1fr !important;
+            gap: 15px !important;
+          }
+          
+          .metrics-grid {
+            grid-template-columns: 1fr !important;
+            gap: 15px !important;
+          }
+          
+          .pricing-comparison-new {
+            grid-template-columns: 1fr !important;
+            gap: 15px !important;
+          }
+          
           .capability-item {
             padding: 20px !important;
           }
@@ -2450,6 +2563,75 @@ function Products() {
             font-size: 1rem !important;
           }
           
+          /* Hero Sections Mobile Phone Optimization */
+          .chatbot-hero-new,
+          .callcenter-hero-new,
+          .qa-hero-new,
+          .payment-hero-new {
+            padding: 20px 10px !important;
+            gap: 20px !important;
+          }
+          
+          .chatbot-hero-new .hero-content h1,
+          .callcenter-hero-new .hero-content h1 {
+            font-size: 1.6rem !important;
+            line-height: 1.4 !important;
+            margin-bottom: 12px !important;
+          }
+          
+          .chatbot-hero-new .hero-subtitle,
+          .callcenter-hero-new .hero-subtitle {
+            font-size: 0.9rem !important;
+            margin-bottom: 20px !important;
+            line-height: 1.6 !important;
+          }
+          
+          .payment-hero-new .payment-hero-content h2,
+          .qa-hero-new .qa-hero-content h2 {
+            font-size: 1.6rem !important;
+            line-height: 1.4 !important;
+            margin-bottom: 12px !important;
+          }
+          
+          .payment-hero-new .payment-hero-content p,
+          .qa-hero-new .qa-hero-content p {
+            font-size: 0.9rem !important;
+            margin-bottom: 20px !important;
+            line-height: 1.6 !important;
+          }
+          
+          .hero-buttons-container {
+            gap: 10px !important;
+          }
+          
+          /* Audio Players Mobile Phone Optimization */
+          .callcenter-audio-players {
+            gap: 12px !important;
+            margin: 15px 0 !important;
+          }
+          
+          .callcenter-audio-players audio {
+            max-width: 280px !important;
+            height: 35px !important;
+          }
+          
+          /* Image Modal Mobile Phone Optimization */
+          .qa-modal-image {
+            max-height: 40vh !important;
+          }
+          
+          .qa-modal-image img {
+            max-height: 40vh !important;
+          }
+          
+          .qa-modal-image.zoomed {
+            max-height: 70vh !important;
+          }
+          
+          .qa-modal-image.zoomed img {
+            transform: scale(1.3) !important;
+          }
+          
           .calculator-section {
             padding: 20px 15px !important;
           }
@@ -2476,7 +2658,8 @@ function Products() {
         @media (max-width: 768px) {
           .call-center-device,
           .payment-card-visual,
-          .qa-dashboard-visual {
+          .qa-dashboard-visual,
+          .ai-sphere-placeholder {
             display: none !important;
           }
           
@@ -2484,12 +2667,51 @@ function Products() {
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
+            min-height: 200px !important;
           }
           
-          .hero-animation::after {
-            content: "📱";
+          /* Different emojis for different services */
+          .chatbot-hero-new .hero-animation::after {
+            content: "💬";
             font-size: 4rem;
             opacity: 0.3;
+          }
+          
+          .callcenter-hero-new .hero-animation::after {
+            content: "📞";
+            font-size: 4rem;
+            opacity: 0.3;
+          }
+          
+          .payment-hero-new .hero-animation::after {
+            content: "💳";
+            font-size: 4rem;
+            opacity: 0.3;
+          }
+          
+          .qa-hero-new .hero-animation::after {
+            content: "✅";
+            font-size: 4rem;
+            opacity: 0.3;
+          }
+          
+          /* Prevent images from overflowing */
+          .hero-animation,
+          .hero-animation * {
+            max-width: 100% !important;
+            overflow: hidden !important;
+          }
+          
+          /* Ensure all images are responsive */
+          img {
+            max-width: 100% !important;
+            height: auto !important;
+            object-fit: contain !important;
+          }
+          
+          /* Fix any overflowing elements */
+          * {
+            box-sizing: border-box !important;
           }
         }
 
@@ -2562,8 +2784,58 @@ function Products() {
           }
         }
 
-        /* Product Navigation Responsive */
+        /* Product Cards Mobile Styles */
         @media (max-width: 768px) {
+          .products-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 20px !important;
+            padding: 20px !important;
+          }
+          
+          .product-card {
+            padding: 25px 20px !important;
+            border-radius: 16px !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+            transition: all 0.3s ease !important;
+            background: linear-gradient(135deg, #fff 0%, #fafafa 100%) !important;
+            border: 1px solid rgba(0, 0, 0, 0.05) !important;
+          }
+          
+          .product-card:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15) !important;
+            background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%) !important;
+          }
+          
+          .product-card:active {
+            transform: translateY(-2px) scale(0.98) !important;
+          }
+          
+          .icon-container {
+            width: 60px !important;
+            height: 60px !important;
+            margin: 0 auto 15px auto !important;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+            border-radius: 16px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+          }
+          
+          .product-icon {
+            font-size: 1.8rem !important;
+            color: #333 !important;
+          }
+          
+          .product-title {
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            color: #000 !important;
+            margin: 0 !important;
+            line-height: 1.3 !important;
+          }
+          
           .product-nav {
             flex-direction: column !important;
             gap: 10px !important;
@@ -2583,9 +2855,124 @@ function Products() {
         }
 
         @media (max-width: 480px) {
+          .products-grid {
+            grid-template-columns: 1fr !important;
+            gap: 15px !important;
+            padding: 15px !important;
+          }
+          
+          .product-card {
+            padding: 20px 15px !important;
+            border-radius: 12px !important;
+          }
+          
+          .icon-container {
+            width: 50px !important;
+            height: 50px !important;
+            margin-bottom: 12px !important;
+            border-radius: 12px !important;
+          }
+          
+          .product-icon {
+            font-size: 1.5rem !important;
+          }
+          
+          .product-title {
+            font-size: 0.9rem !important;
+          }
+          
           .product-nav-item {
             padding: 12px 15px !important;
             font-size: 0.9rem !important;
+          }
+        }
+
+        /* Responsive Button Styles */
+        @media (max-width: 768px) {
+          .hero-cta-btn {
+            width: 100% !important;
+            max-width: 250px !important;
+            padding: 12px 20px !important;
+            font-size: 0.9rem !important;
+            margin: 0 auto !important;
+            display: block !important;
+          }
+          
+          .hero-example-btn {
+            width: 100% !important;
+            max-width: 250px !important;
+            padding: 12px 20px !important;
+            font-size: 0.9rem !important;
+            margin: 10px auto 0 auto !important;
+            display: block !important;
+          }
+          
+          .hero-buttons-container {
+            flex-direction: column !important;
+            gap: 15px !important;
+            align-items: center !important;
+            width: 100% !important;
+          }
+          
+          .qa-zoom-btn {
+            width: 45px !important;
+            height: 45px !important;
+            font-size: 1.2rem !important;
+            bottom: 15px !important;
+            right: 15px !important;
+          }
+          
+          .qa-modal-close {
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 1.4rem !important;
+            top: 15px !important;
+            right: 15px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-cta-btn {
+            padding: 10px 16px !important;
+            font-size: 0.8rem !important;
+            max-width: 220px !important;
+          }
+          
+          .hero-example-btn {
+            padding: 10px 16px !important;
+            font-size: 0.8rem !important;
+            max-width: 220px !important;
+          }
+          
+          .qa-zoom-btn {
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 1rem !important;
+            bottom: 10px !important;
+            right: 10px !important;
+          }
+          
+          .qa-modal-close {
+            width: 35px !important;
+            height: 35px !important;
+            font-size: 1.2rem !important;
+            top: 10px !important;
+            right: 10px !important;
+          }
+        }
+
+        /* Touch-friendly button styles */
+        @media (max-width: 768px) {
+          .hero-cta-btn,
+          .hero-example-btn {
+            min-height: 40px !important;
+            touch-action: manipulation !important;
+            -webkit-tap-highlight-color: transparent !important;
+          }
+          
+          .hero-cta-btn:active,
+          .hero-example-btn:active {
+            transform: scale(0.98) !important;
           }
         }
       `}</style>
@@ -2717,7 +3104,7 @@ function Products() {
 
                 {/* Примеры вопросов */}
                 <div className="examples-section">
-                  <h3 className="section-title-black">Примеры</h3>
+                  <h3 className="section-title-white">Примеры</h3>
                   <div
                     className="examples-list"
                     style={{
@@ -2807,7 +3194,7 @@ function Products() {
 
                 {/* Key Facts Cards */}
                 <div className="facts-section">
-                  <h3 className="section-title-black">Основные показатели</h3>
+                  <h3 className="section-title-white">Основные показатели</h3>
                   <div className="facts-grid">
                     <motion.div
                       className="fact-card glass-effect"
@@ -3142,7 +3529,7 @@ function Products() {
 
                 {/* Key Facts Cards */}
                 <div className="facts-section">
-                  <h3 className="section-title-black">Основные показатели</h3>
+                  <h3 className="section-title-white">Основные показатели</h3>
                   <div className="facts-grid">
                     <motion.div
                       className="fact-card glass-effect"

@@ -369,20 +369,32 @@ function Home() {
         /* Stats Section Responsive */
         @media (max-width: 768px) {
           .stats-container {
-            height: auto !important;
+            height: 100vh !important;
             min-height: 100vh !important;
-            padding: 40px 20px !important;
+            padding: 20px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            position: relative !important;
           }
           
           .stats-circle {
             width: 200px !important;
             height: 200px !important;
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            z-index: 2 !important;
           }
           
           .stats-block {
             width: 140px !important;
             height: 80px !important;
             padding: 12px !important;
+            position: absolute !important;
+            border-radius: 12px !important;
+            z-index: 1 !important;
           }
           
           .stats-number {
@@ -396,18 +408,32 @@ function Home() {
 
         @media (max-width: 480px) {
           .stats-container {
-            padding: 20px 10px !important;
+            height: 100vh !important;
+            min-height: 100vh !important;
+            padding: 15px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            position: relative !important;
           }
           
           .stats-circle {
             width: 150px !important;
             height: 150px !important;
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            z-index: 2 !important;
           }
           
           .stats-block {
             width: 120px !important;
             height: 70px !important;
             padding: 8px !important;
+            position: absolute !important;
+            border-radius: 10px !important;
+            z-index: 1 !important;
           }
           
           .stats-number {
@@ -609,6 +635,176 @@ function Home() {
           .cta-title {
             font-size: 2rem !important;
           }
+        }
+
+        /* Products Section Mobile Styles */
+        @media (max-width: 768px) {
+          .products-section {
+            padding: 20px 15px !important;
+            min-height: auto !important;
+          }
+          
+          .products-title {
+            font-size: 1.8rem !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .products-grid-container {
+            grid-template-columns: 1fr !important;
+            gap: 15px !important;
+          }
+          
+          .products-list {
+            order: 2 !important;
+            gap: 10px !important;
+          }
+          
+          .product-item {
+            height: 50px !important;
+            padding: 8px !important;
+            border-radius: 12px !important;
+          }
+          
+          .product-icon {
+            width: 30px !important;
+            height: 30px !important;
+            font-size: 1rem !important;
+            margin-right: 8px !important;
+          }
+          
+          .product-info {
+            gap: 4px !important;
+          }
+          
+          .product-title {
+            font-size: 0.9rem !important;
+          }
+          
+          .product-details {
+            padding: 15px !important;
+            border-radius: 12px !important;
+            position: relative !important;
+            min-height: auto !important;
+          }
+          
+          .product-details-title {
+            font-size: 1.4rem !important;
+            margin-bottom: 10px !important;
+            padding-bottom: 8px !important;
+            border-bottom: 2px solid #000 !important;
+          }
+          
+          .product-details-title div {
+            width: 35px !important;
+            height: 35px !important;
+            border-radius: 8px !important;
+          }
+          
+          .product-details-title div svg {
+            width: 18px !important;
+            height: 18px !important;
+          }
+          
+          .product-details-description {
+            font-size: 0.9rem !important;
+            line-height: 1.4 !important;
+            margin-bottom: 15px !important;
+          }
+          
+          .product-features {
+            gap: 6px !important;
+            flex-wrap: wrap !important;
+          }
+          
+          .product-feature {
+            padding: 6px 10px !important;
+            font-size: 0.75rem !important;
+            border-radius: 6px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .products-section {
+            padding: 15px 10px !important;
+            min-height: auto !important;
+          }
+          
+          .products-title {
+            font-size: 1.5rem !important;
+            margin-bottom: 15px !important;
+          }
+          
+          .products-grid-container {
+            gap: 10px !important;
+          }
+          
+          .products-list {
+            gap: 8px !important;
+          }
+          
+          .product-item {
+            height: 45px !important;
+            padding: 6px !important;
+            border-radius: 10px !important;
+          }
+          
+          .product-icon {
+            width: 25px !important;
+            height: 25px !important;
+            font-size: 0.8rem !important;
+            margin-right: 6px !important;
+          }
+          
+          .product-info {
+            gap: 2px !important;
+          }
+          
+          .product-title {
+            font-size: 0.8rem !important;
+          }
+          
+          .product-details {
+            padding: 12px !important;
+            border-radius: 10px !important;
+            position: relative !important;
+            min-height: auto !important;
+          }
+          
+          .product-details-title {
+            font-size: 1.2rem !important;
+            margin-bottom: 8px !important;
+            padding-bottom: 6px !important;
+            border-bottom: 1px solid #000 !important;
+          }
+          
+          .product-details-title div {
+            width: 30px !important;
+            height: 30px !important;
+            border-radius: 6px !important;
+          }
+          
+          .product-details-title div svg {
+            width: 16px !important;
+            height: 16px !important;
+          }
+          
+          .product-details-description {
+            font-size: 0.8rem !important;
+            line-height: 1.3 !important;
+            margin-bottom: 12px !important;
+          }
+          
+          .product-features {
+            gap: 4px !important;
+            flex-wrap: wrap !important;
+          }
+          
+          .product-feature {
+            padding: 4px 8px !important;
+            font-size: 0.7rem !important;
+            border-radius: 4px !important;
+          }
+        }
           
           .cta-subtitle {
             font-size: 1rem !important;
@@ -871,6 +1067,7 @@ function Home() {
         <section
           id="products"
           ref={productsRef}
+          className="products-section"
           style={{
             position: 'relative',
             minHeight: '100vh',
@@ -888,6 +1085,7 @@ function Home() {
             width: '100%'
           }}>
             <motion.h2
+              className="products-title"
               initial={{ opacity: 0, y: 30 }}
               animate={isProductsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ 
@@ -906,7 +1104,7 @@ function Home() {
               Продукты платформы
             </motion.h2>
             
-            <div style={{
+            <div className="products-grid-container" style={{
               display: 'grid',
               gridTemplateColumns: '320px 1fr',
               gap: '60px',
@@ -915,6 +1113,7 @@ function Home() {
             }}>
               {/* Список продуктов */}
               <motion.div
+                className="products-list"
                 initial={{ 
                   opacity: 0, 
                   x: -100,
@@ -943,6 +1142,7 @@ function Home() {
                 {products.map((product, idx) => (
                   <motion.div
                     key={product.id}
+                    className="product-item"
                     initial={{ 
                       opacity: 0,
                       x: -50,
@@ -1005,7 +1205,7 @@ function Home() {
                     }} />
                     
                     {/* Иконка */}
-                    <div style={{
+                    <div className="product-icon" style={{
                       width: '40px',
                       height: '40px',
                       borderRadius: '10px',
@@ -1026,8 +1226,8 @@ function Home() {
                     </div>
                     
                     {/* Название услуги */}
-                    <div style={{ flex: 1 }}>
-                      <h3 style={{
+                    <div className="product-info" style={{ flex: 1 }}>
+                      <h3 className="product-title" style={{
                         fontSize: '1.2rem',
                         margin: 0,
                         color: selectedProduct?.id === product.id ? '#000' : '#fff',
@@ -1046,12 +1246,12 @@ function Home() {
 
               {/* Детальное описание выбранного продукта */}
               <div style={{
-                position: 'relative',
-                minHeight: 500
+                position: 'relative'
               }}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={selectedProduct?.id}
+                    className="product-details"
                     initial={{ 
                       opacity: 0,
                       scale: 0.8,
@@ -1099,6 +1299,7 @@ function Home() {
                     {selectedProduct ? (
                       <>
                         <motion.h3
+                          className="product-details-title"
                           initial={{ 
                             opacity: 0,
                             y: 20
@@ -1149,7 +1350,7 @@ function Home() {
                           animate={isProductsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                           transition={{ duration: 0.2, delay: 0.15 }}
                         >
-                      <p style={{
+                      <p className="product-details-description" style={{
                         fontSize: '1.1rem',
                         lineHeight: 1.6,
                         color: '#000',
@@ -1159,7 +1360,7 @@ function Home() {
                       }}>
                         {selectedProduct.fullDescription}
                       </p>
-                      <div style={{
+                      <div className="product-features" style={{
                         display: 'flex',
                         flexWrap: 'nowrap',
                         gap: '8px',
@@ -1168,6 +1369,7 @@ function Home() {
                         {selectedProduct.features.map((feature, idx) => (
                           <motion.span
                             key={idx}
+                            className="product-feature"
                             initial={{ 
                               opacity: 0,
                               scale: 0.8,
