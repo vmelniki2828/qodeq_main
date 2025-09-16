@@ -158,15 +158,15 @@ function Home() {
   return (
     <ParallaxProvider>
       <style>{`
-        @keyframes pulse-glow {
-          0%, 100% {
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-          }
-          50% {
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(0,0,0,0.2);
-          }
+        /* CTA Button Styles with Gradient Shine Effect */
+        .cta-button {
+          position: relative;
+          overflow: hidden;
+          isolation: isolate;
+          cursor: pointer;
+          transition: all 0.3s ease;
         }
-        
+
         .cta-button::before {
           content: '';
           position: absolute;
@@ -183,20 +183,49 @@ function Home() {
           transition: left 0.6s ease;
           z-index: -1;
         }
-        
+
         .cta-button:hover::before {
           left: 100%;
         }
-        
+
         .cta-button:hover {
           animation: pulse-glow 2s infinite;
         }
-        
+
+        /* Primary CTA Button (Get Started) */
+        .cta-primary {
+          padding: 18px 40px;
+          font-size: 1.2rem;
+          font-weight: 600;
+          background: #fff;
+          color: #000;
+          border: none;
+          border-radius: 30px;
+          box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
         .cta-primary:hover {
           transform: translateY(-3px);
           box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
-        
+
+        /* Navigation Button Styles */
+        .nav-button {
+          position: relative;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: 2px solid #000;
+          background: #fff;
+          color: #000;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          overflow: hidden;
+        }
+
         .nav-button::before {
           content: '';
           position: absolute;
@@ -212,21 +241,51 @@ function Home() {
           );
           transition: left 0.4s ease;
         }
-        
+
         .nav-button:hover {
           background: #000;
           color: #fff;
           transform: scale(1.1);
           box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        
+
         .nav-button:hover::before {
           left: 100%;
         }
-        
+
+        /* Indicator Button Styles */
+        .indicator-button {
+          height: 8px;
+          border-radius: 4px;
+          border: none;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .indicator-button.active {
+          width: 24px;
+          background: #000;
+        }
+
+        .indicator-button.inactive {
+          width: 8px;
+          background: rgba(0,0,0,0.3);
+        }
+
         .indicator-button.inactive:hover {
           background: rgba(0,0,0,0.5);
           transform: scale(1.2);
+        }
+
+        @keyframes pulse-glow {
+          0%, 100% {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+          }
+          50% {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(0,0,0,0.2);
+          }
         }
       `}</style>
       <div style={{ position: 'relative' }}>
