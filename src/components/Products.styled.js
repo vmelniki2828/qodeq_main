@@ -733,6 +733,7 @@ export const CostInputContainer = styled.div`
   gap: 0.5rem;
 `;
 
+
 export const CurrencySymbol = styled.span`
   font-size: 1.2rem;
   font-weight: bold;
