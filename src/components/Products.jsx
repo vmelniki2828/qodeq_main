@@ -2283,6 +2283,311 @@ function Products() {
             justify-content: center;
           }
         }
+
+        /* Responsive Styles for Products Page */
+        @media (max-width: 768px) {
+          .products-page {
+            padding: 0 10px !important;
+          }
+          
+          .hero-section {
+            padding: 40px 20px !important;
+            min-height: 80vh !important;
+          }
+          
+          .hero-content h1 {
+            font-size: 2.5rem !important;
+            line-height: 1.2 !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .hero-content p {
+            font-size: 1.1rem !important;
+            margin-bottom: 30px !important;
+          }
+          
+          .hero-animation {
+            display: none !important;
+          }
+          
+          .calculator-section {
+            margin: 40px 0 !important;
+            padding: 30px 20px !important;
+          }
+          
+          .calculator-container {
+            width: 100% !important;
+          }
+          
+          .setting-item {
+            margin-bottom: 20px !important;
+          }
+          
+          .setting-item label {
+            font-size: 1rem !important;
+            margin-bottom: 8px !important;
+          }
+          
+          .calculator-slider {
+            height: 8px !important;
+          }
+          
+          .result-item {
+            padding: 15px !important;
+            margin-bottom: 15px !important;
+          }
+          
+          .result-item span:first-child {
+            font-size: 0.9rem !important;
+          }
+          
+          .result-item span:last-child {
+            font-size: 1.1rem !important;
+          }
+          
+          .pricing-section {
+            margin: 40px 0 !important;
+            padding: 30px 20px !important;
+          }
+          
+          .pricing-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          
+          .pricing-card-new {
+            padding: 20px !important;
+          }
+          
+          .pricing-card-new h4 {
+            font-size: 1.3rem !important;
+            margin-bottom: 15px !important;
+          }
+          
+          .pricing-feature {
+            font-size: 0.9rem !important;
+            margin-bottom: 8px !important;
+          }
+          
+          .prospects-section {
+            margin: 40px 0 !important;
+            padding: 30px 20px !important;
+          }
+          
+          .prospects-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          
+          .prospect-card {
+            padding: 20px !important;
+          }
+          
+          .prospect-icon {
+            width: 50px !important;
+            height: 50px !important;
+            font-size: 1.2rem !important;
+          }
+          
+          .prospect-content h4 {
+            font-size: 1.2rem !important;
+            margin-bottom: 10px !important;
+          }
+          
+          .prospect-content p {
+            font-size: 0.9rem !important;
+          }
+          
+          .facts-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          
+          .fact-card {
+            padding: 20px !important;
+          }
+          
+          .fact-card h4 {
+            font-size: 1.2rem !important;
+            margin-bottom: 10px !important;
+          }
+          
+          .fact-card p {
+            font-size: 0.9rem !important;
+          }
+          
+          .capabilities-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          
+          .capability-item {
+            padding: 20px !important;
+          }
+          
+          .capability-item h4 {
+            font-size: 1.2rem !important;
+            margin-bottom: 10px !important;
+          }
+          
+          .capability-item p {
+            font-size: 0.9rem !important;
+          }
+          
+          .section-title-black,
+          .section-title-white {
+            font-size: 2rem !important;
+            margin-bottom: 30px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-content h1 {
+            font-size: 2rem !important;
+          }
+          
+          .hero-content p {
+            font-size: 1rem !important;
+          }
+          
+          .calculator-section {
+            padding: 20px 15px !important;
+          }
+          
+          .pricing-section,
+          .prospects-section {
+            padding: 20px 15px !important;
+          }
+          
+          .section-title-black,
+          .section-title-white {
+            font-size: 1.8rem !important;
+          }
+          
+          .pricing-card-new,
+          .prospect-card,
+          .fact-card,
+          .capability-item {
+            padding: 15px !important;
+          }
+        }
+
+        /* Hide complex animations on mobile */
+        @media (max-width: 768px) {
+          .call-center-device,
+          .payment-card-visual,
+          .qa-dashboard-visual {
+            display: none !important;
+          }
+          
+          .hero-animation {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+          
+          .hero-animation::after {
+            content: "📱";
+            font-size: 4rem;
+            opacity: 0.3;
+          }
+        }
+
+        /* Modal Responsive Styles */
+        @media (max-width: 768px) {
+          .qa-modal-content {
+            max-width: 95% !important;
+            margin: 20px !important;
+            padding: 20px !important;
+          }
+          
+          .qa-modal-header {
+            padding: 20px 20px 0 20px !important;
+          }
+          
+          .qa-modal-title {
+            font-size: 1.8rem !important;
+            margin-bottom: 10px !important;
+          }
+          
+          .qa-modal-subtitle {
+            font-size: 1rem !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .qa-modal-body {
+            padding: 0 20px 20px 20px !important;
+          }
+          
+          .qa-example-image {
+            width: 100% !important;
+            height: auto !important;
+            max-height: 300px !important;
+            object-fit: contain !important;
+          }
+          
+          .qa-zoom-btn {
+            position: fixed !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            z-index: 10002 !important;
+          }
+          
+          .qa-modal-close {
+            top: 10px !important;
+            right: 10px !important;
+            width: 35px !important;
+            height: 35px !important;
+            font-size: 1.2rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .qa-modal-content {
+            max-width: 98% !important;
+            margin: 10px !important;
+            padding: 15px !important;
+          }
+          
+          .qa-modal-title {
+            font-size: 1.5rem !important;
+          }
+          
+          .qa-modal-subtitle {
+            font-size: 0.9rem !important;
+          }
+          
+          .qa-example-image {
+            max-height: 250px !important;
+          }
+        }
+
+        /* Product Navigation Responsive */
+        @media (max-width: 768px) {
+          .product-nav {
+            flex-direction: column !important;
+            gap: 10px !important;
+            margin-bottom: 30px !important;
+          }
+          
+          .product-nav-item {
+            width: 100% !important;
+            padding: 15px 20px !important;
+            font-size: 1rem !important;
+          }
+          
+          .product-nav-item.active {
+            background: #000 !important;
+            color: #fff !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .product-nav-item {
+            padding: 12px 15px !important;
+            font-size: 0.9rem !important;
+          }
+        }
       `}</style>
       <div className="products-page">
         <div className="starfall-container">
