@@ -1,10 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { motion, useInView, AnimatePresence, animate } from 'framer-motion';
 import Starfall from './animations/Starfall';
 import PulsingSphere from './animations/PulsingSphere';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import Navigation from './Navigation';
 import { IoChatbubbleEllipsesOutline, IoCallOutline, IoWalletOutline, IoHelpCircleOutline } from 'react-icons/io5';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Хук для анимированного счетчика с задержкой
 function useDelayedCounter(ref, end, delay = 0, duration = 2000) {
@@ -27,88 +28,81 @@ function useDelayedCounter(ref, end, delay = 0, duration = 2000) {
 
   return counter;
 }
-const products = [
-  {
-    id: 'chat',
-    title: 'Чат-бот',
-    icon: IoChatbubbleEllipsesOutline,
-    shortDescription: 'До 40% запросов',
-    fullDescription: `Чат-бот на базе ИИ для автоматической обработки обращений пользователей.
-    
-    Основные преимущества:
-    • Мгновенные ответы 24/7
-    • Поддержка нескольких языков
-    • Интеграция с популярными мессенджерами
-    • Автоматическая эскалация сложных случаев
-    • Аналитика и отчёты`,
-    features: ['Ответы на базе ИИ', 'Мультиязычность', 'Интеграция с CRM', 'Аналитика запросов']
-  },
-  {
-    id: 'call',
-    title: 'Бот для колл-центра',
-    icon: IoCallOutline,
-    shortDescription: 'До 80% звонков',
-    fullDescription: `Интеллектуальная система обработки телефонных звонков с распознаванием речи.
-    
-    Основные преимущества:
-    • Автоматическая обработка стандартных запросов
-    • Мультиязычное распознавание речи
-    • Естественный синтез голоса
-    • Интеграция с существующей телефонией
-    • Детальная статистика звонков`,
-    features: ['Распознавание речи', 'Синтез голоса', 'Маршрутизация звонков', 'Запись звонков']
-  },
-  {
-    id: 'payment',
-    title: 'Платёжный бот',
-    icon: IoWalletOutline,
-    shortDescription: 'До 70% тикетов',
-    fullDescription: `Автоматизированная система обработки платёжных запросов и поддержки.
-    
-    Основные преимущества:
-    • Автоматическая проверка статуса платежа
-    • Помощь с депозитами и выводами
-    • Интеграция с платёжными системами
-    • Безопасная обработка данных
-    • Мониторинг транзакций`,
-    features: ['Проверка платежей', 'Автоматизация выводов', 'Безопасность', 'История транзакций']
-  },
-  {
-    id: 'qa',
-    title: 'QA-бот',
-    icon: IoHelpCircleOutline,
-    shortDescription: 'До 80% проверок',
-    fullDescription: `Система контроля качества сервиса на базе искусственного интеллекта.
-    
-    Основные преимущества:
-    • Автоматический анализ диалогов
-    • Оценка качества ответов
-    • Выявление проблем
-    • Рекомендации по улучшению
-    • Формирование отчётов`,
-    features: ['Анализ диалогов ИИ', 'Оценка качества', 'Рекомендации', 'Отчёты']
-  }
-];
+// Products будут созданы динамически в компоненте
 
-const valueProps = [
-  'Автоматизация до 70% чатов, звонков и обращений.',
-  'Экономия до $50,000 в месяц на поддержке.',
-  'Поддержка до 15 языков.',
-  'Интеграция с CRM, платёжными системами и игровыми платформами.',
-  'Аналитика и контроль качества.',
-];
+// ValueProps будут созданы динамически в компоненте
 
 function Home() {
+  const { t, language } = useLanguage();
   const mainBlockRef = useRef(null);
   const aboutRef = useRef(null);
   const productsRef = useRef(null);
   const statsRef = useRef(null);
   const isAboutInView = useInView(aboutRef, { once: true, amount: 0.3 });
   const isProductsInView = useInView(productsRef, { once: true, amount: 0.5 });
-  const [selectedProduct, setSelectedProduct] = useState(products[0]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isAutoPlayPaused, setIsAutoPlayPaused] = useState(false);
 
+  // Динамические массивы для переводов
+  const valueProps = [
+    t('valueProp1'),
+    t('valueProp2'),
+    t('valueProp3'),
+    t('valueProp4'),
+    t('valueProp5')
+  ];
+
+  const products = useMemo(() => [
+    {
+      id: 'chat',
+      title: t('chatbotTitle'),
+      icon: IoChatbubbleEllipsesOutline,
+      shortDescription: t('chatbotSubtitle'),
+      fullDescription: t('chatbotFullDescription'),
+      features: t('chatbotFeatures')
+    },
+    {
+      id: 'call',
+      title: t('callCenterTitle'),
+      icon: IoCallOutline,
+      shortDescription: t('callCenterSubtitle'),
+      fullDescription: t('callCenterFullDescription'),
+      features: t('callCenterFeatures')
+    },
+    {
+      id: 'payment',
+      title: t('paymentTitle'),
+      icon: IoWalletOutline,
+      shortDescription: t('paymentSubtitle'),
+      fullDescription: t('paymentFullDescription'),
+      features: t('paymentFeatures')
+    },
+    {
+      id: 'qa',
+      title: t('qaTitle'),
+      icon: IoHelpCircleOutline,
+      shortDescription: t('qaSubtitle'),
+      fullDescription: t('qaFullDescription'),
+      features: t('qaFeatures')
+    }
+  ], [t]);
+
+  // Инициализация и обновление выбранного продукта при изменении языка
+  useEffect(() => {
+    if (products.length > 0) {
+      setSelectedProduct(prevProduct => {
+        if (!prevProduct) {
+          // Первоначальная инициализация
+          return products[0];
+        } else {
+          // Обновление при изменении языка - находим продукт с тем же ID
+          const updatedProduct = products.find(p => p.id === prevProduct.id);
+          return updatedProduct || products[0];
+        }
+      });
+    }
+  }, [products, language]); // Добавили language в зависимости
 
   // Анимированные счетчики для статистики
   // Периферийные блоки анимируются сразу после выезда соответствующих блоков
@@ -122,29 +116,29 @@ function Home() {
 
   const testimonials = [
     {
-      text: "С Qodeq мы сократили расходы на поддержку на 45% и ускорили обработку платёжных тикетов в 5 раз.",
-      author: "Руководитель поддержки",
-      company: "Ведущий iGaming бренд"
+      text: t('testimonial1'),
+      author: t('testimonial1Author'),
+      company: t('testimonial1Company')
     },
     {
-      text: "Эффективность колл-центра выросла на 60%. ИИ отлично справляется с рутинными запросами, а команда фокусируется на сложных случаях.",
-      author: "Операционный директор",
-      company: "Платформа онлайн-казино"
+      text: t('testimonial2'),
+      author: t('testimonial2Author'),
+      company: t('testimonial2Company')
     },
     {
-      text: "Внедрение прошло без проблем. Уже через 2 недели время ответа на запросы клиентов сократилось на 70%.",
-      author: "Менеджер по работе с клиентами",
-      company: "Финтех-стартап"
+      text: t('testimonial3'),
+      author: t('testimonial3Author'),
+      company: t('testimonial3Company')
     },
     {
-      text: "Мультиязычная поддержка открыла для нас новые рынки. Теперь обслуживаем клиентов на 12 языках без усилий.",
-      author: "Руководитель международного бизнеса",
-      company: "Глобальная беттинг-компания"
+      text: t('testimonial4'),
+      author: t('testimonial4Author'),
+      company: t('testimonial4Company')
     },
     {
-      text: "ROI был заметен с первого дня. Платформа окупается за счёт экономии и роста удовлетворённости клиентов.",
-      author: "Технический директор",
-      company: "Платёжная компания"
+      text: t('testimonial5'),
+      author: t('testimonial5Author'),
+      company: t('testimonial5Company')
     }
   ];
 
@@ -378,9 +372,25 @@ function Home() {
             position: relative !important;
           }
           
+          .central-stats-circle {
+            width: 133px !important;
+            height: 133px !important;
+            padding: 17px !important;
+          }
+          
+          .central-stats-circle p:first-child {
+            font-size: 2rem !important;
+            margin-bottom: 7px !important;
+          }
+          
+          .central-stats-circle p:last-child {
+            font-size: 0.6rem !important;
+            line-height: 1.3 !important;
+          }
+          
           .stats-circle {
-            width: 200px !important;
-            height: 200px !important;
+            width: 220px !important;
+            height: 220px !important;
             position: absolute !important;
             top: 50% !important;
             left: 50% !important;
@@ -389,20 +399,22 @@ function Home() {
           }
           
           .stats-block {
-            width: 140px !important;
-            height: 80px !important;
-            padding: 12px !important;
+            width: 80px !important;
+            height: 45px !important;
+            padding: 8px !important;
             position: absolute !important;
-            border-radius: 12px !important;
+            border-radius: 8px !important;
             z-index: 1 !important;
           }
           
           .stats-number {
-            font-size: 1.8rem !important;
+            font-size: 1rem !important;
+            margin-bottom: 3px !important;
           }
           
           .stats-description {
-            font-size: 0.8rem !important;
+            font-size: 0.43rem !important;
+            line-height: 1.2 !important;
           }
         }
 
@@ -417,9 +429,25 @@ function Home() {
             position: relative !important;
           }
           
+          .central-stats-circle {
+            width: 113px !important;
+            height: 113px !important;
+            padding: 13px !important;
+          }
+          
+          .central-stats-circle p:first-child {
+            font-size: 1.67rem !important;
+            margin-bottom: 5px !important;
+          }
+          
+          .central-stats-circle p:last-child {
+            font-size: 0.53rem !important;
+            line-height: 1.2 !important;
+          }
+          
           .stats-circle {
-            width: 150px !important;
-            height: 150px !important;
+            width: 190px !important;
+            height: 190px !important;
             position: absolute !important;
             top: 50% !important;
             left: 50% !important;
@@ -428,20 +456,22 @@ function Home() {
           }
           
           .stats-block {
-            width: 120px !important;
-            height: 70px !important;
-            padding: 8px !important;
+            width: 70px !important;
+            height: 40px !important;
+            padding: 6px !important;
             position: absolute !important;
-            border-radius: 10px !important;
+            border-radius: 6px !important;
             z-index: 1 !important;
           }
           
           .stats-number {
-            font-size: 1.5rem !important;
+            font-size: 0.9rem !important;
+            margin-bottom: 2px !important;
           }
           
           .stats-description {
-            font-size: 0.7rem !important;
+            font-size: 0.38rem !important;
+            line-height: 1.1 !important;
           }
         }
 
@@ -884,7 +914,7 @@ function Home() {
               }}
             >
               
-              Qodeq — мульти-бот AI для автоматизации поддержки, колл-центра и платежей
+{t('heroDescription')}
             </motion.h1>
             <motion.div
               initial={{ opacity: 0 }}
@@ -928,7 +958,7 @@ function Home() {
                   textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)'
                 }}
               >
-                Почему Qodeq
+{t('whyQodeqTitle')}
               </motion.h2>
 
             <div style={{
@@ -1101,7 +1131,7 @@ function Home() {
                 fontWeight: 700
               }}
               >
-              Продукты платформы
+{t('productsTitle')}
             </motion.h2>
             
             <div className="products-grid-container" style={{
@@ -1457,6 +1487,7 @@ function Home() {
           }}>
             {/* Центральный элемент */}
             <motion.div
+              className="central-stats-circle"
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.6 }}
@@ -1506,38 +1537,41 @@ function Home() {
                 opacity: 0.95,
                 letterSpacing: '0.5px'
               }}>
-                всего объёма работы автоматизировано
+{t('totalAutomated')}
               </p>
             </motion.div>
 
             {/* Круговые элементы */}
             {[
-              { 
-                counter: chatCounter,
-                description: 'запросов обработано чат-ботом',
-                angle: 270,
-                order: 1 // top
-              },
-              { 
-                counter: callCounter,
-                description: 'звонков обработано ботом колл-центра',
-                angle: 0,
-                order: 2 // right
-              },
-              { 
-                counter: paymentCounter,
-                description: 'платёжных тикетов решено платёжным ботом',
-                angle: 90,
-                order: 3 // bottom
-              },
-              { 
-                counter: qaCounter,
-                description: 'проверок проведено AI-ботом качества',
-                angle: 180,
-                order: 4 // left
-              }
+                { 
+                  counter: chatCounter,
+                  description: t('chatRequests'),
+                  angle: 270,
+                  order: 1 // top
+                },
+                { 
+                  counter: callCounter,
+                  description: t('callCenter'),
+                  angle: 0,
+                  order: 2 // right
+                },
+                { 
+                  counter: paymentCounter,
+                  description: t('paymentTickets'),
+                  angle: 90,
+                  order: 3 // bottom
+                },
+                { 
+                  counter: qaCounter,
+                  description: t('qualityChecks'),
+                  angle: 180,
+                  order: 4 // left
+                }
             ].map((item, idx) => {
-              const radius = 250; // Радиус круга
+              // Адаптивный радиус в зависимости от размера экрана
+              const isMobile = window.innerWidth <= 768;
+              const isSmallMobile = window.innerWidth <= 480;
+              const radius = isSmallMobile ? 120 : isMobile ? 150 : 250;
               const angle = (item.angle * Math.PI) / 180; // Преобразование в радианы
               const x = radius * Math.cos(angle);
               const y = radius * Math.sin(angle);
@@ -1681,7 +1715,7 @@ function Home() {
                 textShadow: '0 2px 10px rgba(255,255,255,0.1)'
               }}
             >
-              Для кого
+{t('targetAudienceTitle')}
             </motion.h2>
             
             <motion.p
@@ -1696,7 +1730,7 @@ function Home() {
                 opacity: 0.9
               }}
             >
-              Qodeq подходит для:
+{t('targetAudienceSubtitle')}
             </motion.p>
 
             <div style={{
@@ -1716,7 +1750,7 @@ function Home() {
                       <path d="M6 7h.01M6 11h.01M6 15h.01M18 7h.01M18 11h.01M18 15h.01"/>
                     </svg>
                   ),
-                  text: 'Онлайн-казино и букмекерские компании'
+                  text: t('targetAudience1')
                 },
                 {
                   icon: (
@@ -1727,7 +1761,7 @@ function Home() {
                       <circle cx="18" cy="15" r="1"/>
                     </svg>
                   ),
-                  text: 'Финтех и платёжные сервисы'
+                  text: t('targetAudience2')
                 },
                 {
                   icon: (
@@ -1735,7 +1769,7 @@ function Home() {
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                     </svg>
                   ),
-                  text: 'Колл-центры и отделы поддержки'
+                  text: t('targetAudience3')
                 }
               ].map((item, index) => (
                 <motion.div
@@ -1877,7 +1911,7 @@ function Home() {
                   textShadow: '0 2px 10px rgba(0,0,0,0.05)'
                 }}
               >
-                Как работает Qodeq
+{t('howItWorksTitle')}
               </motion.h2>
               <motion.p
                 className="how-it-works-subtitle"
@@ -1892,7 +1926,7 @@ function Home() {
                   margin: '0 auto'
                 }}
               >
-                Оптимизированный процесс для максимальной эффективности
+{t('howItWorksSubtitle')}
               </motion.p>
             </motion.div>
 
@@ -1905,8 +1939,8 @@ function Home() {
             }}>
               {[
                 {
-                  title: 'Интеграция',
-                  description: 'Подключение чатов, звонков и платежей через единый API.',
+                  title: t('integrationTitle'),
+                  description: t('integrationDescription'),
                   icon: (
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
@@ -1915,8 +1949,8 @@ function Home() {
                   )
                 },
                 {
-                  title: 'Обработка на базе ИИ',
-                  description: 'Умные боты автоматически обрабатывают до 70% стандартных запросов.',
+                  title: t('processingTitle'),
+                  description: t('processingDescription'),
                   icon: (
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2" />
@@ -1926,8 +1960,8 @@ function Home() {
                   )
                 },
                 {
-                  title: 'Умная эскалация',
-                  description: 'Сложные случаи направляются операторам.',
+                  title: t('escalationTitle'),
+                  description: t('escalationDescription'),
                   icon: (
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -2234,7 +2268,7 @@ function Home() {
                 WebkitTextFillColor: 'transparent',
                 textShadow: '0 2px 10px rgba(255,255,255,0.1)'
               }}>
-                Qodeq — автоматизация поддержки, которая работает с первого дня
+{t('heroTitle')}
               </h2>
               <p className="cta-subtitle" style={{
                 fontSize: '1.5rem',
@@ -2242,7 +2276,7 @@ function Home() {
                 opacity: 0.9,
                 marginBottom: '40px'
               }}>
-                Узнайте, как наши ИИ-боты помогут сократить расходы и повысить качество сервиса
+{t('heroSubtitle')}
               </p>
               <motion.a
                 href="https://t.me/qodeq_bot"
@@ -2257,7 +2291,7 @@ function Home() {
                 className="cta-button cta-primary"
                 style={{ textDecoration: 'none', display: 'inline-block' }}
               >
-                Начать
+{t('startButton')}
               </motion.a>
             </motion.div>
           </div>
@@ -2281,8 +2315,8 @@ function Home() {
                 fontWeight: 600,
                 opacity: 0.8
               }}>
-                © 2025 Qodeq. Все права защищены.<br/>
-                <span style={{fontSize: '0.95rem', opacity: 0.7}}>created by softqod.com</span>
+{t('footerCopyright')}<br/>
+                <span style={{fontSize: '0.95rem', opacity: 0.7}}>{t('footerCreatedBy')}</span>
               </div>
               <div style={{
                 display: 'flex',
@@ -2291,10 +2325,10 @@ function Home() {
                 gap: '8px'
               }}>
                 <div style={{fontSize:'0.95rem',opacity:0.7}}>
-                  TG: <a href="https://t.me/qodeq_bot" style={{color:'#fff',textDecoration:'underline',opacity:0.7}}>@qodeq_bot</a>
+{t('footerTelegram')} <a href="https://t.me/qodeq_bot" style={{color:'#fff',textDecoration:'underline',opacity:0.7}}>@qodeq_bot</a>
                 </div>
                 <div style={{fontSize:'0.95rem',opacity:0.7}}>
-                  <a href="mailto:manager@softqod.com" style={{color:'#fff',textDecoration:'underline',opacity:0.7}}>manager@softqod.com</a>
+                  <a href="mailto:manager@softqod.com" style={{color:'#fff',textDecoration:'underline',opacity:0.7}}>{t('footerEmail')}</a>
                 </div>
               </div>
             </div>

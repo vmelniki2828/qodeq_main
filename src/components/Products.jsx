@@ -3,6 +3,7 @@ import Marquee from 'react-fast-marquee';
 import { motion } from 'framer-motion';
 import Starfall from './animations/Starfall';
 import Navigation from './Navigation';
+import { useLanguage } from '../contexts/LanguageContext';
 import {
   IoChatbubbleEllipsesOutline,
   IoCallOutline,
@@ -25,30 +26,34 @@ import {
   IoShieldCheckmarkOutline,
 } from 'react-icons/io5';
 
-const services = [
-  {
-    id: 'chatbot',
-    name: 'Чат-бот',
-    icon: IoChatbubbleEllipsesOutline,
-  },
-  {
-    id: 'callcenter',
-    name: 'Call Center Bot',
-    icon: IoCallOutline,
-  },
-  {
-    id: 'payment',
-    name: 'Payment Bot',
-    icon: IoWalletOutline,
-  },
-  {
-    id: 'qa',
-    name: 'QA Bot',
-    icon: IoHelpCircleOutline,
-  },
-];
+// Services будут созданы динамически в компоненте
 
 function Products() {
+  const { t } = useLanguage();
+
+  // Динамический массив services для переводов
+  const services = [
+    {
+      id: 'chatbot',
+      name: t('chatbotTitle'),
+      icon: IoChatbubbleEllipsesOutline,
+    },
+    {
+      id: 'callcenter',
+      name: t('callCenterTitle'),
+      icon: IoCallOutline,
+    },
+    {
+      id: 'payment',
+      name: t('paymentTitle'),
+      icon: IoWalletOutline,
+    },
+    {
+      id: 'qa',
+      name: t('qaTitle'),
+      icon: IoHelpCircleOutline,
+    },
+  ];
 
   // Универсальный скролл к блоку "Экономический эффект" для любого бота
   const scrollToEffect = (id) => {
@@ -78,88 +83,27 @@ function Products() {
       effectBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
-  // Вопросы и ответы для блока примеры
+  // Вопросы и ответы для блока примеры (динамические для переводов)
   const exampleQuestions = [
-    {
-      q: 'Как пополнить счет?',
-      a: 'Для пополнения счета перейдите в раздел "Депозит", выберите удобный способ оплаты из списка и укажите сумму. Средства поступят на баланс сразу после подтверждения транзакции.',
-    },
-    {
-      q: 'Подскажите, какие документы нужны для верификации?',
-      a: 'Для стандартной верификации Вам потребуются: 📋 Фотография основной страницы паспорта. 📸 Селфи с первой страницей паспорта в руке. 📄 Фото страницы с пропиской. Для полной верификации могут запросить: 💳 Фото карты с двух сторон (видны первые 6 и последние 4 цифры, срок действия, ФИО; CVV можно закрыть). Все данные должны быть читабельны и без бликов. Статус верификации можно проверить в разделе "Верификация".',
-    },
-    {
-      q: 'В каком статусе у меня вывод?',
-      a: 'Проверьте статус Вашего вывода в разделе "История транзакций" в личном кабинете. Там Вы увидите текущий статус и причину отмены.',
-    },
-    {
-      q: 'Могу вывести на криптовалюту, если депозит был совершенен с карты?',
-      a: 'Нет, вывод должен осуществляться тем же способом, которым был произведен депозит. Подробнее — в разделе "Правила и условия".',
-    },
-    {
-      q: 'Могу использовать ВПН?',
-      a: 'Использование VPN может повлиять на доступ к казино. Рекомендуем использовать прямое подключение к интернету для стабильной и безопасной игры.',
-    },
-    {
-      q: 'У вас есть бонус на День Рождения?',
-      a: 'Да, бонус доступен за 1 день до и 3 дня после дня рождения. Требуется: верифицированный аккаунт, депозиты от 3000 RUB за полгода, уровень лояльности не ниже 2-го. Для активации обратитесь к старшему специалисту.',
-    },
-    {
-      q: 'Как сменить язык сайта?',
-      a: 'Вы можете изменить язык сайта кликнув на слайдер в левом нижнем углу экрана и выбрать подходящий язык интерфейса.',
-    },
-    {
-      q: 'Как отыграть бонус?',
-      a: 'Условия отыгрыша зависят от конкретного бонуса. Ознакомьтесь с правилами в разделе "Мои бонусы" в личном кабинете.',
-    },
-    {
-      q: 'Сколько занимает проверка документов?',
-      a: 'Верификация занимает до 24 часов (обычно несколько часов). Статус можно проверить в разделе "Верификация".',
-    },
-    {
-      q: 'Как долго выводите средства?',
-      a: 'Официальный срок — до 24 часов, обычно 1–2 часа. Возможны задержки из-за платёжной системы. Статус заявки — в "Истории транзакций".',
-    },
-    {
-      q: 'Когда приходит кешбэк?',
-      a: 'Кешбэк начисляется еженедельно, в понедельник в 4:00 по МСК. Увидеть его можно в разделе "Мои бонусы".',
-    },
-    {
-      q: 'У вас есть приветственные бонусы?',
-      a: 'Приветственный пакет включает бонусы на первые 3 депозита. Подробности — в разделе "Мои бонусы и награды".',
-    },
-    {
-      q: 'Что такое РТП?',
-      a: 'РТП (Return to Player) — процент возврата игроку от всех ставок в игре. Например, РТП 96% означает, что на каждые 100 рублей 96 возвращаются игрокам. Подробнее — в описании игры.',
-    },
-    {
-      q: 'Зачем нужна верификация?',
-      a: 'Верификация подтверждает вашу личность и защищает средства. Загрузите документы в разделе "Верификация". Обычно занимает до 24 часов.',
-    },
-    {
-      q: 'Не пришел депозит, что делать?',
-      a: 'Предоставьте копию квитанции из банка с успешным статусом платежа или справку/чек/выписку. Квитанцию можно найти в "Истории операций".',
-    },
-    {
-      q: 'У вас есть реферальная программа?',
-      a: 'Информация о партнёрской программе: https://bit.ly/r7_aff_program. Там можно зарегистрироваться и узнать условия.',
-    },
-    {
-      q: 'Как подтвердить почту?',
-      a: 'Перейдите по ссылке из письма, отправленного при регистрации. Если не получили письмо — проверьте "Спам" или запросите повторную отправку в разделе "Профиль".',
-    },
-    {
-      q: 'Как сменить язык сайта?',
-      a: 'Вы можете изменить язык сайта кликнув на слайдер в левом нижнем углу экрана и выбрать подходящий язык интерфейса.',
-    },
-    {
-      q: 'Где вводить промокод?',
-      a: 'Промокоды вводятся в разделе "Профиль" в графе "Есть код для бонуса?"',
-    },
-    {
-      q: 'Где найти условия бонуса?',
-      a: 'Условия бонусов — в разделе "Бонусы" на главной странице сайта. Там указаны требования к вейджеру, ограничения и максимальный выигрыш.',
-    },
+    { q: t('exampleQ1'), a: t('exampleA1') },
+    { q: t('exampleQ2'), a: t('exampleA2') },
+    { q: t('exampleQ3'), a: t('exampleA3') },
+    { q: t('exampleQ4'), a: t('exampleA4') },
+    { q: t('exampleQ5'), a: t('exampleA5') },
+    { q: t('exampleQ6'), a: t('exampleA6') },
+    { q: t('exampleQ7'), a: t('exampleA7') },
+    { q: t('exampleQ8'), a: t('exampleA8') },
+    { q: t('exampleQ9'), a: t('exampleA9') },
+    { q: t('exampleQ10'), a: t('exampleA10') },
+    { q: t('exampleQ11'), a: t('exampleA11') },
+    { q: t('exampleQ12'), a: t('exampleA12') },
+    { q: t('exampleQ13'), a: t('exampleA13') },
+    { q: t('exampleQ14'), a: t('exampleA14') },
+    { q: t('exampleQ15'), a: t('exampleA15') },
+    { q: t('exampleQ16'), a: t('exampleA16') },
+    { q: t('exampleQ17'), a: t('exampleA17') },
+    { q: t('exampleQ18'), a: t('exampleA18') },
+    { q: t('exampleQ19'), a: t('exampleA19') },
   ];
 
   const [activeQuestion, setActiveQuestion] = useState(null);
@@ -3057,11 +3001,10 @@ function Products() {
                 <div className="chatbot-hero-new">
                   <div className="hero-content">
                     <h1 className="hero-title">
-                      Qodeq: автоматизируй до 55% запросов без операторов
+                      {t('chatbotHeroTitle')}
                     </h1>
                     <p className="hero-subtitle">
-                      Сократи расходы на поддержку, ускорь ответы и обеспечь
-                      круглосуточную помощь клиентам.
+                      {t('chatbotHeroSubtitle')}
                     </p>
                     <motion.button 
                       className="hero-cta-btn btn-with-shine"
@@ -3069,7 +3012,7 @@ function Products() {
                       whileTap={{ scale: 0.95 }}
                       onClick={() => scrollToEffect('chatbot-effect')}
                     >
-                      Рассчитать стоимость
+{t('calculateCostButton')}
                     </motion.button>
                   </div>
                   <div className="hero-animation">
@@ -3081,9 +3024,9 @@ function Products() {
                       </div>
 
                       <div className="chat-messages">
-                        <div className="message user">Привет! Как дела?</div>
+                        <div className="message user">{t('helloHowAreYou')}</div>
                         <div className="message ai">
-                          Отлично! Готов помочь вам с любыми вопросами 😊
+                          {t('greatReadyToHelp')}
                         </div>
                         <div className="message ai typing">
                           <div className="typing-indicator">
@@ -3104,7 +3047,7 @@ function Products() {
 
                 {/* Примеры вопросов */}
                 <div className="examples-section">
-                  <h3 className="section-title-white">Примеры</h3>
+                  <h3 className="section-title-white">{t('examplesTitle')}</h3>
                   <div
                     className="examples-list"
                     style={{
@@ -3194,7 +3137,7 @@ function Products() {
 
                 {/* Key Facts Cards */}
                 <div className="facts-section">
-                  <h3 className="section-title-white">Основные показатели</h3>
+                  <h3 className="section-title-white">{t('keyMetricsTitle')}</h3>
                   <div className="facts-grid">
                     <motion.div
                       className="fact-card glass-effect"
@@ -3204,9 +3147,9 @@ function Products() {
                         <IoStatsChartOutline />
                       </div>
                       <div className="fact-content">
-                        <div className="fact-number">UPTIME 97%</div>
+                        <div className="fact-number">{t('uptime97Percent')}</div>
                         <div className="fact-description">
-                          Стабильная работа системы
+{t('stableSystemWork')}
                         </div>
                       </div>
                     </motion.div>
@@ -3219,9 +3162,9 @@ function Products() {
                         <IoDocumentTextOutline />
                       </div>
                       <div className="fact-content">
-                        <div className="fact-number">База знаний</div>
+                        <div className="fact-number">{t('knowledgeBase')}</div>
                         <div className="fact-description">
-                          Быстрый доступ без разработчиков
+                          {t('quickAccessNoDevs')}
                         </div>
                       </div>
                     </motion.div>
@@ -3236,7 +3179,7 @@ function Products() {
                       <div className="fact-content">
                         <div className="fact-number">$15,000/мес</div>
                         <div className="fact-description">
-                          Экономия при 100k чатов
+                          {t('monthlySavings100k')}
                         </div>
                       </div>
                     </motion.div>
@@ -3245,7 +3188,7 @@ function Products() {
 
                 {/* Capabilities Grid */}
                 <div className="capabilities-section-new">
-                  <h3 className="section-title-white">Возможности системы</h3>
+                  <h3 className="section-title-white">{t('systemCapabilitiesTitle')}</h3>
                   <div className="capabilities-grid-new">
                     <motion.div
                       className="capability-card-new"
@@ -3254,8 +3197,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoShieldCheckmarkOutline />
                       </div>
-                      <h4>KYC, бонусы, лимиты, блокировки</h4>
-                      <p>Полная поддержка сложных сценариев</p>
+                      <h4>{t('kycBonusesLimits')}</h4>
+                      <p>{t('fullSupportComplexScenarios')}</p>
                     </motion.div>
 
                     <motion.div
@@ -3265,8 +3208,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoLinkOutline />
                       </div>
-                      <h4>Интеграция с iGaming API</h4>
-                      <p>Бесшовная интеграция с платформой</p>
+                      <h4>{t('integrationIgamingApi')}</h4>
+                      <p>{t('seamlessPlatformIntegration')}</p>
                     </motion.div>
 
                     <motion.div
@@ -3276,8 +3219,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoGlobeOutline />
                       </div>
-                      <h4>Поддержка любого языка и бренда</h4>
-                      <p>Адаптация под ваше казино</p>
+                      <h4>{t('supportAnyLanguageBrand')}</h4>
+                      <p>{t('adaptationToYourCasino')}</p>
                     </motion.div>
 
                     <motion.div
@@ -3287,8 +3230,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoEyeOutline />
                       </div>
-                      <h4>Анализ эмоций клиентов</h4>
-                      <p>Понимание эмоционального состояния</p>
+                      <h4>{t('customerEmotionAnalysis')}</h4>
+                      <p>{t('understandingEmotionalState')}</p>
                     </motion.div>
 
                     <motion.div
@@ -3298,8 +3241,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoFlashOutline />
                       </div>
-                      <h4>Масштабируемость</h4>
-                      <p>Тысячи запросов одновременно</p>
+                      <h4>{t('scalability')}</h4>
+                      <p>{t('thousandsRequestsSimultaneously')}</p>
                     </motion.div>
                   </div>
                 </div>
@@ -3307,14 +3250,14 @@ function Products() {
                 {/* Economic Effect */}
                 <div className="economics-section">
                   <h3 className="section-title-black" id="chatbot-effect">
-                    Экономия в цифрах
+{t('economicsTitle')}
                   </h3>
 
                   {/* Interactive Cost Comparison */}
                   <div className="cost-comparison-interactive">
                     <div className="operator-cost-input">
                       <label htmlFor="operatorCost">
-                        Стоимость оператора за чат:
+{t('operatorCostLabel')}
                       </label>
                       <div className="cost-input-container">
                         <span className="currency-symbol">$</span>
@@ -3327,31 +3270,30 @@ function Products() {
                           min="0"
                           onChange={handleOperatorCostChange}
                         />
-                        <span className="cost-label-small">за чат</span>
+                        <span className="cost-label-small">{t('perChat')}</span>
                       </div>
                     </div>
 
                     <div className="comparison-bars">
                       <div className="cost-bar operator-cost">
-                        <div className="cost-label">Оператор</div>
+                        <div className="cost-label">{t('operator')}</div>
                         <div className="cost-bar-fill operator-bar"></div>
                         <div className="cost-value">
-                          ${operatorCostPerChat.toFixed(2)} / чат
+                          ${operatorCostPerChat.toFixed(2)} / {t('perChat')}
                         </div>
                       </div>
                       <div className="cost-bar ai-cost">
-                        <div className="cost-label">ИИ-бот</div>
+                        <div className="cost-label">{t('aiBot')}</div>
                         <div className="cost-bar-fill ai-bar"></div>
-                        <div className="cost-value">$0.15 / чат</div>
+                        <div className="cost-value">$0.15 / {t('perChat')}</div>
                       </div>
                     </div>
                     <div className="savings-highlight">
                       <div className="savings-text">
-                        В{' '}
                         {operatorCostPerChat > 0
                           ? (operatorCostPerChat / 0.15).toFixed(1)
                           : 0}
-                        x дешевле
+                        {t('timesCheaper')}
                       </div>
                       <div className="savings-percentage">
                         {operatorCostPerChat > 0
@@ -3361,7 +3303,7 @@ function Products() {
                               100
                             ).toFixed(1)
                           : 0}
-                        % экономии
+                        {t('savingsPercentage')}
                       </div>
                     </div>
                   </div>
@@ -3374,7 +3316,7 @@ function Products() {
                     >
                       <div className="metric-number">55%</div>
                       <div className="metric-label">
-                        запросов без участия человека
+                        {t('requestsWithoutHuman')}
                       </div>
                     </motion.div>
 
@@ -3382,9 +3324,9 @@ function Products() {
                       className="metric-card"
                       whileHover={{ scale: 1.05 }}
                     >
-                      <div className="metric-number">$500k/год</div>
+                      <div className="metric-number">{t('savings500kPerYear')}</div>
                       <div className="metric-label">
-                        экономия при 100k чатов в месяц
+                        {t('savingsWith100kChats')}
                       </div>
                     </motion.div>
 
@@ -3394,7 +3336,7 @@ function Products() {
                     >
                       <div className="metric-number">4x</div>
                       <div className="metric-label">
-                        сокращение времени ответа
+                        {t('responseTimeReduction')}
                       </div>
                     </motion.div>
                   </div>
@@ -3402,21 +3344,21 @@ function Products() {
 
                 {/* Cost Calculator */}
                 <div className="calculator-section">
-                  <h3 className="section-title-black">Калькулятор экономии</h3>
+                  <h3 className="section-title-black">{t('calculatorTitle')}</h3>
                   <div className="calculator-container">
                     <div className="calculator-settings">
                       <div className="setting-item">
                         <label>
-                          Стоимость оператора за чат: $
+  {t('operatorCostLabel')} $
                           {operatorCostPerChat.toFixed(2)}
                         </label>
                         <p className="setting-note">
-                          (изменяется в разделе "Экономия в цифрах")
+{t('changesInEconomicsSectionSavings')}
                         </p>
                       </div>
                     </div>
                     <div className="calculator-input">
-                      <label>Количество чатов в месяц:</label>
+                      <label>{t('monthlyChatsCount')}</label>
                       <input
                         type="range"
                         min="1000"
@@ -3427,27 +3369,27 @@ function Products() {
                         id="chatCount"
                       />
                       <div className="slider-value">
-                        {formatNumber(chatCount)} чатов
+                        {formatNumber(chatCount)} {t('chats')}
                       </div>
                     </div>
 
                     <div className="calculator-results">
                       <div className="result-item">
-                        <span>С операторами:</span>
+                        <span>{t('withOperators')}</span>
                         <span className="operator-cost-result">
-                          ${formatNumber(operatorCost)}/мес
+                          ${formatNumber(operatorCost)}{t('perMonth')}
                         </span>
                       </div>
                       <div className="result-item">
-                        <span>С ИИ-ботом:</span>
+                        <span>{t('withAiBot')}</span>
                         <span className="ai-cost-result">
-                          ${formatNumber(aiCost)}/мес
+                          ${formatNumber(aiCost)}{t('perMonth')}
                         </span>
                       </div>
                       <div className="result-item savings-result">
-                        <span>Экономия:</span>
+                        <span>{t('savings')}</span>
                         <span className="savings-amount-result">
-                          ${formatNumber(savings)}/мес
+                          ${formatNumber(savings)}{t('perMonth')}
                         </span>
                       </div>
                     </div>
@@ -3471,11 +3413,10 @@ function Products() {
                 <div className="callcenter-hero-new">
                   <div className="hero-content">
                     <h1 className="hero-title">
-                      ИИ Call Center Bot: автоматизация звонков без операторов
+                      {t('callCenterBotTitle')}
                     </h1>
                     <p className="hero-subtitle">
-                      Сократи расходы на колл-центр до 70% и обеспечь
-                      круглосуточную поддержку по телефону.
+                      {t('callCenterBotSubtitle')}
                     </p>
                     <div
                       className="callcenter-audio-players"
@@ -3488,11 +3429,11 @@ function Products() {
                     >
                       <audio controls style={{ width: '320px' }}>
                         {/* <source src="./audio_1.mp3" type="audio/mpeg" /> */}
-                        Ваш браузер не поддерживает аудио.
+                        {t('browserNotSupportAudio')}
                       </audio>
                       <audio controls style={{ width: '320px' }}>
                         {/* <source src="./audio_2.mp3" type="audio/mpeg" /> */}
-                        Ваш браузер не поддерживает аудио.
+                        {t('browserNotSupportAudio')}
                       </audio>
                     </div>
                     <motion.button
@@ -3501,7 +3442,7 @@ function Products() {
                       whileTap={{ scale: 0.95 }}
                       onClick={scrollToCallCenterEffect}
                     >
-                      Рассчитать стоимость
+{t('calculateCostButton')}
                     </motion.button>
                   </div>
                   <div className="hero-animation">
@@ -3529,7 +3470,7 @@ function Products() {
 
                 {/* Key Facts Cards */}
                 <div className="facts-section">
-                  <h3 className="section-title-white">Основные показатели</h3>
+                  <h3 className="section-title-white">{t('keyMetricsTitle')}</h3>
                   <div className="facts-grid">
                     <motion.div
                       className="fact-card glass-effect"
@@ -3539,9 +3480,9 @@ function Products() {
                         <IoCallOutline />
                       </div>
                       <div className="fact-content">
-                        <div className="fact-number">До 80%</div>
+                        <div className="fact-number">{t('upTo80Percent')}</div>
                         <div className="fact-description">
-                          Обрабатывает звонков
+                          {t('processesCalls')}
                         </div>
                       </div>
                     </motion.div>
@@ -3556,7 +3497,7 @@ function Products() {
                       <div className="fact-content">
                         <div className="fact-number">$25k/мес</div>
                         <div className="fact-description">
-                          Экономия при 50k звонков
+                          {t('monthlySavings50k')}
                         </div>
                       </div>
                     </motion.div>
@@ -3569,9 +3510,9 @@ function Products() {
                         <IoStatsChartOutline />
                       </div>
                       <div className="fact-content">
-                        <div className="fact-number">UPTIME 97%</div>
+                        <div className="fact-number">{t('uptime97Percent')}</div>
                         <div className="fact-description">
-                          Стабильная работа системы
+{t('stableSystemWork')}
                         </div>
                       </div>
                     </motion.div>
@@ -3580,7 +3521,7 @@ function Products() {
 
                 {/* Capabilities Grid */}
                 <div className="capabilities-section-new">
-                  <h3 className="section-title-white">Возможности системы</h3>
+                  <h3 className="section-title-white">{t('systemCapabilitiesTitle')}</h3>
                   <div className="capabilities-grid-new">
                     <motion.div
                       className="capability-card-new"
@@ -3589,8 +3530,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoCallOutline />
                       </div>
-                      <h4>Приём входящих и исходящих звонков</h4>
-                      <p>Полный цикл телефонной поддержки</p>
+                      <h4>{t('incomingOutgoingCalls')}</h4>
+                      <p>{t('fullPhoneSupportCycle')}</p>
                     </motion.div>
 
                     <motion.div
@@ -3600,8 +3541,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoVolumeHighOutline />
                       </div>
-                      <h4>Голосовой синтез и распознавание речи</h4>
-                      <p>Естественное общение с клиентами</p>
+                      <h4>{t('voiceSynthesisSpeechRecognition')}</h4>
+                      <p>{t('naturalCustomerCommunication')}</p>
                     </motion.div>
 
                     <motion.div
@@ -3611,8 +3552,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoLinkOutline />
                       </div>
-                      <h4>Интеграция с CRM и телефонией</h4>
-                      <p>Бесшовная работа с системами</p>
+                      <h4>{t('integrationCrmTelephony')}</h4>
+                      <p>{t('seamlessSystemWork')}</p>
                     </motion.div>
 
                     <motion.div
@@ -3622,8 +3563,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoGlobeOutline />
                       </div>
-                      <h4>Поддержка до 15 языков</h4>
-                      <p>Международная поддержка клиентов</p>
+                      <h4>{t('supportUpTo15Languages')}</h4>
+                      <p>{t('internationalCustomerSupport')}</p>
                     </motion.div>
 
                     <motion.div
@@ -3633,21 +3574,21 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoFlashOutline />
                       </div>
-                      <h4>Массовая обзвонная кампания</h4>
-                      <p>Автоматизация обзвона тысяч клиентов</p>
+                      <h4>{t('massCallingCampaign')}</h4>
+                      <p>{t('automationThousandsCustomers')}</p>
                     </motion.div>
                   </div>
                 </div>
 
                 {/* Economic Effect */}
                 <div className="economics-section">
-                  <h3 className="section-title-black" id="callcenter-effect">Экономический эффект</h3>
+                  <h3 className="section-title-black" id="callcenter-effect">{t('economicEffect')}</h3>
 
                   {/* Interactive Cost Comparison */}
                   <div className="cost-comparison-interactive">
                     <div className="operator-cost-input">
                       <label htmlFor="operatorCallCost">
-                        Стоимость оператора за минуту звонка:
+                        {t('operatorCostPerCallMinute')}
                       </label>
                       <div className="cost-input-container">
                         <span className="currency-symbol">$</span>
@@ -3660,31 +3601,30 @@ function Products() {
                           min="0"
                           onChange={handleOperatorCallCostChange}
                         />
-                        <span className="cost-label-small">за минуту</span>
+                        <span className="cost-label-small">{t('perMinute')}</span>
                       </div>
                     </div>
 
                     <div className="comparison-bars">
                       <div className="cost-bar operator-cost">
-                        <div className="cost-label">Оператор</div>
+                        <div className="cost-label">{t('operator')}</div>
                         <div className="cost-bar-fill operator-bar"></div>
                         <div className="cost-value">
-                          ${operatorCostPerCall.toFixed(2)} / минута
+                          ${operatorCostPerCall.toFixed(2)} {t('perMinuteValue')}
                         </div>
                       </div>
                       <div className="cost-bar ai-cost">
-                        <div className="cost-label">Call Bot</div>
+                        <div className="cost-label">{t('callBot')}</div>
                         <div className="cost-bar-fill ai-bar"></div>
-                        <div className="cost-value">$0.10 / минута</div>
+                        <div className="cost-value">$0.10 {t('perMinuteValue')}</div>
                       </div>
                     </div>
                     <div className="savings-highlight">
                       <div className="savings-text">
-                        В{' '}
                         {operatorCostPerCall > 0
                           ? (operatorCostPerCall / 0.1).toFixed(1)
                           : 0}
-                        x дешевле
+                        {t('timesCheaper')}
                       </div>
                       <div className="savings-percentage">
                         {operatorCostPerCall > 0
@@ -3694,7 +3634,7 @@ function Products() {
                               100
                             ).toFixed(1)
                           : 0}
-                        % экономии
+                        {t('savingsPercentage')}
                       </div>
                     </div>
                   </div>
@@ -3706,7 +3646,7 @@ function Products() {
                       whileHover={{ scale: 1.05 }}
                     >
                       <div className="metric-number">80%</div>
-                      <div className="metric-label">автоматизация звонков</div>
+                      <div className="metric-label">{t('callAutomation')}</div>
                     </motion.div>
 
                     <motion.div
@@ -3715,7 +3655,7 @@ function Products() {
                     >
                       <div className="metric-number">70%</div>
                       <div className="metric-label">
-                        сокращение расходов колл-центра
+                        {t('callCenterCostReduction')}
                       </div>
                     </motion.div>
 
@@ -3725,7 +3665,7 @@ function Products() {
                     >
                       <div className="metric-number">24/7</div>
                       <div className="metric-label">
-                        круглосуточная поддержка
+                        {t('roundTheClockSupport')}
                       </div>
                     </motion.div>
                   </div>
@@ -3734,22 +3674,22 @@ function Products() {
                 {/* Cost Calculator */}
                 <div className="calculator-section">
                   <h3 className="section-title-black">
-                    Калькулятор экономии звонков
+{t('calculatorTitle')} {t('callsCalculator')}
                   </h3>
                   <div className="calculator-container">
                     <div className="calculator-settings">
                       <div className="setting-item">
                         <label>
-                          Стоимость оператора за минуту: $
+                          {t('operatorCostPerMinute')} $
                           {operatorCostPerCall.toFixed(2)}
                         </label>
                         <p className="setting-note">
-                          (изменяется в разделе "Экономический эффект")
+                          {t('changesInEconomicsSection')}
                         </p>
                       </div>
                     </div>
                     <div className="calculator-input">
-                      <label>Количество минут звонков в месяц:</label>
+                      <label>{t('monthlyCallMinutes')}</label>
                       <input
                         type="range"
                         min="1000"
@@ -3760,27 +3700,27 @@ function Products() {
                         id="callCount"
                       />
                       <div className="slider-value">
-                        {formatNumber(chatCount)} минут
+                        {formatNumber(chatCount)} {t('minutes')}
                       </div>
                     </div>
 
                     <div className="calculator-results">
                       <div className="result-item">
-                        <span>С операторами:</span>
+                        <span>{t('withOperators')}</span>
                         <span className="operator-cost-result">
-                          ${formatNumber(operatorCallCost)}/мес
+                          ${formatNumber(operatorCallCost)}{t('perMonth')}
                         </span>
                       </div>
                       <div className="result-item">
-                        <span>С Call Bot:</span>
+                        <span>{t('withCallBot')}</span>
                         <span className="ai-cost-result">
-                          ${formatNumber(aiCallCost)}/мес
+                          ${formatNumber(aiCallCost)}{t('perMonth')}
                         </span>
                       </div>
                       <div className="result-item savings-result">
-                        <span>Экономия:</span>
+                        <span>{t('savings')}</span>
                         <span className="savings-amount-result">
-                          ${formatNumber(callSavings)}/мес
+                          ${formatNumber(callSavings)}{t('perMonth')}
                         </span>
                       </div>
                     </div>
@@ -3790,7 +3730,7 @@ function Products() {
                 {/* Pricing Comparison */}
                 <div className="pricing-section">
                   <h3 className="section-title-white">
-                    Стоимость обслуживания
+                    {t('serviceCost')}
                   </h3>
                   <div className="pricing-comparison-new">
                     <motion.div
@@ -3804,17 +3744,17 @@ function Products() {
                         <h4>Call Bot</h4>
                       </div>
                       <div className="pricing-amount">$0.10</div>
-                      <div className="pricing-label">за минуту</div>
+                      <div className="pricing-label">{t('perMinutePricing')}</div>
                       <div className="pricing-features">
                         <div className="pricing-feature">
-                          ✓ Автоматическая обработка
+                          ✓ {t('automaticProcessing')}
                         </div>
-                        <div className="pricing-feature">✓ Работает 24/7</div>
+                        <div className="pricing-feature">✓ {t('works247')}</div>
                         <div className="pricing-feature">
-                          ✓ Неограниченная масштабируемость
+                          ✓ {t('unlimitedScalability')}
                         </div>
                         <div className="pricing-feature">
-                          ✓ Интеграция с CRM
+                          ✓ {t('crmIntegration')}
                         </div>
                       </div>
                     </motion.div>
@@ -3827,24 +3767,24 @@ function Products() {
                         <div className="pricing-icon">
                           <IoPersonOutline />
                         </div>
-                        <h4>Оператор</h4>
+                        <h4>{t('operator')}</h4>
                       </div>
                       <div className="pricing-amount">
                         ${operatorCostPerCall.toFixed(2)}
                       </div>
-                      <div className="pricing-label">за минуту</div>
+                      <div className="pricing-label">{t('perMinutePricing')}</div>
                       <div className="pricing-features">
                         <div className="pricing-feature">
-                          • Зарплата оператора
+                          • {t('operatorSalary')}
                         </div>
                         <div className="pricing-feature">
-                          • Отпускные/больничные
+                          • {t('vacationSickLeave')}
                         </div>
                         <div className="pricing-feature">
-                          • Человеческий фактор
+                          • {t('humanFactor')}
                         </div>
                         <div className="pricing-feature">
-                          • Ограниченные часы работы
+                          • {t('limitedWorkingHours')}
                         </div>
                       </div>
                     </motion.div>
@@ -3853,7 +3793,7 @@ function Products() {
 
                 {/* Future Prospects */}
                 <div className="prospects-section">
-                  <h3 className="section-title-white">Перспективы развития</h3>
+                  <h3 className="section-title-white">{t('developmentProspects')}</h3>
                   <div className="prospects-grid">
                     <motion.div
                       className="prospect-card"
@@ -3863,10 +3803,9 @@ function Products() {
                         <IoVolumeHighOutline />
                       </div>
                       <div className="prospect-content">
-                        <h4>Улучшение качества синтеза речи</h4>
+                        <h4>{t('speechSynthesisImprovement')}</h4>
                         <p>
-                          Еще более естественное звучание и эмоциональная
-                          окраска голоса
+                          {t('speechSynthesisDescription')}
                         </p>
                       </div>
                     </motion.div>
@@ -3879,10 +3818,9 @@ function Products() {
                         <IoChatbubbleEllipsesOutline />
                       </div>
                       <div className="prospect-content">
-                        <h4>Интеграция с WhatsApp/Telegram звонками</h4>
+                        <h4>{t('whatsappTelegramIntegration')}</h4>
                         <p>
-                          Расширение каналов коммуникации для максимального
-                          охвата
+                          {t('whatsappTelegramDescription')}
                         </p>
                       </div>
                     </motion.div>
@@ -3895,10 +3833,9 @@ function Products() {
                         <IoStatsChartOutline />
                       </div>
                       <div className="prospect-content">
-                        <h4>Smart-обзвоны с ИИ-персонализацией</h4>
+                        <h4>{t('smartCallsWithAi')}</h4>
                         <p>
-                          Индивидуальный подход к каждому клиенту на основе
-                          поведенческой аналитики
+                          {t('smartCallsDescription')}
                         </p>
                       </div>
                     </motion.div>
@@ -3921,10 +3858,9 @@ function Products() {
                 {/* Hero Section */}
                 <div className="qa-hero-new">
                   <div className="qa-hero-content">
-                    <h2>ИИ QA Bot: контроль качества поддержки</h2>
+                    <h2>{t('qaBotTitle')}</h2>
                     <p>
-                      Проводи до 80% проверок чатов и звонков автоматически,
-                      экономь время тимлидов и супервайзеров
+                      {t('qaBotSubtitle')}
                     </p>
                     <div className="hero-buttons-container">
                       <motion.button
@@ -3933,7 +3869,7 @@ function Products() {
                         whileTap={{ scale: 0.95 }}
                         onClick={scrollToQABotEffect}
                       >
-                        Рассчитать стоимость
+  {t('calculateCostButton')}
                       </motion.button>
                       <motion.button
                         className="hero-example-btn btn-with-shine"
@@ -3941,7 +3877,7 @@ function Products() {
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setShowQAModal(true)}
                       >
-                        Посмотреть пример
+{t('lookAtExample')}
                       </motion.button>
                     </div>
                   </div>
@@ -3970,14 +3906,14 @@ function Products() {
 
                 {/* Facts Grid */}
                 <div className="facts-section">
-                  <h3 className="section-title-white">Ключевые факты</h3>
+                  <h3 className="section-title-white">{t('keyFacts')}</h3>
                   <div className="facts-grid">
                     <motion.div
                       className="fact-card"
                       whileHover={{ scale: 1.02 }}
                     >
                       <div className="fact-number">80%</div>
-                      <p>Выполняет до 80% QA-проверок</p>
+                      <p>{t('performsUpTo80PercentQaChecks')}</p>
                     </motion.div>
 
                     <motion.div
@@ -3985,7 +3921,7 @@ function Products() {
                       whileHover={{ scale: 1.02 }}
                     >
                       <div className="fact-number">500</div>
-                      <p>Экономия до 500 часов работы QA в месяц</p>
+                      <p>{t('savingsUpTo500HoursQaWork')}</p>
                     </motion.div>
 
                     <motion.div
@@ -3993,14 +3929,14 @@ function Products() {
                       whileHover={{ scale: 1.02 }}
                     >
                       <div className="fact-number">24/7</div>
-                      <p>Автоматический скоринг по KPI</p>
+                      <p>{t('automaticKpiScoring')}</p>
                     </motion.div>
                   </div>
                 </div>
 
                 {/* Capabilities Grid */}
                 <div className="capabilities-section-new">
-                  <h3 className="section-title-white">Возможности системы</h3>
+                  <h3 className="section-title-white">{t('systemCapabilitiesTitle')}</h3>
                   <div className="capabilities-grid-new">
                     <motion.div
                       className="capability-card-new"
@@ -4009,8 +3945,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoEyeOutline />
                       </div>
-                      <h4>Проверка чатов и звонков по чек-листам</h4>
-                      <p>Комплексная проверка соблюдения стандартов</p>
+                      <h4>{t('chatCallChecklistsCheck')}</h4>
+                      <p>{t('comprehensiveStandardsComplianceCheck')}</p>
                     </motion.div>
 
                     <motion.div
@@ -4020,8 +3956,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoStatsChartOutline />
                       </div>
-                      <h4>Формирование отчётов и метрик</h4>
-                      <p>Детальная аналитика по всем показателям</p>
+                      <h4>{t('reportAndMetricsGeneration')}</h4>
+                      <p>{t('detailedAnalyticsOnAllIndicators')}</p>
                     </motion.div>
 
                     <motion.div
@@ -4031,8 +3967,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoPersonOutline />
                       </div>
-                      <h4>Автоматический скоринг операторов</h4>
-                      <p>Объективная оценка работы сотрудников</p>
+                      <h4>{t('automaticOperatorScoring')}</h4>
+                      <p>{t('objectiveEmployeeWorkAssessment')}</p>
                     </motion.div>
 
                     <motion.div
@@ -4042,8 +3978,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoAnalyticsOutline />
                       </div>
-                      <h4>Анализ тональности</h4>
-                      <p>Определение эмоциональной окраски общения</p>
+                      <h4>{t('sentimentAnalysis')}</h4>
+                      <p>{t('emotionalCommunicationToneDetection')}</p>
                     </motion.div>
 
                     <motion.div
@@ -4053,21 +3989,21 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoFlashOutline />
                       </div>
-                      <h4>Масштабируемость до десятков тысяч чатов</h4>
-                      <p>Обработка больших объёмов без потери качества</p>
+                      <h4>{t('scalabilityTensOfThousandsChats')}</h4>
+                      <p>{t('largeVolumeProcessingWithoutQualityLoss')}</p>
                     </motion.div>
                   </div>
                 </div>
 
                 {/* Economic Effect */}
                 <div className="economics-section">
-                  <h3 className="section-title-black" id='qa-effect'>Экономический эффект</h3>
+                  <h3 className="section-title-black" id='qa-effect'>{t('economicEffect')}</h3>
 
                   {/* Interactive Cost Comparison */}
                   <div className="cost-comparison-interactive">
                     <div className="operator-cost-input">
                       <label htmlFor="operatorQACost">
-                        Стоимость оператора QA за проверку чата:
+                        {t('qaOperatorCostPerChatCheck')}
                       </label>
                       <div className="cost-input-container">
                         <span className="currency-symbol">$</span>
@@ -4080,31 +4016,30 @@ function Products() {
                           min="0"
                           onChange={handleOperatorQACostChange}
                         />
-                        <span className="cost-label-small">за проверку</span>
+                        <span className="cost-label-small">{t('perCheck')}</span>
                       </div>
                     </div>
 
                     <div className="comparison-bars">
                       <div className="cost-bar operator-cost">
-                        <div className="cost-label">Оператор QA</div>
+                        <div className="cost-label">{t('qaOperator')}</div>
                         <div className="cost-bar-fill operator-bar"></div>
                         <div className="cost-value">
-                          ${operatorCostPerQA.toFixed(2)} / проверка
+                          ${operatorCostPerQA.toFixed(2)}{t('perCheckValue')}
                         </div>
                       </div>
                       <div className="cost-bar ai-cost">
-                        <div className="cost-label">QA Bot</div>
+                        <div className="cost-label">{t('qaBot')}</div>
                         <div className="cost-bar-fill ai-bar"></div>
-                        <div className="cost-value">$0.06 / проверка</div>
+                        <div className="cost-value">$0.06{t('perCheckValue')}</div>
                       </div>
                     </div>
                     <div className="savings-highlight">
                       <div className="savings-text">
-                        В{' '}
                         {operatorCostPerQA > 0
                           ? (operatorCostPerQA / 0.06).toFixed(1)
                           : 0}
-                        x дешевле
+                        {t('timesCheaper')}
                       </div>
                       <div className="savings-percentage">
                         {operatorCostPerQA > 0
@@ -4113,7 +4048,7 @@ function Products() {
                               100
                             ).toFixed(1)
                           : 0}
-                        % экономии
+{t('savingsPercentage')}
                       </div>
                     </div>
                   </div>
@@ -4122,22 +4057,22 @@ function Products() {
                 {/* QA Cost Calculator */}
                 <div className="calculator-section">
                   <h3 className="section-title-black">
-                    Калькулятор экономии QA
+{t('calculatorTitle')} {t('qaCalculator')}
                   </h3>
                   <div className="calculator-container">
                     <div className="calculator-settings">
                       <div className="setting-item">
                         <label>
-                          Стоимость QA-специалиста за проверку: $
+                          {t('qaSpecialistCostPerCheck')} $
                           {operatorCostPerQA.toFixed(2)}
                         </label>
                         <p className="setting-note">
-                          (изменяется в разделе "Экономический эффект")
+                          {t('changesInEconomicsSection')}
                         </p>
                       </div>
                     </div>
                     <div className="calculator-input">
-                      <label>Количество проверок чатов в месяц:</label>
+                      <label>{t('monthlyChatChecks')}</label>
                       <input
                         type="range"
                         min="1000"
@@ -4148,27 +4083,27 @@ function Products() {
                         id="qaCount"
                       />
                       <div className="slider-value">
-                        {formatNumber(chatCount)} проверок
+                        {formatNumber(chatCount)} {t('checks')}
                       </div>
                     </div>
 
                     <div className="calculator-results">
                       <div className="result-item">
-                        <span>С QA-специалистами:</span>
+                        <span>{t('withQaSpecialists')}</span>
                         <span className="operator-cost-result">
-                          ${formatNumber(operatorQACost)}/мес
+                          ${formatNumber(operatorQACost)}{t('perMonth')}
                         </span>
                       </div>
                       <div className="result-item">
-                        <span>С QA Bot:</span>
+                        <span>{t('withQaBot')}</span>
                         <span className="ai-cost-result">
-                          ${formatNumber(aiQACost)}/мес
+                          ${formatNumber(aiQACost)}{t('perMonth')}
                         </span>
                       </div>
                       <div className="result-item savings-result">
-                        <span>Экономия:</span>
+                        <span>{t('savings')}</span>
                         <span className="savings-amount-result">
-                          ${formatNumber(qaSavings)}/мес
+                          ${formatNumber(qaSavings)}{t('perMonth')}
                         </span>
                       </div>
                     </div>
@@ -4178,7 +4113,7 @@ function Products() {
                 {/* Pricing Section */}
                 <div className="pricing-section">
                   <h3 className="section-title-white">
-                    Стоимость обслуживания
+                    {t('serviceCost')}
                   </h3>
                   <div className="pricing-comparison-new">
                     <motion.div
@@ -4189,20 +4124,20 @@ function Products() {
                         <div className="pricing-icon">
                           <IoFlashOutline />
                         </div>
-                        <h4>QA Bot</h4>
+                        <h4>{t('qaBot')}</h4>
                       </div>
                       <div className="pricing-amount">$0.06</div>
-                      <div className="pricing-label">за проверку</div>
+                      <div className="pricing-label">{t('perCheckPricing')}</div>
                       <div className="pricing-features">
                         <div className="pricing-feature">
-                          • Мгновенная обработка
+                          • {t('instantProcessing')}
                         </div>
                         <div className="pricing-feature">
-                          • 100% покрытие чатов
+                          • {t('hundredPercentCoverage')}
                         </div>
-                        <div className="pricing-feature">• Работа 24/7</div>
+                        <div className="pricing-feature">• {t('works247')}</div>
                         <div className="pricing-feature">
-                          • Автоматические отчёты
+                          • {t('automaticReports')}
                         </div>
                       </div>
                     </motion.div>
@@ -4215,22 +4150,22 @@ function Products() {
                         <div className="pricing-icon">
                           <IoPersonOutline />
                         </div>
-                        <h4>QA-специалист</h4>
+                        <h4>{t('qaSpecialist')}</h4>
                       </div>
                       <div className="pricing-amount">
                         ${operatorCostPerQA.toFixed(2)}
                       </div>
-                      <div className="pricing-label">за проверку</div>
+                      <div className="pricing-label">{t('perCheckPricing')}</div>
                       <div className="pricing-features">
                         <div className="pricing-feature">
-                          • Время обработки 15-30 мин
+                          • {t('processingTime15to30min')}
                         </div>
                         <div className="pricing-feature">
-                          • Покрытие 2-5% чатов
+                          • {t('coverage2to5percent')}
                         </div>
-                        <div className="pricing-feature">• Работа в смены</div>
+                        <div className="pricing-feature">• {t('workInShifts')}</div>
                         <div className="pricing-feature">
-                          • Субъективная оценка
+                          • {t('subjectiveAssessment')}
                         </div>
                       </div>
                     </motion.div>
@@ -4239,7 +4174,7 @@ function Products() {
 
                 {/* Prospects Section */}
                 <div className="prospects-section">
-                  <h3 className="section-title-white">Перспективы развития</h3>
+                  <h3 className="section-title-white">{t('developmentProspects')}</h3>
                   <div className="prospects-grid">
                     <motion.div
                       className="prospect-card"
@@ -4249,10 +4184,9 @@ function Products() {
                         <IoGlobeOutline />
                       </div>
                       <div className="prospect-content">
-                        <h4>Поддержка мультиязычных QA-скриптов</h4>
+                        <h4>{t('multilingualQaScripts')}</h4>
                         <p>
-                          Расширение системы для работы с международными
-                          командами и многоязычной поддержкой клиентов
+                          {t('multilingualQaDescription')}
                         </p>
                       </div>
                     </motion.div>
@@ -4265,10 +4199,9 @@ function Products() {
                         <IoLinkOutline />
                       </div>
                       <div className="prospect-content">
-                        <h4>Интеграция с HR и LMS-системами</h4>
+                        <h4>{t('hrLmsIntegration')}</h4>
                         <p>
-                          Автоматическая синхронизация с системами управления
-                          персоналом и обучающими платформами
+                          {t('hrLmsDescription')}
                         </p>
                       </div>
                     </motion.div>
@@ -4281,10 +4214,9 @@ function Products() {
                         <IoCheckmarkCircleOutline />
                       </div>
                       <div className="prospect-content">
-                        <h4>Автоматическая выдача рекомендаций операторам</h4>
+                        <h4>{t('automaticOperatorRecommendations')}</h4>
                         <p>
-                          Персонализированные советы по улучшению качества
-                          работы на основе анализа ошибок
+                          {t('operatorRecommendationsDescription')}
                         </p>
                       </div>
                     </motion.div>
@@ -4307,10 +4239,9 @@ function Products() {
                 {/* Hero Section */}
                 <div className="payment-hero-new">
                   <div className="payment-hero-content">
-                    <h2>ИИ Payment Bot: автоматизация обработки платежей</h2>
+                    <h2>{t('paymentBotTitle')}</h2>
                     <p>
-                      Сократи нагрузку на саппорт, обрабатывай до 70% тикетов по
-                      платежам автоматически
+                      {t('paymentBotSubtitle')}
                     </p>
                     <motion.button
                       className="hero-cta-btn btn-with-shine"
@@ -4318,7 +4249,7 @@ function Products() {
                       whileTap={{ scale: 0.95 }}
                       onClick={scrollToPaymentbotEffect}
                     >
-                      Рассчитать стоимость
+{t('calculateCostButton')}
                     </motion.button>
                   </div>
                   <div className="hero-animation">
@@ -4351,14 +4282,14 @@ function Products() {
 
                 {/* Facts Grid */}
                 <div className="facts-section">
-                  <h3 className="section-title-white">Ключевые факты</h3>
+                  <h3 className="section-title-white">{t('keyFacts')}</h3>
                   <div className="facts-grid">
                     <motion.div
                       className="fact-card"
                       whileHover={{ scale: 1.02 }}
                     >
                       <div className="fact-number">70%</div>
-                      <p>Закрывает до 70% тикетов по депозитам/выводам</p>
+                      <p>{t('closesUpTo70PercentTickets')}</p>
                     </motion.div>
 
                     <motion.div
@@ -4366,7 +4297,7 @@ function Products() {
                       whileHover={{ scale: 1.02 }}
                     >
                       <div className="fact-number">$20k</div>
-                      <p>Экономия до $20k/мес при 30k тикетов</p>
+                      <p>{t('savingsUpTo20kPerMonth')}</p>
                     </motion.div>
 
                     <motion.div
@@ -4374,14 +4305,14 @@ function Products() {
                       whileHover={{ scale: 1.02 }}
                     >
                       <div className="fact-number">24/7</div>
-                      <p>Интеграция с платёжными системами</p>
+                      <p>{t('paymentSystemsIntegration')}</p>
                     </motion.div>
                   </div>
                 </div>
 
                 {/* Capabilities Grid */}
                 <div className="capabilities-section-new">
-                  <h3 className="section-title-white">Возможности системы</h3>
+                  <h3 className="section-title-white">{t('systemCapabilitiesTitle')}</h3>
                   <div className="capabilities-grid-new">
                     <motion.div
                       className="capability-card-new"
@@ -4390,8 +4321,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoCardOutline />
                       </div>
-                      <h4>Проверка статуса транзакций</h4>
-                      <p>Мгновенная проверка платежных операций</p>
+                      <h4>{t('transactionStatusCheck')}</h4>
+                      <p>{t('instantPaymentOperationsCheck')}</p>
                     </motion.div>
 
                     <motion.div
@@ -4401,8 +4332,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoLinkOutline />
                       </div>
-                      <h4>Интеграция с PSP/банками</h4>
-                      <p>Прямое подключение к платёжным провайдерам</p>
+                      <h4>{t('pspBanksIntegration')}</h4>
+                      <p>{t('directPaymentProvidersConnection')}</p>
                     </motion.div>
 
                     <motion.div
@@ -4412,8 +4343,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoTimerOutline />
                       </div>
-                      <h4>Автоматические ответы по задержкам</h4>
-                      <p>Уведомления о статусе задержанных платежей</p>
+                      <h4>{t('automaticDelayResponses')}</h4>
+                      <p>{t('delayedPaymentsStatusNotifications')}</p>
                     </motion.div>
 
                     <motion.div
@@ -4423,8 +4354,8 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoStatsChartOutline />
                       </div>
-                      <h4>Логирование и аналитика</h4>
-                      <p>Детальная отчётность по всем операциям</p>
+                      <h4>{t('loggingAndAnalytics')}</h4>
+                      <p>{t('detailedOperationsReporting')}</p>
                     </motion.div>
 
                     <motion.div
@@ -4434,34 +4365,34 @@ function Products() {
                       <div className="capability-icon-new">
                         <IoFlashOutline />
                       </div>
-                      <h4>Масштабируемость (десятки тысяч запросов)</h4>
-                      <p>Обработка больших объёмов транзакций</p>
+                      <h4>{t('scalabilityTensOfThousands')}</h4>
+                      <p>{t('largeVolumeTransactionsProcessing')}</p>
                     </motion.div>
                   </div>
                 </div>
 
                 {/* Economic Effect */}
                 <div className="economics-section">
-                  <h3 className="section-title-black" id='paymentbot-effect'>Экономический эффект</h3>
+                  <h3 className="section-title-black" id='paymentbot-effect'>{t('economicEffect')}</h3>
 
                   {/* Cost Comparison */}
                   <div className="cost-comparison">
                     <div className="comparison-bars">
                       <div className="cost-bar operator-cost">
-                        <div className="cost-label">Оператор</div>
+                        <div className="cost-label">{t('operator')}</div>
                         <div className="cost-bar-fill operator-bar"></div>
-                        <div className="cost-value">$0.80 / тикет</div>
+                        <div className="cost-value">$0.80{t('perTicket')}</div>
                       </div>
                       <div className="cost-bar ai-cost">
-                        <div className="cost-label">Payment Bot</div>
+                        <div className="cost-label">{t('paymentBot')}</div>
                         <div className="cost-bar-fill ai-bar"></div>
-                        <div className="cost-value">$0.20 / тикет</div>
+                        <div className="cost-value">$0.20{t('perTicket')}</div>
                       </div>
                     </div>
                     <div className="savings-highlight">
-                      <div className="savings-text">Экономия до 4x</div>
+                      <div className="savings-text">{t('savingsUpTo4x')}</div>
                       <div className="savings-percentage">
-                        70% автоматизации
+                        {t('seventyPercentAutomation')}
                       </div>
                     </div>
                   </div>
@@ -4470,7 +4401,7 @@ function Products() {
                 {/* Pricing Section */}
                 <div className="pricing-section">
                   <h3 className="section-title-white">
-                    Стоимость обслуживания
+                    {t('serviceCost')}
                   </h3>
                   <div className="pricing-comparison-new">
                     <motion.div
@@ -4481,20 +4412,20 @@ function Products() {
                         <div className="pricing-icon">
                           <IoFlashOutline />
                         </div>
-                        <h4>Payment Bot</h4>
+                        <h4>{t('paymentBot')}</h4>
                       </div>
                       <div className="pricing-amount">$0.20</div>
-                      <div className="pricing-label">за тикет</div>
+                      <div className="pricing-label">{t('perTicketPricing')}</div>
                       <div className="pricing-features">
                         <div className="pricing-feature">
-                          • Мгновенная обработка
+                          • {t('instantProcessing')}
                         </div>
                         <div className="pricing-feature">
-                          • Интеграция с PSP
+                          • {t('pspIntegration')}
                         </div>
-                        <div className="pricing-feature">• Работа 24/7</div>
+                        <div className="pricing-feature">• {t('works247')}</div>
                         <div className="pricing-feature">
-                          • Автоматическая аналитика
+                          • {t('automaticAnalytics')}
                         </div>
                       </div>
                     </motion.div>
@@ -4507,20 +4438,20 @@ function Products() {
                         <div className="pricing-icon">
                           <IoPersonOutline />
                         </div>
-                        <h4>Оператор</h4>
+                        <h4>{t('operator')}</h4>
                       </div>
                       <div className="pricing-amount">$0.80</div>
-                      <div className="pricing-label">за тикет</div>
+                      <div className="pricing-label">{t('perTicketPricing')}</div>
                       <div className="pricing-features">
                         <div className="pricing-feature">
-                          • Время обработки 3-5 мин
+                          • {t('processingTime3to5min')}
                         </div>
-                        <div className="pricing-feature">• Работа в смены</div>
+                        <div className="pricing-feature">• {t('workInShifts')}</div>
                         <div className="pricing-feature">
-                          • Человеческий фактор
+                          • {t('humanFactor')}
                         </div>
                         <div className="pricing-feature">
-                          • Дополнительные расходы
+                          • {t('additionalExpenses')}
                         </div>
                       </div>
                     </motion.div>
@@ -4529,7 +4460,7 @@ function Products() {
 
                 {/* Prospects Section */}
                 <div className="prospects-section">
-                  <h3 className="section-title-white">Перспективы развития</h3>
+                  <h3 className="section-title-white">{t('developmentProspects')}</h3>
                   <div className="prospects-grid">
                     <motion.div
                       className="prospect-card"
@@ -4539,10 +4470,9 @@ function Products() {
                         <IoCubeOutline />
                       </div>
                       <div className="prospect-content">
-                        <h4>Подключение крипто-процессинга</h4>
+                        <h4>{t('cryptoProcessingIntegration')}</h4>
                         <p>
-                          Интеграция с блокчейн-сетями и криптовалютными
-                          платформами для обработки децентрализованных платежей
+                          {t('cryptoProcessingDescription')}
                         </p>
                       </div>
                     </motion.div>
@@ -4555,10 +4485,9 @@ function Products() {
                         <IoShieldCheckmarkOutline />
                       </div>
                       <div className="prospect-content">
-                        <h4>Smart-проверки аномалий</h4>
+                        <h4>{t('smartAnomalyChecks')}</h4>
                         <p>
-                          Машинное обучение для выявления подозрительных
-                          транзакций и предотвращения мошенничества
+                          {t('anomalyChecksDescription')}
                         </p>
                       </div>
                     </motion.div>
@@ -4571,10 +4500,9 @@ function Products() {
                         <IoTrendingUpOutline />
                       </div>
                       <div className="prospect-content">
-                        <h4>Предиктивная аналитика платежных сбоев</h4>
+                        <h4>{t('predictivePaymentAnalytics')}</h4>
                         <p>
-                          Прогнозирование возможных проблем с платежами и
-                          превентивные меры по их устранению
+                          {t('paymentAnalyticsDescription')}
                         </p>
                       </div>
                     </motion.div>
