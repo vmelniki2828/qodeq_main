@@ -740,6 +740,7 @@ export const CurrencySymbol = styled.span`
   color: #000000;
 `;
 
+
 export const CostInput = styled.input`
   width: 100px;
   padding: 0.8rem 1rem;
