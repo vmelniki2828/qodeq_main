@@ -1619,7 +1619,6 @@ function Home() {
                 <div style={{fontSize:'0.95rem',opacity:0.7}}>
                   <a href="mailto:manager@softqod.com" style={{color:'#fff',textDecoration:'underline',opacity:0.7}}>manager@softqod.com</a>
                 </div>
-                {/* ссылки удалены по запросу */}
               </div>
             </div>
           </footer>
