@@ -29,7 +29,7 @@ import {
 // Services будут созданы динамически в компоненте
 
 function Products() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   // Динамический массив services для переводов
   const services = [
@@ -3427,12 +3427,12 @@ function Products() {
                         margin: '2rem 0',
                       }}
                     >
-                      <audio controls style={{ width: '320px' }}>
-                        {/* <source src="./audio_1.mp3" type="audio/mpeg" /> */}
+                      <audio key={`audio-1-${language}`} controls style={{ width: '320px' }}>
+                        <source src={language === 'ru' ? './audio_rus_1.mp3' : './audio_eng_1.mp3'} type="audio/mpeg" />
                         {t('browserNotSupportAudio')}
                       </audio>
-                      <audio controls style={{ width: '320px' }}>
-                        {/* <source src="./audio_2.mp3" type="audio/mpeg" /> */}
+                      <audio key={`audio-2-${language}`} controls style={{ width: '320px' }}>
+                        <source src={language === 'ru' ? './audio_rus_2.mp3' : './audio_eng_2.mp3'} type="audio/mpeg" />
                         {t('browserNotSupportAudio')}
                       </audio>
                     </div>
