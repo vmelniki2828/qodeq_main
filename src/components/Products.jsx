@@ -49,6 +49,7 @@ const services = [
 ];
 
 function Products() {
+
   // Универсальный скролл к блоку "Экономический эффект" для любого бота
   const scrollToEffect = (id) => {
     const effectBlock = document.getElementById(id);
@@ -238,11 +239,1018 @@ function Products() {
   const formatNumber = num => num.toLocaleString();
 
   return (
-    <div className="products-page">
-      <div className="starfall-container">
-        <Starfall />
-      </div>
-      <Navigation />
+    <>
+      <style>{`
+        /* Диалог в стиле мессенджера для блока вопросов */
+        .messenger-dialogue {
+          position: absolute;
+          left: 50%;
+          top: 0;
+          transform: translate(-50%, 0);
+          z-index: 20;
+          min-width: 340px;
+          max-width: 540px;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          align-items: flex-start;
+          background: linear-gradient(135deg, #f7f7fa 80%, #e6f0ff 100%);
+          border-radius: 22px;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.16), 0 1.5px 0 #e6f0ff;
+          padding: 28px 26px 24px 26px;
+          border: 1.5px solid #e0e7ef;
+          animation: fadeInMessenger 0.35s cubic-bezier(.4,0,.2,1);
+          pointer-events: auto;
+        }
+        
+        @keyframes fadeInMessenger {
+          from { opacity: 0; transform: translate(-50%, 20px) scale(0.96); }
+          to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+        }
+        
+        .examples-section {
+          position: relative;
+        }
+        
+        .messenger-bubble {
+          padding: 12px 20px;
+          border-radius: 16px;
+          font-size: 1.08rem;
+          font-weight: 500;
+          max-width: 95%;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+          margin-bottom: 2px;
+          line-height: 1.5;
+          word-break: break-word;
+        }
+        
+        .messenger-bubble.user {
+          background: #e6f0ff;
+          color: #1a3a6b;
+          align-self: flex-end;
+          border: 1px solid #cce0ff;
+        }
+        
+        .messenger-bubble.bot {
+          background: #fff;
+          color: #222;
+          border: 1px solid #eee;
+        }
+        
+        .example-question {
+          background: #fff;
+          color: #333;
+          padding: 12px 20px;
+          border-radius: 12px;
+          font-size: 0.95rem;
+          font-weight: 500;
+          white-space: nowrap;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+          border: 1px solid #e0e0e0;
+          transition: all 0.2s ease;
+        }
+        
+        .example-question.active {
+          background: #00FF85;
+          color: #000;
+          transform: scale(1.05);
+          box-shadow: 0 4px 16px rgba(0,255,133,0.3);
+        }
+        
+        .white-block {
+          background: #fff;
+          color: #333;
+          padding: 12px 20px;
+          border-radius: 12px;
+          font-size: 0.95rem;
+          font-weight: 500;
+          white-space: nowrap;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+          border: 1px solid #e0e0e0;
+          transition: all 0.2s ease;
+        }
+        
+        .white-block.active {
+          background: #00FF85;
+          color: #000;
+          transform: scale(1.05);
+          box-shadow: 0 4px 16px rgba(0,255,133,0.3);
+        }
+        
+        /* Основные стили для продуктов */
+        .products-page {
+          position: relative;
+          min-height: 100vh;
+          background: #000;
+          color: #fff;
+          font-family: 'Oswald', Arial, sans-serif;
+        }
+        
+        .starfall-container {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          pointer-events: none;
+        }
+        
+        .products-content {
+          position: relative;
+          z-index: 2;
+          padding-top: 80px;
+        }
+        
+        .products-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: calc(100vh - 80px);
+          padding: 40px 20px;
+        }
+        
+        .products-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 40px;
+          max-width: 1200px;
+          width: 100%;
+        }
+        
+        .product-card {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 20px;
+          padding: 40px 30px;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .product-card:hover {
+          transform: translateY(-10px);
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.3);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .icon-container {
+          width: 80px;
+          height: 80px;
+          margin: 0 auto 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .product-icon {
+          font-size: 2.5rem;
+          color: #fff;
+        }
+        
+        .product-title {
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: #fff;
+          margin: 0;
+          letter-spacing: 1px;
+        }
+        
+        /* Мини-блоки */
+        .mini-blocks-container {
+          padding: 40px 20px;
+          max-width: 1400px;
+          margin: 0 auto;
+        }
+        
+        .mini-blocks-grid {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-bottom: 40px;
+        }
+        
+        .mini-block {
+          width: 60px;
+          height: 60px;
+          border-radius: 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mini-block.selected {
+          background: rgba(0, 255, 133, 0.2);
+          border-color: #00FF85;
+          transform: scale(1.1);
+        }
+        
+        .mini-block:hover {
+          background: rgba(255, 255, 255, 0.1);
+          transform: scale(1.05);
+        }
+        
+        .mini-icon-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .mini-product-icon {
+          font-size: 1.5rem;
+          color: #fff;
+        }
+        
+        .selected-service-title {
+          text-align: center;
+          font-size: 3rem;
+          font-weight: 700;
+          color: #fff;
+          margin: 0 0 60px 0;
+          letter-spacing: 2px;
+        }
+        
+        /* Секции */
+        .section-title-black {
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: #fff;
+          text-align: center;
+          margin: 0 0 40px 0;
+          letter-spacing: 1px;
+        }
+        
+        /* Hero секции */
+        .chatbot-hero-new,
+        .callcenter-hero-new,
+        .qa-hero-new,
+        .payment-hero-new {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+          padding: 80px 40px;
+          background: linear-gradient(135deg, rgba(0,255,133,0.1) 0%, rgba(30,144,255,0.1) 100%);
+          border-radius: 30px;
+          margin: 40px 0;
+          border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .hero-content h1 {
+          font-size: 3rem;
+          font-weight: 700;
+          color: #fff;
+          margin: 0 0 20px 0;
+          line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+          font-size: 1.2rem;
+          color: rgba(255,255,255,0.8);
+          margin: 0 0 30px 0;
+          line-height: 1.6;
+        }
+        
+        .hero-cta-btn {
+          background: linear-gradient(135deg, #00FF85 0%, #1E90FF 100%);
+          color: #000;
+          border: none;
+          padding: 16px 32px;
+          border-radius: 25px;
+          font-size: 1.1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 8px 25px rgba(0,255,133,0.3);
+        }
+        
+        .hero-cta-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 12px 35px rgba(0,255,133,0.4);
+        }
+        
+        /* Факты */
+        .facts-section {
+          margin: 60px 0;
+        }
+        
+        .facts-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 30px;
+          margin-top: 40px;
+        }
+        
+        .fact-card {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 20px;
+          padding: 30px;
+          text-align: center;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+        }
+        
+        .fact-card:hover {
+          transform: translateY(-5px);
+          background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .fact-icon {
+          font-size: 2.5rem;
+          color: #00FF85;
+          margin-bottom: 15px;
+        }
+        
+        .fact-number {
+          font-size: 2rem;
+          font-weight: 700;
+          color: #fff;
+          margin-bottom: 10px;
+        }
+        
+        .fact-description {
+          font-size: 1rem;
+          color: rgba(255,255,255,0.8);
+        }
+        
+        .highlight-card {
+          background: linear-gradient(135deg, rgba(0,255,133,0.2) 0%, rgba(30,144,255,0.2) 100%);
+          border-color: rgba(0,255,133,0.3);
+        }
+        
+        /* Возможности */
+        .capabilities-section-new {
+          margin: 60px 0;
+        }
+        
+        .capabilities-grid-new {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 25px;
+          margin-top: 40px;
+        }
+        
+        .capability-card-new {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 15px;
+          padding: 25px;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+        }
+        
+        .capability-card-new:hover {
+          transform: scale(1.02);
+          background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .capability-icon-new {
+          font-size: 2rem;
+          color: #1E90FF;
+          margin-bottom: 15px;
+        }
+        
+        .capability-card-new h4 {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: #fff;
+          margin: 0 0 10px 0;
+        }
+        
+        .capability-card-new p {
+          font-size: 0.95rem;
+          color: rgba(255,255,255,0.7);
+          margin: 0;
+          line-height: 1.5;
+        }
+        
+        /* Экономика */
+        .economics-section {
+          margin: 60px 0;
+          padding: 40px;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 25px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .cost-comparison-interactive {
+          margin: 40px 0;
+        }
+        
+        .operator-cost-input {
+          margin-bottom: 30px;
+        }
+        
+        .operator-cost-input label {
+          display: block;
+          font-size: 1.1rem;
+          color: #fff;
+          margin-bottom: 10px;
+          font-weight: 500;
+        }
+        
+        .cost-input-container {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          padding: 10px 15px;
+          width: fit-content;
+        }
+        
+        .currency-symbol {
+          color: #00FF85;
+          font-weight: 600;
+          font-size: 1.1rem;
+        }
+        
+        .cost-input {
+          background: transparent;
+          border: none;
+          color: #fff;
+          font-size: 1.1rem;
+          font-weight: 600;
+          width: 80px;
+          outline: none;
+        }
+        
+        .cost-label-small {
+          color: rgba(255,255,255,0.6);
+          font-size: 0.9rem;
+        }
+        
+        .comparison-bars {
+          display: flex;
+          gap: 20px;
+          margin: 30px 0;
+        }
+        
+        .cost-bar {
+          flex: 1;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 15px;
+          padding: 20px;
+          text-align: center;
+        }
+        
+        .cost-label {
+          font-size: 1rem;
+          color: #fff;
+          margin-bottom: 10px;
+          font-weight: 500;
+        }
+        
+        .cost-bar-fill {
+          height: 8px;
+          border-radius: 4px;
+          margin: 15px 0;
+        }
+        
+        .operator-bar {
+          background: linear-gradient(90deg, #FF0099, #FF6B6B);
+          width: 100%;
+        }
+        
+        .ai-bar {
+          background: linear-gradient(90deg, #00FF85, #1E90FF);
+          width: 30%;
+        }
+        
+        .cost-value {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: #fff;
+        }
+        
+        .savings-highlight {
+          text-align: center;
+          margin: 30px 0;
+          padding: 20px;
+          background: linear-gradient(135deg, rgba(0,255,133,0.2) 0%, rgba(30,144,255,0.2) 100%);
+          border-radius: 15px;
+          border: 1px solid rgba(0,255,133,0.3);
+        }
+        
+        .savings-text {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #00FF85;
+          margin-bottom: 5px;
+        }
+        
+        .savings-percentage {
+          font-size: 1.2rem;
+          color: #fff;
+          font-weight: 500;
+        }
+        
+        /* Метрики */
+        .metrics-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 25px;
+          margin: 40px 0;
+        }
+        
+        .metric-card {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 15px;
+          padding: 25px;
+          text-align: center;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+        }
+        
+        .metric-card:hover {
+          transform: scale(1.05);
+          background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .metric-number {
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: #00FF85;
+          margin-bottom: 10px;
+        }
+        
+        .metric-label {
+          font-size: 1rem;
+          color: rgba(255,255,255,0.8);
+          line-height: 1.4;
+        }
+        
+        /* Калькулятор */
+        .calculator-section {
+          margin: 60px 0;
+          padding: 40px;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 25px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .calculator-container {
+          max-width: 600px;
+          margin: 0 auto;
+        }
+        
+        .calculator-settings {
+          margin-bottom: 30px;
+        }
+        
+        .setting-item label {
+          display: block;
+          font-size: 1.1rem;
+          color: #fff;
+          margin-bottom: 5px;
+          font-weight: 500;
+        }
+        
+        .setting-note {
+          font-size: 0.9rem;
+          color: rgba(255,255,255,0.6);
+          margin: 0;
+        }
+        
+        .calculator-input {
+          margin: 30px 0;
+        }
+        
+        .calculator-input label {
+          display: block;
+          font-size: 1.1rem;
+          color: #fff;
+          margin-bottom: 15px;
+          font-weight: 500;
+        }
+        
+        .calculator-slider {
+          width: 100%;
+          height: 8px;
+          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.1);
+          outline: none;
+          -webkit-appearance: none;
+        }
+        
+        .calculator-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #00FF85;
+          cursor: pointer;
+          box-shadow: 0 2px 6px rgba(0,255,133,0.3);
+        }
+        
+        .calculator-slider::-moz-range-thumb {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #00FF85;
+          cursor: pointer;
+          border: none;
+          box-shadow: 0 2px 6px rgba(0,255,133,0.3);
+        }
+        
+        .slider-value {
+          text-align: center;
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: #00FF85;
+          margin-top: 15px;
+        }
+        
+        .calculator-results {
+          margin-top: 30px;
+        }
+        
+        .result-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 20px;
+          margin: 10px 0;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 10px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .result-item span:first-child {
+          color: rgba(255,255,255,0.8);
+          font-weight: 500;
+        }
+        
+        .operator-cost-result {
+          color: #FF0099;
+          font-weight: 600;
+          font-size: 1.1rem;
+        }
+        
+        .ai-cost-result {
+          color: #1E90FF;
+          font-weight: 600;
+          font-size: 1.1rem;
+        }
+        
+        .savings-result {
+          background: linear-gradient(135deg, rgba(0,255,133,0.2) 0%, rgba(30,144,255,0.2) 100%);
+          border-color: rgba(0,255,133,0.3);
+        }
+        
+        .savings-amount-result {
+          color: #00FF85;
+          font-weight: 700;
+          font-size: 1.2rem;
+        }
+        
+        /* Ценообразование */
+        .pricing-section {
+          margin: 60px 0;
+        }
+        
+        .pricing-comparison-new {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 30px;
+          margin-top: 40px;
+        }
+        
+        .pricing-card-new {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 20px;
+          padding: 30px;
+          text-align: center;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+        }
+        
+        .pricing-card-new:hover {
+          transform: scale(1.03);
+          background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .pricing-header {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 15px;
+          margin-bottom: 20px;
+        }
+        
+        .pricing-icon {
+          font-size: 2rem;
+          color: #00FF85;
+        }
+        
+        .pricing-card-new h4 {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: #fff;
+          margin: 0;
+        }
+        
+        .pricing-amount {
+          font-size: 3rem;
+          font-weight: 700;
+          color: #00FF85;
+          margin: 15px 0 5px 0;
+        }
+        
+        .pricing-label {
+          font-size: 1rem;
+          color: rgba(255,255,255,0.7);
+          margin-bottom: 25px;
+        }
+        
+        .pricing-features {
+          text-align: left;
+        }
+        
+        .pricing-feature {
+          padding: 8px 0;
+          color: rgba(255,255,255,0.8);
+          font-size: 0.95rem;
+        }
+        
+        .call-bot-card,
+        .qa-bot-card,
+        .payment-bot-card {
+          border-color: rgba(0,255,133,0.3);
+          background: linear-gradient(135deg, rgba(0,255,133,0.1) 0%, rgba(30,144,255,0.1) 100%);
+        }
+        
+        .operator-card {
+          border-color: rgba(255,0,153,0.3);
+          background: linear-gradient(135deg, rgba(255,0,153,0.1) 0%, rgba(255,107,107,0.1) 100%);
+        }
+        
+        /* Перспективы */
+        .prospects-section {
+          margin: 60px 0;
+        }
+        
+        .prospects-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 30px;
+          margin-top: 40px;
+        }
+        
+        .prospect-card {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 15px;
+          padding: 25px;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+          display: flex;
+          align-items: flex-start;
+          gap: 20px;
+        }
+        
+        .prospect-card:hover {
+          transform: translateX(10px);
+          background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .prospect-icon {
+          font-size: 2rem;
+          color: #1E90FF;
+          flex-shrink: 0;
+        }
+        
+        .prospect-content h4 {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: #fff;
+          margin: 0 0 10px 0;
+        }
+        
+        .prospect-content p {
+          font-size: 0.95rem;
+          color: rgba(255,255,255,0.7);
+          margin: 0;
+          line-height: 1.5;
+        }
+        
+        /* QA Modal */
+        .qa-modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.8);
+          z-index: 10000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+        }
+        
+        .qa-modal-content {
+          background: #fff;
+          border-radius: 20px;
+          max-width: 800px;
+          max-height: 90vh;
+          overflow: hidden;
+          position: relative;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .qa-modal-close {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          background: rgba(0, 0, 0, 0.1);
+          border: none;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          font-size: 1.5rem;
+          cursor: pointer;
+          z-index: 10001;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .qa-zoom-btn {
+          position: absolute;
+          top: 15px;
+          right: 65px;
+          background: rgba(0, 0, 0, 0.1);
+          border: none;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
+          cursor: pointer;
+          z-index: 10001;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .qa-modal-image {
+          width: 100%;
+          height: auto;
+          max-height: 60vh;
+          overflow: hidden;
+          position: relative;
+        }
+        
+        .qa-modal-image.zoomed {
+          overflow: auto;
+        }
+        
+        .qa-modal-image img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+        
+        .qa-placeholder-image {
+          width: 100%;
+          height: 400px;
+          background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          gap: 20px;
+        }
+        
+        .placeholder-content {
+          text-align: center;
+          color: #666;
+        }
+        
+        .placeholder-content h3 {
+          margin: 0 0 10px 0;
+          font-size: 1.5rem;
+        }
+        
+        .placeholder-content p {
+          margin: 0;
+          font-size: 1rem;
+        }
+        
+        .qa-modal-description {
+          padding: 30px;
+          background: #fff;
+        }
+        
+        .qa-modal-description h3 {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: #333;
+          margin: 0 0 15px 0;
+        }
+        
+        .qa-modal-description p {
+          font-size: 1rem;
+          color: #666;
+          line-height: 1.6;
+          margin: 0;
+        }
+        
+        /* Анимации */
+        .btn-with-shine {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .btn-with-shine::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+          transition: left 0.6s ease;
+        }
+        
+        .btn-with-shine:hover::before {
+          left: 100%;
+        }
+        
+        /* Glass эффект */
+        .glass-effect {
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+          .chatbot-hero-new,
+          .callcenter-hero-new,
+          .qa-hero-new,
+          .payment-hero-new {
+            grid-template-columns: 1fr;
+            gap: 40px;
+            padding: 40px 20px;
+          }
+          
+          .hero-content h1 {
+            font-size: 2.2rem;
+          }
+          
+          .selected-service-title {
+            font-size: 2.2rem;
+          }
+          
+          .section-title-black {
+            font-size: 2rem;
+          }
+          
+          .products-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+          
+          .facts-grid,
+          .capabilities-grid-new,
+          .metrics-grid,
+          .pricing-comparison-new,
+          .prospects-grid {
+            grid-template-columns: 1fr;
+          }
+          
+          .comparison-bars {
+            flex-direction: column;
+            gap: 15px;
+          }
+          
+          .mini-blocks-grid {
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+        }
+      `}</style>
+      <div className="products-page">
+        <div className="starfall-container">
+          <Starfall />
+        </div>
+        <Navigation />
 
       <div className={`products-content ${selectedId ? 'has-selection' : ''}`}>
         {!selectedId ? (
@@ -1901,6 +2909,7 @@ function Products() {
         </motion.div>
       )}
     </div>
+    </>
   );
 }
 

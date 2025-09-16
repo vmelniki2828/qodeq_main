@@ -5,7 +5,6 @@ import PulsingSphere from './animations/PulsingSphere';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import Navigation from './Navigation';
 import { IoChatbubbleEllipsesOutline, IoCallOutline, IoWalletOutline, IoHelpCircleOutline } from 'react-icons/io5';
-import './../index.css';
 
 // Хук для анимированного счетчика с задержкой
 function useDelayedCounter(ref, end, delay = 0, duration = 2000) {
@@ -109,6 +108,7 @@ function Home() {
   const [selectedProduct, setSelectedProduct] = useState(products[0]);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
+
   // Анимированные счетчики для статистики
   // Периферийные блоки анимируются сразу после выезда соответствующих блоков
   const chatCounter = useDelayedCounter(statsRef, 40, 1300, 1500); // блок появляется в 1.3 сек, счетчик 1.5 сек
@@ -157,6 +157,78 @@ function Home() {
 
   return (
     <ParallaxProvider>
+      <style>{`
+        @keyframes pulse-glow {
+          0%, 100% {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+          }
+          50% {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(0,0,0,0.2);
+          }
+        }
+        
+        .cta-button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent
+          );
+          transition: left 0.6s ease;
+          z-index: -1;
+        }
+        
+        .cta-button:hover::before {
+          left: 100%;
+        }
+        
+        .cta-button:hover {
+          animation: pulse-glow 2s infinite;
+        }
+        
+        .cta-primary:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        
+        .nav-button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(0, 0, 0, 0.2),
+            transparent
+          );
+          transition: left 0.4s ease;
+        }
+        
+        .nav-button:hover {
+          background: #000;
+          color: #fff;
+          transform: scale(1.1);
+          box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .nav-button:hover::before {
+          left: 100%;
+        }
+        
+        .indicator-button.inactive:hover {
+          background: rgba(0,0,0,0.5);
+          transform: scale(1.2);
+        }
+      `}</style>
       <div style={{ position: 'relative' }}>
         {/* Фиксированные элементы */}
         <div style={{
