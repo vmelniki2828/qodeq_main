@@ -845,6 +845,92 @@ function Home() {
             padding: 10px 20px !important;
           }
         }
+
+        /* Why Qodeq Section Responsive */
+        @media (max-width: 768px) {
+          .why-qodeq-container {
+            padding: 20px !important;
+          }
+          
+          .why-qodeq-title {
+            font-size: 2rem !important;
+            margin-bottom: 30px !important;
+          }
+          
+          .why-qodeq-content {
+            gap: 30px !important;
+          }
+          
+          .why-qodeq-item {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+          }
+          
+          .why-qodeq-card {
+            flex: none !important;
+            width: 100% !important;
+            max-width: 400px !important;
+            padding: 20px !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .why-qodeq-icon {
+            width: 50px !important;
+            height: 50px !important;
+            font-size: 1.5rem !important;
+            margin-bottom: 15px !important;
+          }
+          
+          .why-qodeq-text {
+            font-size: 1rem !important;
+            line-height: 1.4 !important;
+          }
+          
+          .why-qodeq-line {
+            display: none !important;
+          }
+          
+          .why-qodeq-dot {
+            display: none !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .why-qodeq-container {
+            padding: 15px !important;
+          }
+          
+          .why-qodeq-title {
+            font-size: 1.6rem !important;
+            margin-bottom: 25px !important;
+          }
+          
+          .why-qodeq-content {
+            gap: 25px !important;
+          }
+          
+          .why-qodeq-card {
+            padding: 15px !important;
+            max-width: 100% !important;
+          }
+          
+          .why-qodeq-icon {
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 1.2rem !important;
+            margin-bottom: 12px !important;
+          }
+          
+          .why-qodeq-text {
+            font-size: 0.9rem !important;
+            line-height: 1.3 !important;
+          }
+          
+          .why-qodeq-dot {
+            display: none !important;
+          }
+        }
       `}</style>
       <div style={{ position: 'relative' }}>
         {/* Фиксированные элементы */}
@@ -939,13 +1025,14 @@ function Home() {
               color: '#000'
             }}
           >
-            <div style={{
+            <div className="why-qodeq-container" style={{
               maxWidth: 1200,
               margin: '0 auto',
               padding: '40px',
               width: '100%'
             }}>
               <motion.h2
+                className="why-qodeq-title"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isAboutInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6 }}
@@ -961,7 +1048,7 @@ function Home() {
 {t('whyQodeqTitle')}
               </motion.h2>
 
-            <div style={{
+            <div className="why-qodeq-content" style={{
               position: 'relative',
               display: 'flex',
               flexDirection: 'column',
@@ -969,6 +1056,7 @@ function Home() {
             }}>
               {/* Центральная линия */}
               <motion.div 
+                className="why-qodeq-line"
                 initial={{ scaleY: 0 }}
                 animate={isAboutInView ? { scaleY: 1 } : { scaleY: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}
@@ -987,6 +1075,7 @@ function Home() {
               {valueProps.map((text, idx) => (
                 <motion.div 
                   key={idx} 
+                  className="why-qodeq-item"
                   initial={{ 
                     opacity: 0, 
                     x: idx % 2 === 0 ? -100 : 100,
@@ -1016,6 +1105,7 @@ function Home() {
                   }}
                 >
                   <motion.div 
+                    className="why-qodeq-card"
                     whileHover={{ 
                       y: -6, 
                       boxShadow: '8px 16px 0px #000',
@@ -1033,6 +1123,7 @@ function Home() {
                     }}
                   >
                     <motion.div 
+                      className="why-qodeq-icon"
                       initial={{ scale: 0, rotate: -180 }}
                       animate={isAboutInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
                       transition={{ duration: 0.5, delay: isAboutInView ? 1.5 + idx * 0.2 : 0 }}
@@ -1055,7 +1146,7 @@ function Home() {
                     >
                       {String(idx + 1).padStart(2, '0')}
                     </motion.div>
-                    <p style={{
+                    <p className="why-qodeq-text" style={{
                       margin: 0,
                       fontSize: '1.2rem',
                       fontWeight: 600,
@@ -1069,6 +1160,7 @@ function Home() {
 
                   {/* Центральная точка */}
                   <motion.div 
+                    className="why-qodeq-dot"
                     initial={{ scale: 0 }}
                     animate={isAboutInView ? { scale: 1 } : { scale: 0 }}
                     transition={{ duration: 0.3, delay: isAboutInView ? 1.8 + idx * 0.2 : 0 }}

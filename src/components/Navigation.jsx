@@ -229,7 +229,7 @@ function Navigation() {
               onClick={toggleLanguage}
               title={t('language')}
             >
-              {language === 'ru' ? 'EN' : 'RU'}
+              {language === 'ru' ? 'RU' : 'EN'}
             </button>
           </li>
         </ul>

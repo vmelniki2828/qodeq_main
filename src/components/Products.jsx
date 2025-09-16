@@ -3056,6 +3056,7 @@ function Products() {
                       gap: '22px',
                       margin: '32px 0',
                     }}
+                    onMouseLeave={() => setActiveQuestion(null)}
                   >
                     <Marquee
                       gradient={false}
@@ -3070,7 +3071,6 @@ function Products() {
                             activeQuestion === item.q ? ' active' : ''
                           }`}
                           onMouseEnter={() => setActiveQuestion(item.q)}
-                          onMouseLeave={() => setActiveQuestion(null)}
                           style={{ marginRight: 32, cursor: 'pointer' }}
                         >
                           {item.q}
@@ -3091,7 +3091,6 @@ function Products() {
                             activeQuestion === item.q ? ' active' : ''
                           }`}
                           onMouseEnter={() => setActiveQuestion(item.q)}
-                          onMouseLeave={() => setActiveQuestion(null)}
                           style={{ marginRight: 32, cursor: 'pointer' }}
                         >
                           {item.q}
@@ -3111,7 +3110,6 @@ function Products() {
                             activeQuestion === item.q ? ' active' : ''
                           }`}
                           onMouseEnter={() => setActiveQuestion(item.q)}
-                          onMouseLeave={() => setActiveQuestion(null)}
                           style={{ marginRight: 32, cursor: 'pointer' }}
                         >
                           {item.q}
@@ -3119,7 +3117,11 @@ function Products() {
                       ))}
                     </Marquee>
                     {activeQuestion && (
-                      <div className="messenger-dialogue">
+                      <div 
+                        className="messenger-dialogue"
+                        onMouseEnter={() => setActiveQuestion(activeQuestion)}
+                        onMouseLeave={() => setActiveQuestion(null)}
+                      >
                         <div className="messenger-bubble user">
                           {activeQuestion}
                         </div>
