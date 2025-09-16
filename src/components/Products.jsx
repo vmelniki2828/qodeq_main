@@ -3,7 +3,11 @@ import Marquee from 'react-fast-marquee';
 import { motion } from 'framer-motion';
 import Starfall from './animations/Starfall';
 import Navigation from './Navigation';
-import './Products.css';
+import './ProductsBase.css';
+import './ChatbotStyles.css';
+import './EconomicsStyles.css';
+import './OtherBotsStyles.css';
+import './ModalStyles.css';
 import {
   IoChatbubbleEllipsesOutline,
   IoCallOutline,
@@ -750,11 +754,11 @@ function Products() {
                       }}
                     >
                       <audio controls style={{ width: '320px' }}>
-                        <source src="/audio_1.mp3" type="audio/mpeg" />
+                        <source src="./audio_1.mp3" type="audio/mpeg" />
                         Ваш браузер не поддерживает аудио.
                       </audio>
                       <audio controls style={{ width: '320px' }}>
-                        <source src="/audio_2.mp3" type="audio/mpeg" />
+                        <source src="./audio_2.mp3" type="audio/mpeg" />
                         Ваш браузер не поддерживает аудио.
                       </audio>
                     </div>

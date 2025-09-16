@@ -1,0 +1,809 @@
+/* Стили для Call Center Bot */
+.callcenter-info {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.callcenter-hero-new {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  padding: 3rem;
+  margin-bottom: 4rem;
+}
+
+.ai-call-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0,0,0,0.05), transparent);
+  border-radius: 20px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.call-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 100px;
+  background: linear-gradient(135deg, #000, rgba(0,0,0,0.8));
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  animation: phoneVibrate 1.5s ease-in-out infinite;
+}
+
+.call-core:before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 20px;
+  background: hsla(0,0%,100%,0.9);
+  border-radius: 3px;
+  animation: screenGlow 2s ease-in-out infinite alternate;
+}
+
+.call-core:after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 25px;
+  height: 25px;
+  background: rgba(0,150,0,0.8);
+  border-radius: 50%;
+  animation: callButtonPulse 1s ease-in-out infinite;
+}
+
+.call-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 50%;
+  animation: callRingExpand 2s ease-out infinite;
+}
+
+.call-ring.ring-1 {
+  width: 150px;
+  height: 150px;
+  animation-delay: 0s;
+}
+
+.call-ring.ring-2 {
+  width: 200px;
+  height: 200px;
+  border-color: rgba(0,0,0,0.2);
+  animation-delay: 0.7s;
+}
+
+.wave {
+  position: absolute;
+  background: #000;
+  border-radius: 2px;
+  opacity: 0.7;
+  animation: soundWaveFlow 1.8s ease-in-out infinite;
+}
+
+.wave:first-child {
+  left: 30%;
+  top: 25%;
+  width: 3px;
+  height: 15px;
+  animation-delay: 0s;
+}
+
+.wave:nth-child(2) {
+  left: 35%;
+  top: 20%;
+  width: 4px;
+  height: 25px;
+  animation-delay: 0.1s;
+}
+
+.wave:nth-child(3) {
+  left: 40%;
+  top: 15%;
+  width: 3px;
+  height: 35px;
+  animation-delay: 0.2s;
+}
+
+.wave:nth-child(4) {
+  right: 30%;
+  top: 25%;
+  width: 3px;
+  height: 15px;
+  animation-delay: 0.3s;
+}
+
+.wave:nth-child(5) {
+  right: 35%;
+  top: 20%;
+  width: 4px;
+  height: 25px;
+  animation-delay: 0.4s;
+}
+
+.wave:nth-child(6) {
+  right: 40%;
+  top: 15%;
+  width: 3px;
+  height: 35px;
+  animation-delay: 0.5s;
+}
+
+.wave:nth-child(7) {
+  left: 25%;
+  bottom: 25%;
+  width: 4px;
+  height: 20px;
+  animation-delay: 0.6s;
+}
+
+.wave:nth-child(8) {
+  right: 25%;
+  bottom: 25%;
+  width: 4px;
+  height: 20px;
+  animation-delay: 0.7s;
+}
+
+/* Стили для QA Bot */
+.qa-info {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.qa-hero-new {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  padding: 3rem;
+  margin-bottom: 4rem;
+}
+
+.qa-hero-content h2 {
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.qa-hero-content p {
+  color: rgba(0,0,0,0.7);
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.hero-example-btn {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  color: #000;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  padding: 12px 30px;
+  position: relative;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.hero-example-btn:hover {
+  background: #000;
+  color: #fff;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+
+.hero-example-btn:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, hsla(0,0%,100%,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.hero-example-btn:hover:before {
+  left: 100%;
+}
+
+.ai-qa-placeholder {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 300px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.qa-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 80px;
+  background: linear-gradient(135deg, #000, rgba(0,0,0,0.8));
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  animation: qaDashboardPulse 2s ease-in-out infinite;
+}
+
+.qa-core:before {
+  content: "QA Dashboard";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  animation: qaHeaderGlow 2s ease-in-out infinite alternate;
+}
+
+.qa-core:after {
+  content: "94.2%";
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  color: #00d084;
+  font-size: 12px;
+  font-weight: 700;
+  animation: qaScoreFlash 1.5s ease-in-out infinite alternate;
+}
+
+.qa-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  animation: qaFrameFloat 4s ease-in-out infinite;
+}
+
+.qa-ring.ring-1 {
+  width: 150px;
+  height: 110px;
+  animation-delay: 0s;
+}
+
+.qa-ring.ring-2 {
+  width: 180px;
+  height: 130px;
+  border-color: rgba(0,0,0,0.15);
+  animation-delay: 1.5s;
+}
+
+.quality-indicator {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 3px;
+  opacity: 0.8;
+  animation: qaCheckFlow 4s linear infinite;
+}
+
+.quality-indicator:before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 700;
+  opacity: 0;
+  animation: qaCheckmarkPop 4s linear infinite;
+}
+
+.quality-indicator:after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(0,200,0,0.5);
+  border-radius: 4px;
+  opacity: 0;
+  animation: qaCheckBorder 4s linear infinite;
+}
+
+.quality-indicator.indicator-1 {
+  left: 15%;
+  top: 20%;
+  animation-delay: 0s;
+}
+
+.quality-indicator.indicator-2 {
+  right: 15%;
+  top: 25%;
+  animation-delay: 0.7s;
+}
+
+.quality-indicator.indicator-3 {
+  left: 10%;
+  top: 45%;
+  animation-delay: 1.4s;
+}
+
+.quality-indicator.indicator-4 {
+  right: 10%;
+  top: 50%;
+  animation-delay: 2.1s;
+}
+
+.quality-indicator.indicator-5 {
+  bottom: 25%;
+  left: 15%;
+  animation-delay: 2.8s;
+}
+
+.quality-indicator.indicator-6 {
+  bottom: 20%;
+  right: 15%;
+  animation-delay: 3.5s;
+}
+
+/* Стили для Payment Bot */
+.payment-info {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.payment-hero-new {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  padding: 3rem;
+  margin-bottom: 4rem;
+}
+
+.payment-hero-content h2 {
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.payment-hero-content p {
+  color: rgba(0,0,0,0.7);
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.ai-payment-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0,0,0,0.05), transparent);
+  border-radius: 20px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 60px;
+  background: linear-gradient(45deg, #000, rgba(0,0,0,0.8));
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  animation: paymentCardPulse 2s ease-in-out infinite;
+}
+
+.payment-core:before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 25px;
+  height: 20px;
+  background: hsla(0,0%,100%,0.8);
+  border-radius: 3px;
+  animation: chipGlow 1.5s ease-in-out infinite alternate;
+}
+
+.payment-core:after {
+  content: "$";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  animation: dollarFlash 1s ease-in-out infinite alternate;
+}
+
+.payment-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 15px;
+  animation: paymentRingFloat 4s ease-in-out infinite;
+}
+
+.payment-ring.ring-1 {
+  width: 140px;
+  height: 90px;
+  animation-delay: 0s;
+}
+
+.payment-ring.ring-2 {
+  width: 180px;
+  height: 120px;
+  border-color: rgba(0,0,0,0.2);
+  animation-delay: 1s;
+}
+
+.transaction {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #000;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: transactionFlow 4s linear infinite;
+}
+
+.transaction:before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 50%;
+  animation: transactionRipple 2s ease-out infinite;
+}
+
+.transaction.transaction-1 {
+  left: 10%;
+  top: 20%;
+  animation-delay: 0s;
+}
+
+.transaction.transaction-2 {
+  right: 15%;
+  top: 30%;
+  background: rgba(0,0,0,0.6);
+  animation-delay: 0.7s;
+}
+
+.transaction.transaction-3 {
+  right: 10%;
+  top: 60%;
+  animation-delay: 1.4s;
+}
+
+.transaction.transaction-4 {
+  bottom: 30%;
+  right: 20%;
+  background: rgba(0,0,0,0.6);
+  animation-delay: 2.1s;
+}
+
+.transaction.transaction-5 {
+  bottom: 20%;
+  left: 15%;
+  animation-delay: 2.8s;
+}
+
+.transaction.transaction-6 {
+  left: 5%;
+  top: 50%;
+  background: rgba(0,0,0,0.6);
+  animation-delay: 3.5s;
+}
+
+/* Анимации для Call Center */
+@keyframes phoneVibrate {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  25% { transform: translate(-48%, -50%) rotate(1deg); }
+  75% { transform: translate(-52%, -50%) rotate(-1deg); }
+}
+
+@keyframes screenGlow {
+  0% { 
+    background: hsla(0,0%,100%,0.9);
+    box-shadow: 0 0 5px hsla(0,0%,100%,0.5);
+  }
+  100% { 
+    background: #fff;
+    box-shadow: 0 0 15px hsla(0,0%,100%,0.8);
+  }
+}
+
+@keyframes callButtonPulse {
+  0%, 100% { 
+    background: rgba(0,150,0,0.8);
+    transform: translateX(-50%) scale(1);
+  }
+  50% { 
+    background: #00c800;
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 0 10px rgba(0,200,0,0.6);
+  }
+}
+
+@keyframes callRingExpand {
+  0% { 
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  70% { 
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% { 
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
+
+@keyframes soundWaveFlow {
+  0%, 100% { 
+    opacity: 0.4;
+    transform: scaleY(0.5);
+  }
+  50% { 
+    opacity: 1;
+    transform: scaleY(1.5);
+  }
+}
+
+/* Анимации для QA Bot */
+@keyframes qaDashboardPulse {
+  0%, 100% { 
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  }
+  50% { 
+    transform: translate(-50%, -50%) scale(1.02);
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  }
+}
+
+@keyframes qaHeaderGlow {
+  0% { text-shadow: 0 0 3px hsla(0,0%,100%,0.5); }
+  100% { text-shadow: 0 0 8px hsla(0,0%,100%,0.9); }
+}
+
+@keyframes qaScoreFlash {
+  0% { 
+    color: #00d084;
+    text-shadow: 0 0 3px rgba(0,208,132,0.5);
+  }
+  100% { 
+    color: #00ff9f;
+    text-shadow: 0 0 8px rgba(0,255,159,0.8);
+  }
+}
+
+@keyframes qaFrameFloat {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% { 
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+@keyframes qaCheckFlow {
+  0% { 
+    background: rgba(0,0,0,0.6);
+    transform: scale(1);
+  }
+  20% { 
+    background: #fa0;
+    transform: scale(1.1);
+  }
+  40% { 
+    background: #00d084;
+    transform: scale(1.2);
+  }
+  60% { 
+    background: #00d084;
+    transform: scale(1.1);
+  }
+  100% { 
+    background: rgba(0,0,0,0.6);
+    transform: scale(1);
+  }
+}
+
+@keyframes qaCheckmarkPop {
+  0%, 15% { opacity: 0; }
+  20%, 55% { opacity: 1; }
+  60%, 100% { opacity: 0; }
+}
+
+@keyframes qaCheckBorder {
+  0%, 15% { 
+    opacity: 0;
+    transform: scale(1);
+  }
+  20% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  35% { 
+    opacity: 1;
+    transform: scale(1.3);
+  }
+  55% { 
+    opacity: 0.5;
+    transform: scale(1.5);
+  }
+  60%, 100% { 
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* Анимации для Payment Bot */
+@keyframes paymentCardPulse {
+  0%, 100% { 
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  }
+  50% { 
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 0 35px rgba(0,0,0,0.6);
+  }
+}
+
+@keyframes chipGlow {
+  0% { background: hsla(0,0%,100%,0.8); }
+  100% { 
+    background: #fff;
+    box-shadow: 0 0 5px hsla(0,0%,100%,0.8);
+  }
+}
+
+@keyframes dollarFlash {
+  0% { opacity: 0.8; }
+  100% { 
+    opacity: 1;
+    text-shadow: 0 0 5px hsla(0,0%,100%,0.5);
+  }
+}
+
+@keyframes paymentRingFloat {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  50% { 
+    opacity: 0.6;
+    transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
+  }
+}
+
+@keyframes transactionFlow {
+  0% { 
+    opacity: 0;
+    transform: scale(0.5) translateY(10px);
+  }
+  10% { 
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  90% { 
+    opacity: 1;
+    transform: scale(1) translateY(-5px);
+  }
+  100% { 
+    opacity: 0;
+    transform: scale(0.5) translateY(-10px);
+  }
+}
+
+@keyframes transactionRipple {
+  0% { 
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% { 
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .callcenter-hero-new,
+  .qa-hero-new,
+  .payment-hero-new {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .ai-call-placeholder,
+  .ai-qa-placeholder,
+  .ai-payment-placeholder {
+    height: 200px;
+    width: 200px;
+  }
+  
+  .hero-buttons-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .hero-example-btn {
+    max-width: 280px;
+    width: 100%;
+  }
+}
