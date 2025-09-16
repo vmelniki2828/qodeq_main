@@ -3,11 +3,6 @@ import Marquee from 'react-fast-marquee';
 import { motion } from 'framer-motion';
 import Starfall from './animations/Starfall';
 import Navigation from './Navigation';
-import './ProductsBase.css';
-import './ChatbotStyles.css';
-import './EconomicsStyles.css';
-import './OtherBotsStyles.css';
-import './ModalStyles.css';
 import {
   IoChatbubbleEllipsesOutline,
   IoCallOutline,

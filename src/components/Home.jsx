@@ -5,8 +5,6 @@ import PulsingSphere from './animations/PulsingSphere';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import Navigation from './Navigation';
 import { IoChatbubbleEllipsesOutline, IoCallOutline, IoWalletOutline, IoHelpCircleOutline } from 'react-icons/io5';
-import './ProductStyles.css';
-import './Home.css';
 
 // Хук для анимированного счетчика с задержкой
 function useDelayedCounter(ref, end, delay = 0, duration = 2000) {
