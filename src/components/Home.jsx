@@ -107,6 +107,7 @@ function Home() {
   const isProductsInView = useInView(productsRef, { once: true, amount: 0.5 });
   const [selectedProduct, setSelectedProduct] = useState(products[0]);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isAutoPlayPaused, setIsAutoPlayPaused] = useState(false);
 
 
   // Анимированные счетчики для статистики
@@ -149,11 +150,24 @@ function Home() {
 
   // Автоматическая смена слайдов
   useEffect(() => {
+    if (isAutoPlayPaused) return;
+    
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [testimonials.length]);
+  }, [testimonials.length, isAutoPlayPaused]);
+
+  // Функция для выбора комментария с паузой автопролистывания
+  const handleTestimonialSelect = (index) => {
+    setCurrentTestimonial(index);
+    setIsAutoPlayPaused(true);
+    
+    // Возобновляем автопролистывание через 10 секунд
+    setTimeout(() => {
+      setIsAutoPlayPaused(false);
+    }, 10000);
+  };
 
   return (
     <ParallaxProvider>
@@ -279,12 +293,330 @@ function Home() {
           transform: scale(1.2);
         }
 
+
         @keyframes pulse-glow {
           0%, 100% {
             box-shadow: 0 15px 30px rgba(0,0,0,0.3);
           }
           50% {
             box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(0,0,0,0.2);
+          }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+          .hero-title {
+            font-size: 2rem !important;
+            max-width: 100% !important;
+            padding: 16px !important;
+            margin-bottom: 16px !important;
+          }
+          
+          .hero-subtitle {
+            font-size: 1rem !important;
+            max-width: 100% !important;
+            padding: 12px !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .hero-buttons {
+            flex-direction: column !important;
+            gap: 12px !important;
+            align-items: center !important;
+          }
+          
+          .cta-button {
+            width: 100% !important;
+            max-width: 280px !important;
+            font-size: 1rem !important;
+            padding: 12px 24px !important;
+          }
+          
+          .nav-button {
+            display: none !important;
+          }
+          
+          .hero-main {
+            padding: 0 20px !important;
+          }
+          
+          .hero-main {
+            height: 100vh !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            text-align: center !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-title {
+            font-size: 1.6rem !important;
+            letter-spacing: 0.5px !important;
+          }
+          
+          .hero-subtitle {
+            font-size: 0.9rem !important;
+          }
+          
+          .cta-button {
+            font-size: 0.9rem !important;
+            padding: 10px 20px !important;
+          }
+        }
+
+        /* Stats Section Responsive */
+        @media (max-width: 768px) {
+          .stats-container {
+            height: auto !important;
+            min-height: 100vh !important;
+            padding: 40px 20px !important;
+          }
+          
+          .stats-circle {
+            width: 200px !important;
+            height: 200px !important;
+          }
+          
+          .stats-block {
+            width: 140px !important;
+            height: 80px !important;
+            padding: 12px !important;
+          }
+          
+          .stats-number {
+            font-size: 1.8rem !important;
+          }
+          
+          .stats-description {
+            font-size: 0.8rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .stats-container {
+            padding: 20px 10px !important;
+          }
+          
+          .stats-circle {
+            width: 150px !important;
+            height: 150px !important;
+          }
+          
+          .stats-block {
+            width: 120px !important;
+            height: 70px !important;
+            padding: 8px !important;
+          }
+          
+          .stats-number {
+            font-size: 1.5rem !important;
+          }
+          
+          .stats-description {
+            font-size: 0.7rem !important;
+          }
+        }
+
+        /* How it Works Section Responsive */
+        @media (max-width: 768px) {
+          .how-it-works-container {
+            padding: 20px !important;
+          }
+          
+          .how-it-works-title {
+            font-size: 2rem !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .how-it-works-subtitle {
+            font-size: 1rem !important;
+            margin-bottom: 30px !important;
+          }
+          
+          .how-it-works-grid {
+            grid-template-columns: 1fr !important;
+            gap: 30px !important;
+            margin-bottom: 30px !important;
+          }
+          
+          .how-it-works-card {
+            flex-direction: row !important;
+            gap: 15px !important;
+            text-align: left !important;
+          }
+          
+          .how-it-works-icon {
+            width: 50px !important;
+            height: 50px !important;
+            flex-shrink: 0 !important;
+          }
+          
+          .how-it-works-card h3 {
+            font-size: 1.1rem !important;
+            margin-bottom: 4px !important;
+          }
+          
+          .how-it-works-card p {
+            font-size: 0.9rem !important;
+            line-height: 1.3 !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .how-it-works-container {
+            padding: 15px !important;
+          }
+          
+          .how-it-works-title {
+            font-size: 1.6rem !important;
+          }
+          
+          .how-it-works-subtitle {
+            font-size: 0.9rem !important;
+          }
+          
+          .how-it-works-grid {
+            gap: 20px !important;
+          }
+          
+          .how-it-works-card {
+            gap: 12px !important;
+          }
+          
+          .how-it-works-icon {
+            width: 40px !important;
+            height: 40px !important;
+          }
+          
+          .how-it-works-card h3 {
+            font-size: 1rem !important;
+          }
+          
+          .how-it-works-card p {
+            font-size: 0.8rem !important;
+          }
+        }
+
+        /* Testimonials Section Responsive */
+        @media (max-width: 768px) {
+          .testimonials-container {
+            padding: 40px 20px !important;
+          }
+          
+          .testimonials-title {
+            font-size: 2.5rem !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .testimonials-subtitle {
+            font-size: 1.1rem !important;
+            margin-bottom: 40px !important;
+          }
+          
+          .testimonials-card {
+            padding: 30px 20px !important;
+            margin: 0 10px !important;
+          }
+          
+          .testimonials-text {
+            font-size: 1.1rem !important;
+            line-height: 1.5 !important;
+          }
+          
+          .testimonials-author {
+            font-size: 0.9rem !important;
+          }
+          
+          .testimonials-company {
+            font-size: 0.8rem !important;
+          }
+          
+          .testimonials-avatar {
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 1rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .testimonials-container {
+            padding: 30px 15px !important;
+          }
+          
+          .testimonials-title {
+            font-size: 2rem !important;
+          }
+          
+          .testimonials-subtitle {
+            font-size: 1rem !important;
+          }
+          
+          .testimonials-card {
+            padding: 25px 15px !important;
+            margin: 0 5px !important;
+          }
+          
+          .testimonials-text {
+            font-size: 1rem !important;
+          }
+          
+          .testimonials-author {
+            font-size: 0.8rem !important;
+          }
+          
+          .testimonials-company {
+            font-size: 0.7rem !important;
+          }
+          
+          .testimonials-avatar {
+            width: 35px !important;
+            height: 35px !important;
+            font-size: 0.9rem !important;
+          }
+        }
+
+        /* CTA Section Responsive */
+        @media (max-width: 768px) {
+          .cta-container {
+            padding: 60px 20px !important;
+          }
+          
+          .cta-title {
+            font-size: 2.5rem !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .cta-subtitle {
+            font-size: 1.1rem !important;
+            margin-bottom: 30px !important;
+          }
+          
+          .cta-button {
+            width: 100% !important;
+            max-width: 300px !important;
+            font-size: 1rem !important;
+            padding: 12px 24px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .cta-container {
+            padding: 40px 15px !important;
+          }
+          
+          .cta-title {
+            font-size: 2rem !important;
+          }
+          
+          .cta-subtitle {
+            font-size: 1rem !important;
+          }
+          
+          .cta-button {
+            font-size: 0.9rem !important;
+            padding: 10px 20px !important;
           }
         }
       `}</style>
@@ -326,6 +658,7 @@ function Home() {
           <main
             id="main"
             ref={mainBlockRef}
+            className="hero-main"
             style={{
               position: 'relative',
               height: '100vh',
@@ -337,6 +670,7 @@ function Home() {
             }}
           >
             <motion.h1
+              className="hero-title"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -910,7 +1244,7 @@ function Home() {
             overflow: 'hidden'
           }}
         >
-          <div style={{
+          <div className="stats-container" style={{
             maxWidth: 1200,
             width: '100%',
             height: '100vh',
@@ -1028,14 +1362,15 @@ function Home() {
                     type: "spring",
                     bounce: 0.4
                   }}
+                  className="stats-block"
                   style={{
                     position: 'absolute',
                     background: 'linear-gradient(145deg, #000000, #1a1a1a)',
                     color: '#fff',
                     padding: '20px',
                     borderRadius: '20px',
-                    width: '160px',
-                    height: '120px',
+                    width: '200px',
+                    height: '90px',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -1048,7 +1383,7 @@ function Home() {
                     backdropFilter: 'blur(10px)'
                   }}
                 >
-                  <p style={{
+                  <p className="stats-number" style={{
                     fontSize: '2.2rem',
                     fontWeight: 800,
                     margin: 0,
@@ -1061,7 +1396,7 @@ function Home() {
                   }}>
                     {item.counter}%
                   </p>
-                  <p style={{
+                  <p className="stats-description" style={{
                     fontSize: '1rem',
                     fontWeight: 500,
                     margin: 0,
@@ -1087,6 +1422,7 @@ function Home() {
                 type: "spring",
                 bounce: 0.3
               }}
+              className="stats-circle"
               style={{
                 position: 'absolute',
                 width: '450px',
@@ -1303,7 +1639,7 @@ function Home() {
             pointerEvents: 'none'
           }} />
 
-          <div style={{
+          <div className="how-it-works-container" style={{
             maxWidth: '1200px',
             width: '100%',
             position: 'relative',
@@ -1320,18 +1656,19 @@ function Home() {
               transition={{ duration: 0.8 }}
               style={{
                 textAlign: 'center',
-                marginBottom: '60px'
+                marginBottom: '30px'
               }}
             >
               <motion.h2
+                className="how-it-works-title"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
                 style={{
-                  fontSize: '2.8rem',
+                  fontSize: '2.2rem',
                   fontWeight: 800,
-                  marginBottom: '20px',
+                  marginBottom: '15px',
                   background: 'linear-gradient(135deg, #000 0%, #333 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
@@ -1341,14 +1678,15 @@ function Home() {
                 Как работает Qodeq
               </motion.h2>
               <motion.p
+                className="how-it-works-subtitle"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 style={{
-                  fontSize: '1.4rem',
+                  fontSize: '1.2rem',
                   color: '#666',
-                  maxWidth: '600px',
+                  maxWidth: '500px',
                   margin: '0 auto'
                 }}
               >
@@ -1356,11 +1694,11 @@ function Home() {
               </motion.p>
             </motion.div>
 
-            <div style={{
+            <div className="how-it-works-grid" style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
-              gap: '60px 40px',
-              marginBottom: '60px',
+              gap: '40px 30px',
+              marginBottom: '40px',
               position: 'relative'
             }}>
               {[
@@ -1420,11 +1758,12 @@ function Home() {
                     type: "spring",
                     bounce: 0.4
                   }}
+                  className="how-it-works-card"
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     flexDirection: index % 2 === 0 ? 'row' : 'row-reverse',
-                    gap: '30px',
+                    gap: '20px',
                     position: 'relative'
                   }}
                 >
@@ -1433,16 +1772,17 @@ function Home() {
                       scale: 1.05,
                       boxShadow: '0 8px 30px rgba(0,0,0,0.12)'
                     }}
+                    className="how-it-works-icon"
                     style={{
-                      width: '80px',
-                      height: '80px',
-                      borderRadius: '24px',
+                      width: '60px',
+                      height: '60px',
+                      borderRadius: '18px',
                       background: '#000',
                       color: '#fff',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '1.2rem',
+                      fontSize: '1rem',
                       fontWeight: '600',
                       flexShrink: 0,
                       position: 'relative',
@@ -1470,19 +1810,19 @@ function Home() {
                     flexDirection: 'column',
                     justifyContent: 'center'
                   }}>
-                    <h3 style={{
-                      fontSize: '1.5rem',
+                    <h3 className="how-it-works-card h3" style={{
+                      fontSize: '1.3rem',
                       fontWeight: 700,
-                      margin: '0 0 8px 0',
+                      margin: '0 0 6px 0',
                       color: '#000'
                     }}>
                       {step.title}
                     </h3>
-                    <p style={{
-                      fontSize: '1.15rem',
+                    <p className="how-it-works-card p" style={{
+                      fontSize: '1rem',
                       margin: 0,
                       fontWeight: 400,
-                      lineHeight: 1.5,
+                      lineHeight: 1.4,
                       color: '#666'
                     }}>
                       {step.description}
@@ -1547,7 +1887,7 @@ function Home() {
                     </svg>
                   </div>
 
-                  <p style={{
+                  <p className="testimonials-text" style={{
                     fontSize: '1.25rem',
                     lineHeight: 1.5,
                     marginBottom: '25px',
@@ -1563,7 +1903,7 @@ function Home() {
                     alignItems: 'center',
                     gap: '15px'
                   }}>
-                    <div style={{
+                    <div className="testimonials-avatar" style={{
                       width: '45px',
                       height: '45px',
                       borderRadius: '12px',
@@ -1578,7 +1918,7 @@ function Home() {
                       {testimonials[currentTestimonial].author.charAt(0)}
                     </div>
                     <div>
-                      <p style={{
+                      <p className="testimonials-author" style={{
                         fontSize: '1rem',
                         margin: 0,
                         fontWeight: 600,
@@ -1586,7 +1926,7 @@ function Home() {
                       }}>
                         {testimonials[currentTestimonial].author}
                       </p>
-                      <p style={{
+                      <p className="testimonials-company" style={{
                         fontSize: '0.9rem',
                         margin: '2px 0 0 0',
                         color: '#666',
@@ -1609,7 +1949,7 @@ function Home() {
                 {testimonials.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => setCurrentTestimonial(index)}
+                    onClick={() => handleTestimonialSelect(index)}
                     className={`indicator-button ${index === currentTestimonial ? 'active' : 'inactive'}`}
                   />
                 ))}
@@ -1617,7 +1957,7 @@ function Home() {
 
               {/* Navigation arrows */}
               <button
-                onClick={() => setCurrentTestimonial((prev) => prev === 0 ? testimonials.length - 1 : prev - 1)}
+                onClick={() => handleTestimonialSelect(currentTestimonial === 0 ? testimonials.length - 1 : currentTestimonial - 1)}
                 className="nav-button"
                 style={{
                   position: 'absolute',
@@ -1630,7 +1970,7 @@ function Home() {
               </button>
 
               <button
-                onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
+                onClick={() => handleTestimonialSelect((currentTestimonial + 1) % testimonials.length)}
                 className="nav-button"
                 style={{
                   position: 'absolute',
@@ -1672,6 +2012,7 @@ function Home() {
             position: 'relative'
           }}>
             <motion.div
+              className="cta-container"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -1681,7 +2022,7 @@ function Home() {
                 margin: '0 auto'
               }}
             >
-              <h2 style={{
+              <h2 className="cta-title" style={{
                 fontSize: '3.2rem',
                 fontWeight: 800,
                 marginBottom: '30px',
@@ -1693,7 +2034,7 @@ function Home() {
               }}>
                 Qodeq — автоматизация поддержки, которая работает с первого дня
               </h2>
-              <p style={{
+              <p className="cta-subtitle" style={{
                 fontSize: '1.5rem',
                 lineHeight: 1.5,
                 opacity: 0.9,
@@ -1701,7 +2042,10 @@ function Home() {
               }}>
                 Узнайте, как наши ИИ-боты помогут сократить расходы и повысить качество сервиса
               </p>
-              <motion.button
+              <motion.a
+                href="https://t.me/qodeq_bot"
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -1709,9 +2053,10 @@ function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="cta-button cta-primary"
+                style={{ textDecoration: 'none', display: 'inline-block' }}
               >
                 Начать
-              </motion.button>
+              </motion.a>
             </motion.div>
           </div>
 
