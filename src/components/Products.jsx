@@ -32,28 +32,28 @@ function Products() {
   const { t, language } = useLanguage();
 
   // Динамический массив services для переводов
-  const services = [
-    {
-      id: 'chatbot',
+const services = [
+  {
+    id: 'chatbot',
       name: t('chatbotTitle'),
-      icon: IoChatbubbleEllipsesOutline,
-    },
-    {
-      id: 'callcenter',
+    icon: IoChatbubbleEllipsesOutline,
+  },
+  {
+    id: 'callcenter',
       name: t('callCenterTitle'),
-      icon: IoCallOutline,
-    },
-    {
-      id: 'payment',
+    icon: IoCallOutline,
+  },
+  {
+    id: 'payment',
       name: t('paymentTitle'),
-      icon: IoWalletOutline,
-    },
-    {
-      id: 'qa',
+    icon: IoWalletOutline,
+  },
+  {
+    id: 'qa',
       name: t('qaTitle'),
-      icon: IoHelpCircleOutline,
-    },
-  ];
+    icon: IoHelpCircleOutline,
+  },
+];
 
   // Универсальный скролл к блоку "Экономический эффект" для любого бота
   const scrollToEffect = (id) => {
@@ -528,7 +528,7 @@ function Products() {
         .mini-blocks-grid {
           display: flex;
           justify-content: center;
-          gap: 20px;
+          gap: 10px;
           margin-bottom: 40px;
         }
         
@@ -1493,11 +1493,30 @@ function Products() {
           background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
           border-radius: 25px;
           max-width: 900px;
-          max-height: 90vh;
-          overflow: hidden;
+          max-height: 95vh;
+          overflow-y: auto;
           position: relative;
           box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
           border: 1px solid rgba(0, 0, 0, 0.1);
+          scrollbar-width: thin;
+          scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+        }
+        
+        .qa-modal-content::-webkit-scrollbar {
+          width: 6px;
+        }
+        
+        .qa-modal-content::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        
+        .qa-modal-content::-webkit-scrollbar-thumb {
+          background: rgba(0, 0, 0, 0.3);
+          border-radius: 3px;
+        }
+        
+        .qa-modal-content::-webkit-scrollbar-thumb:hover {
+          background: rgba(0, 0, 0, 0.5);
         }
         
         .qa-modal-close {
@@ -1871,6 +1890,8 @@ function Products() {
           transition: all 0.3s ease;
           backdrop-filter: blur(10px);
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          max-width: 200px;
         }
         
         .metric-card:hover {
@@ -1884,12 +1905,14 @@ function Products() {
           font-weight: 700;
           color: #000;
           margin-bottom: 10px;
+          word-break: break-word;
         }
         
         .metric-label {
           font-size: 1rem;
           color: rgba(0,0,0,0.7);
           line-height: 1.4;
+          word-break: break-word;
         }
         
         /* Калькулятор */
@@ -2311,6 +2334,26 @@ function Products() {
         }
         
         /* Responsive */
+        @media (max-width: 1024px) {
+          .metrics-grid {
+            gap: 20px !important;
+            margin: 35px 0 !important;
+          }
+          
+          .metric-card {
+            padding: 22px !important;
+            max-width: 180px !important;
+          }
+          
+          .metric-number {
+            font-size: 2.3rem !important;
+          }
+          
+          .metric-label {
+            font-size: 0.98rem !important;
+          }
+        }
+
         @media (max-width: 768px) {
           .chatbot-hero-new,
           .callcenter-hero-new,
@@ -2363,6 +2406,23 @@ function Products() {
           .metrics-grid {
             grid-template-columns: 1fr !important;
             gap: 20px !important;
+            margin: 30px 0 !important;
+          }
+          
+          .metric-card {
+            padding: 20px !important;
+            max-width: 100% !important;
+            border-radius: 12px !important;
+          }
+          
+          .metric-number {
+            font-size: 2.2rem !important;
+            margin-bottom: 8px !important;
+          }
+          
+          .metric-label {
+            font-size: 0.95rem !important;
+            line-height: 1.3 !important;
           }
           
           .pricing-comparison-new {
@@ -2621,6 +2681,23 @@ function Products() {
           .metrics-grid {
             grid-template-columns: 1fr !important;
             gap: 15px !important;
+            margin: 25px 0 !important;
+          }
+          
+          .metric-card {
+            padding: 18px !important;
+            max-width: 100% !important;
+            border-radius: 10px !important;
+          }
+          
+          .metric-number {
+            font-size: 2rem !important;
+            margin-bottom: 6px !important;
+          }
+          
+          .metric-label {
+            font-size: 0.9rem !important;
+            line-height: 1.2 !important;
           }
           
           .pricing-comparison-new {
@@ -2807,6 +2884,28 @@ function Products() {
           * {
             box-sizing: border-box !important;
           }
+          
+          /* Metrics grid for very small screens */
+          .metrics-grid {
+            gap: 12px !important;
+            margin: 20px 0 !important;
+          }
+          
+          .metric-card {
+            padding: 15px !important;
+            max-width: 100% !important;
+            border-radius: 8px !important;
+          }
+          
+          .metric-number {
+            font-size: 1.8rem !important;
+            margin-bottom: 4px !important;
+          }
+          
+          .metric-label {
+            font-size: 0.85rem !important;
+            line-height: 1.1 !important;
+          }
         }
 
         /* Modal Responsive Styles - Enhanced */
@@ -2819,6 +2918,7 @@ function Products() {
             max-width: 95% !important;
             max-height: 95vh !important;
             border-radius: 20px !important;
+            overflow-y: auto !important;
           }
           
           .qa-modal-header {
@@ -2871,6 +2971,7 @@ function Products() {
             max-height: 98vh !important;
             border-radius: 16px !important;
             margin: 0 !important;
+            overflow-y: auto !important;
           }
           
           .qa-modal-header {
@@ -2927,6 +3028,7 @@ function Products() {
             max-height: 100vh !important;
             border-radius: 12px !important;
             margin: 0 !important;
+            overflow-y: auto !important;
           }
           
           .qa-modal-header {
@@ -2980,6 +3082,7 @@ function Products() {
           
           .qa-modal-content {
             border-radius: 8px !important;
+            overflow-y: auto !important;
           }
           
           .qa-modal-header {
@@ -3028,6 +3131,7 @@ function Products() {
         @media (max-width: 768px) and (orientation: landscape) {
           .qa-modal-content {
             max-height: 95vh !important;
+            overflow-y: auto !important;
           }
           
           .qa-modal-header {
@@ -4888,18 +4992,18 @@ function Products() {
             </div>
             
             <div className="qa-modal-body">
-              <button
-                className="qa-modal-close"
-                onClick={() => {
-                  setShowQAModal(false);
-                  setImageZoomed(false);
-                  setDragOffset({ x: 0, y: 0 });
-                }}
-              >
-                ×
-              </button>
-              <button
-                className="qa-zoom-btn"
+            <button
+              className="qa-modal-close"
+              onClick={() => {
+                setShowQAModal(false);
+                setImageZoomed(false);
+                setDragOffset({ x: 0, y: 0 });
+              }}
+            >
+              ×
+            </button>
+            <button
+              className="qa-zoom-btn"
               onClick={() => {
                 setImageZoomed(!imageZoomed);
                 if (imageZoomed) {
