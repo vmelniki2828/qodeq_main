@@ -2444,6 +2444,64 @@ function Home() {
               </div>
             </div>
           </footer>
+
+          <style jsx>{`
+            @media (max-width: 768px) {
+              footer {
+                padding: 20px 0 !important;
+              }
+              
+              footer > div {
+                padding: 0 20px !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center !important;
+                gap: 20px !important;
+              }
+              
+              footer > div > div:first-child {
+                font-size: 1rem !important;
+                order: 2 !important;
+              }
+              
+              footer > div > div:first-child span {
+                font-size: 0.9rem !important;
+              }
+              
+              footer > div > div:last-child {
+                align-items: center !important;
+                gap: 12px !important;
+                order: 1 !important;
+              }
+              
+              footer > div > div:last-child > div {
+                font-size: 0.9rem !important;
+              }
+            }
+            
+            @media (max-width: 480px) {
+              footer {
+                padding: 15px 0 !important;
+              }
+              
+              footer > div {
+                padding: 0 15px !important;
+                gap: 15px !important;
+              }
+              
+              footer > div > div:first-child {
+                font-size: 0.95rem !important;
+              }
+              
+              footer > div > div:first-child span {
+                font-size: 0.85rem !important;
+              }
+              
+              footer > div > div:last-child > div {
+                font-size: 0.85rem !important;
+              }
+            }
+          `}</style>
         </section>
 
         </div>
