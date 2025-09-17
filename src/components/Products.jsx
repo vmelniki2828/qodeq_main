@@ -224,6 +224,35 @@ function Products() {
     };
   }, []); // Empty dependency array - runs only once on mount
 
+  // Disable/enable page scroll when QA modal is open/closed
+  useEffect(() => {
+    if (showQAModal) {
+      // Disable scroll
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${window.scrollY}px`;
+      document.body.style.width = '100%';
+    } else {
+      // Enable scroll
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    }
+
+    // Cleanup function to ensure scroll is enabled when component unmounts
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+    };
+  }, [showQAModal]);
+
   const handleCardClick = id => {
     setSelectedId(id === selectedId ? null : id);
   };
@@ -1497,28 +1526,28 @@ function Products() {
         }
         
         .qa-modal-header {
-          padding: 30px 30px 20px 30px;
+          padding: 20px 30px 15px 30px;
           border-bottom: 1px solid rgba(0, 0, 0, 0.1);
           background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
         
         .qa-modal-title {
-          font-size: 2rem;
+          font-size: 1.6rem;
           font-weight: 700;
           color: #000;
-          margin: 0 0 10px 0;
+          margin: 0 0 6px 0;
           text-align: center;
         }
         
         .qa-modal-subtitle {
-          font-size: 1.1rem;
+          font-size: 1rem;
           color: rgba(0, 0, 0, 0.7);
           margin: 0;
           text-align: center;
         }
         
         .qa-modal-body {
-          padding: 30px;
+          padding: 10px;
         }
         
         .qa-example-image {
@@ -2780,72 +2809,247 @@ function Products() {
           }
         }
 
-        /* Modal Responsive Styles */
-        @media (max-width: 768px) {
+        /* Modal Responsive Styles - Enhanced */
+        @media (max-width: 1024px) {
+          .qa-modal-overlay {
+            padding: 15px !important;
+          }
+          
           .qa-modal-content {
             max-width: 95% !important;
-            margin: 20px !important;
-            padding: 20px !important;
+            max-height: 95vh !important;
+            border-radius: 20px !important;
           }
           
           .qa-modal-header {
-            padding: 20px 20px 0 20px !important;
+            padding: 18px 25px 12px 25px !important;
           }
           
           .qa-modal-title {
-            font-size: 1.8rem !important;
-            margin-bottom: 10px !important;
+            font-size: 1.5rem !important;
+            margin-bottom: 6px !important;
           }
           
           .qa-modal-subtitle {
-            font-size: 1rem !important;
-            margin-bottom: 20px !important;
+            font-size: 0.95rem !important;
+            margin-bottom: 12px !important;
           }
           
           .qa-modal-body {
-            padding: 0 20px 20px 20px !important;
+            padding: 0 10px 10px 10px !important;
           }
           
           .qa-example-image {
-            width: 100% !important;
-            height: auto !important;
-            max-height: 300px !important;
-            object-fit: contain !important;
+            max-height: 50vh !important;
+            border-radius: 12px !important;
+          }
+          
+          .qa-modal-close {
+            top: 15px !important;
+            right: 15px !important;
+            width: 38px !important;
+            height: 38px !important;
+            font-size: 1.3rem !important;
           }
           
           .qa-zoom-btn {
-            position: fixed !important;
+            bottom: 25px !important;
+            right: 25px !important;
+            width: 45px !important;
+            height: 45px !important;
+            font-size: 1.1rem !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .qa-modal-overlay {
+            padding: 10px !important;
+          }
+          
+          .qa-modal-content {
+            max-width: 98% !important;
+            max-height: 98vh !important;
+            border-radius: 16px !important;
+            margin: 0 !important;
+          }
+          
+          .qa-modal-header {
+            padding: 16px 20px 8px 20px !important;
+            border-radius: 16px 16px 0 0 !important;
+          }
+          
+          .qa-modal-title {
+            font-size: 1.4rem !important;
+            margin-bottom: 4px !important;
+            line-height: 1.2 !important;
+          }
+          
+          .qa-modal-subtitle {
+            font-size: 0.9rem !important;
+            margin-bottom: 8px !important;
+            line-height: 1.4 !important;
+          }
+          
+          .qa-modal-body {
+            padding: 0 10px 10px 10px !important;
+          }
+          
+          .qa-example-image {
+            max-height: 45vh !important;
+            border-radius: 10px !important;
+            margin-bottom: 10px !important;
+          }
+          
+          .qa-modal-close {
+            top: 12px !important;
+            right: 12px !important;
+            width: 36px !important;
+            height: 36px !important;
+            font-size: 1.2rem !important;
+          }
+          
+          .qa-zoom-btn {
             bottom: 20px !important;
             right: 20px !important;
-            z-index: 10002 !important;
+            width: 42px !important;
+            height: 42px !important;
+            font-size: 1rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .qa-modal-overlay {
+            padding: 5px !important;
+          }
+          
+          .qa-modal-content {
+            max-width: 100% !important;
+            max-height: 100vh !important;
+            border-radius: 12px !important;
+            margin: 0 !important;
+          }
+          
+          .qa-modal-header {
+            padding: 14px 18px 6px 18px !important;
+            border-radius: 12px 12px 0 0 !important;
+          }
+          
+          .qa-modal-title {
+            font-size: 1.2rem !important;
+            margin-bottom: 3px !important;
+            line-height: 1.1 !important;
+          }
+          
+          .qa-modal-subtitle {
+            font-size: 0.85rem !important;
+            margin-bottom: 6px !important;
+            line-height: 1.3 !important;
+          }
+          
+          .qa-modal-body {
+            padding: 0 10px 10px 10px !important;
+          }
+          
+          .qa-example-image {
+            max-height: 40vh !important;
+            border-radius: 8px !important;
+            margin-bottom: 8px !important;
           }
           
           .qa-modal-close {
             top: 10px !important;
             right: 10px !important;
-            width: 35px !important;
-            height: 35px !important;
-            font-size: 1.2rem !important;
+            width: 34px !important;
+            height: 34px !important;
+            font-size: 1.1rem !important;
+          }
+          
+          .qa-zoom-btn {
+            bottom: 18px !important;
+            right: 18px !important;
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 0.95rem !important;
           }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 360px) {
+          .qa-modal-overlay {
+            padding: 2px !important;
+          }
+          
           .qa-modal-content {
-            max-width: 98% !important;
-            margin: 10px !important;
-            padding: 15px !important;
+            border-radius: 8px !important;
+          }
+          
+          .qa-modal-header {
+            padding: 12px 15px 4px 15px !important;
+            border-radius: 8px 8px 0 0 !important;
           }
           
           .qa-modal-title {
-            font-size: 1.5rem !important;
+            font-size: 1.1rem !important;
+            margin-bottom: 2px !important;
           }
           
           .qa-modal-subtitle {
-            font-size: 0.9rem !important;
+            font-size: 0.8rem !important;
+            margin-bottom: 4px !important;
+          }
+          
+          .qa-modal-body {
+            padding: 0 10px 10px 10px !important;
           }
           
           .qa-example-image {
-            max-height: 250px !important;
+            max-height: 35vh !important;
+            border-radius: 6px !important;
+            margin-bottom: 6px !important;
+          }
+          
+          .qa-modal-close {
+            top: 8px !important;
+            right: 8px !important;
+            width: 32px !important;
+            height: 32px !important;
+            font-size: 1rem !important;
+          }
+          
+          .qa-zoom-btn {
+            bottom: 15px !important;
+            right: 15px !important;
+            width: 38px !important;
+            height: 38px !important;
+            font-size: 0.9rem !important;
+          }
+        }
+
+        /* Landscape orientation for mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+          .qa-modal-content {
+            max-height: 95vh !important;
+          }
+          
+          .qa-modal-header {
+            padding: 12px 20px 6px 20px !important;
+          }
+          
+          .qa-modal-title {
+            font-size: 1.3rem !important;
+            margin-bottom: 3px !important;
+          }
+          
+          .qa-modal-subtitle {
+            font-size: 0.85rem !important;
+            margin-bottom: 6px !important;
+          }
+          
+          .qa-example-image {
+            max-height: 60vh !important;
+          }
+          
+          .qa-modal-body {
+            padding: 0 10px 10px 10px !important;
           }
         }
 

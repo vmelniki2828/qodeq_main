@@ -58,7 +58,9 @@ function Navigation() {
     letterSpacing: '2px',
     fontWeight: 700,
     userSelect: 'none',
-    textShadow: 'none',
+    textShadow: textColor === '#fff' 
+      ? '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000'
+      : '1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff',
     position: 'relative',
     zIndex: 1,
     transition: 'all 0.3s ease',
@@ -85,7 +87,10 @@ function Navigation() {
     padding: '8px 0',
     borderBottom: '2px solid transparent',
     transition: 'color 0.3s ease, border-bottom 0.2s',
-    color: textColor
+    color: textColor,
+    textShadow: textColor === '#fff' 
+      ? '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000'
+      : '1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff'
   };
 
   const languageButtonStyles = {
@@ -99,7 +104,10 @@ function Navigation() {
     color: textColor,
     cursor: 'pointer',
     transition: 'all 0.3s ease',
-    marginLeft: '16px'
+    marginLeft: '16px',
+    textShadow: textColor === '#fff' 
+      ? '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000'
+      : '1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff'
   };
 
   return (
@@ -107,7 +115,6 @@ function Navigation() {
       <style>{`
         .logo-text:hover {
           transform: scale(1.05);
-          text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
         
         .nav-list a:hover, .nav-list a:focus {
