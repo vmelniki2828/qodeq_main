@@ -289,6 +289,15 @@ const translations = {
     qaBotTitle: 'ИИ QA Bot: контроль качества поддержки',
     qaBotSubtitle: 'Проводи до 80% проверок чатов и звонков автоматически, экономь время тимлидов и супервайзеров',
     lookAtExample: 'Посмотреть пример',
+    // QA Bot Modal
+    qaBotExampleTitle: 'Пример работы QA Bot',
+    qaBotExampleSubtitle: 'Посмотрите, как ИИ автоматически проверяет качество чатов',
+    zoomIn: 'Увеличить',
+    zoomOut: 'Уменьшить',
+    qaBotDashboard: 'QA Bot Dashboard',
+    qaBotDashboardExample: 'Пример интерфейса системы контроля качества',
+    qaBotAnalyticsDashboard: 'QA Bot Analytics Dashboard',
+    qaBotAnalyticsDescription: 'Панель аналитики показывает ключевые метрики качества обслуживания: общее количество чатов (4,250), средний рейтинг (94.2), общее количество ошибок (1,420) и детальную статистику по операторам с их показателями эффективности.',
     // QA Bot facts
     performsUpTo80PercentQaChecks: 'Выполняет до 80% QA-проверок',
     savingsUpTo500HoursQaWork: 'Экономия до 500 часов работы QA в месяц',
@@ -663,6 +672,15 @@ const translations = {
     qaBotTitle: 'AI QA Bot: support quality control',
     qaBotSubtitle: 'Conduct up to 80% of chat and call checks automatically, save time for team leads and supervisors',
     lookAtExample: 'View example',
+    // QA Bot Modal
+    qaBotExampleTitle: 'QA Bot Work Example',
+    qaBotExampleSubtitle: 'See how AI automatically checks chat quality',
+    zoomIn: 'Zoom in',
+    zoomOut: 'Zoom out',
+    qaBotDashboard: 'QA Bot Dashboard',
+    qaBotDashboardExample: 'Quality control system interface example',
+    qaBotAnalyticsDashboard: 'QA Bot Analytics Dashboard',
+    qaBotAnalyticsDescription: 'The analytics panel shows key service quality metrics: total number of chats (4,250), average rating (94.2), total number of errors (1,420) and detailed statistics on operators with their performance indicators.',
     // QA Bot facts
     performsUpTo80PercentQaChecks: 'Performs up to 80% of QA checks',
     savingsUpTo500HoursQaWork: 'Savings up to 500 hours of QA work per month',

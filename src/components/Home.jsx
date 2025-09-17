@@ -931,6 +931,25 @@ function Home() {
             display: none !important;
           }
         }
+
+        /* CTA Button Mobile Styles */
+        @media (max-width: 768px) {
+          .cta-primary {
+            padding: 14px 28px !important;
+            font-size: 1rem !important;
+            max-width: 200px !important;
+            width: auto !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .cta-primary {
+            padding: 12px 24px !important;
+            font-size: 0.9rem !important;
+            max-width: 180px !important;
+            width: auto !important;
+          }
+        }
       `}</style>
       <div style={{ position: 'relative' }}>
         {/* Фиксированные элементы */}

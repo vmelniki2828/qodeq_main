@@ -4533,9 +4533,9 @@ function Products() {
             onClick={e => e.stopPropagation()}
           >
             <div className="qa-modal-header">
-              <h2 className="qa-modal-title">Пример работы QA Bot</h2>
+              <h2 className="qa-modal-title">{t('qaBotExampleTitle')}</h2>
               <p className="qa-modal-subtitle">
-                Посмотрите, как ИИ автоматически проверяет качество чатов
+                {t('qaBotExampleSubtitle')}
               </p>
             </div>
             
@@ -4558,7 +4558,7 @@ function Products() {
                   setDragOffset({ x: 0, y: 0 });
                 }
               }}
-              title={imageZoomed ? 'Уменьшить' : 'Увеличить'}
+              title={imageZoomed ? t('zoomOut') : t('zoomIn')}
             >
               {imageZoomed ? '🔍-' : '🔍+'}
             </button>
@@ -4593,18 +4593,15 @@ function Products() {
               <div className="qa-placeholder-image" style={{ display: 'none' }}>
                 <div className="placeholder-content">
                   <IoAnalyticsOutline size={80} />
-                  <h3>QA Bot Dashboard</h3>
-                  <p>Пример интерфейса системы контроля качества</p>
+                  <h3>{t('qaBotDashboard')}</h3>
+                  <p>{t('qaBotDashboardExample')}</p>
                 </div>
               </div>
             </div>
             <div className="qa-modal-description">
-              <h3>QA Bot Analytics Dashboard</h3>
+              <h3>{t('qaBotAnalyticsDashboard')}</h3>
               <p>
-                Панель аналитики показывает ключевые метрики качества
-                обслуживания: общее количество чатов (4,250), средний рейтинг
-                (94.2), общее количество ошибок (1,420) и детальную статистику
-                по операторам с их показателями эффективности.
+                {t('qaBotAnalyticsDescription')}
               </p>
             </div>
             </div>
