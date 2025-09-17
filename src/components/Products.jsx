@@ -114,9 +114,22 @@ function Products() {
   const [operatorCostPerQA, setOperatorCostPerQA] = useState(2.0);
   const [showQAModal, setShowQAModal] = useState(false);
   const [imageZoomed, setImageZoomed] = useState(false);
+  const [activeAudio, setActiveAudio] = useState(null);
 
   const handleCardClick = id => {
     setSelectedId(id === selectedId ? null : id);
+  };
+
+  const handleAudioPlay = (audioId) => {
+    // Останавливаем все другие аудио
+    const allAudios = document.querySelectorAll('audio');
+    allAudios.forEach(audio => {
+      if (audio.id !== audioId) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+    setActiveAudio(audioId);
   };
 
   // Drag functionality for zoomed image
@@ -3429,11 +3442,32 @@ function Products() {
                         margin: '2rem 0',
                       }}
                     >
-                      <audio key={`audio-1-${language}`} controls style={{ width: '320px' }}>
+                      <audio 
+                        key={`audio-1-${language}`} 
+                        id="audio-1"
+                        controls 
+                        style={{ 
+                          width: '320px',
+                        }}
+                        onPlay={() => handleAudioPlay('audio-1')}
+                        onPause={() => setActiveAudio(null)}
+                        onEnded={() => setActiveAudio(null)}
+                      >
                         <source src={language === 'ru' ? './audio_rus_1.mp3' : './audio_eng_1.mp3'} type="audio/mpeg" />
                         {t('browserNotSupportAudio')}
                       </audio>
-                      <audio key={`audio-2-${language}`} controls style={{ width: '320px' }}>
+                      <audio 
+                        key={`audio-2-${language}`} 
+                        id="audio-2"
+                        controls 
+                        style={{ 
+                          width: '320px',
+
+                        }}
+                        onPlay={() => handleAudioPlay('audio-2')}
+                        onPause={() => setActiveAudio(null)}
+                        onEnded={() => setActiveAudio(null)}
+                      >
                         <source src={language === 'ru' ? './audio_rus_2.mp3' : './audio_eng_2.mp3'} type="audio/mpeg" />
                         {t('browserNotSupportAudio')}
                       </audio>
