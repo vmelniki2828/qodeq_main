@@ -32,28 +32,28 @@ function Products() {
   const { t, language } = useLanguage();
 
   // Динамический массив services для переводов
-const services = [
-  {
-    id: 'chatbot',
+  const services = [
+    {
+      id: 'chatbot',
       name: t('chatbotTitle'),
-    icon: IoChatbubbleEllipsesOutline,
-  },
-  {
-    id: 'callcenter',
+      icon: IoChatbubbleEllipsesOutline,
+    },
+    {
+      id: 'callcenter',
       name: t('callCenterTitle'),
-    icon: IoCallOutline,
-  },
-  {
-    id: 'payment',
+      icon: IoCallOutline,
+    },
+    {
+      id: 'payment',
       name: t('paymentTitle'),
-    icon: IoWalletOutline,
-  },
-  {
-    id: 'qa',
+      icon: IoWalletOutline,
+    },
+    {
+      id: 'qa',
       name: t('qaTitle'),
-    icon: IoHelpCircleOutline,
-  },
-];
+      icon: IoHelpCircleOutline,
+    },
+  ];
 
   // Универсальный скролл к блоку "Экономический эффект" для любого бота
   const scrollToEffect = (id) => {
@@ -528,7 +528,7 @@ const services = [
         .mini-blocks-grid {
           display: flex;
           justify-content: center;
-          gap: 10px;
+          gap: 20px;
           margin-bottom: 40px;
         }
         
@@ -1493,7 +1493,7 @@ const services = [
           background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
           border-radius: 25px;
           max-width: 900px;
-          max-height: 95vh;
+          max-height: 98vh;
           overflow-y: auto;
           position: relative;
           box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
@@ -1545,7 +1545,7 @@ const services = [
         }
         
         .qa-modal-header {
-          padding: 20px 30px 15px 30px;
+          padding: 15px 20px 10px 20px;
           border-bottom: 1px solid rgba(0, 0, 0, 0.1);
           background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
@@ -1566,7 +1566,7 @@ const services = [
         }
         
         .qa-modal-body {
-          padding: 10px;
+          padding: 5px;
         }
         
         .qa-example-image {
@@ -1905,14 +1905,12 @@ const services = [
           font-weight: 700;
           color: #000;
           margin-bottom: 10px;
-          word-break: break-word;
         }
         
         .metric-label {
           font-size: 1rem;
           color: rgba(0,0,0,0.7);
           line-height: 1.4;
-          word-break: break-word;
         }
         
         /* Калькулятор */
@@ -2288,7 +2286,7 @@ const services = [
         }
         
         .qa-modal-description {
-          padding: 30px;
+          padding: 10px 30px 10px 30px;
           background: #fff;
         }
         
@@ -2334,26 +2332,6 @@ const services = [
         }
         
         /* Responsive */
-        @media (max-width: 1024px) {
-          .metrics-grid {
-            gap: 20px !important;
-            margin: 35px 0 !important;
-          }
-          
-          .metric-card {
-            padding: 22px !important;
-            max-width: 180px !important;
-          }
-          
-          .metric-number {
-            font-size: 2.3rem !important;
-          }
-          
-          .metric-label {
-            font-size: 0.98rem !important;
-          }
-        }
-
         @media (max-width: 768px) {
           .chatbot-hero-new,
           .callcenter-hero-new,
@@ -2396,6 +2374,25 @@ const services = [
           .prospects-grid {
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
+          }
+          
+          /* Responsive */
+          .metrics-grid {
+            gap: 20px !important;
+            margin: 35px 0 !important;
+          }
+          
+          .metric-card {
+            padding: 22px !important;
+            max-width: 180px !important;
+          }
+          
+          .metric-number {
+            font-size: 2.3rem !important;
+          }
+          
+          .metric-label {
+            font-size: 0.98rem !important;
           }
           
           .capabilities-grid-new {
@@ -2916,13 +2913,13 @@ const services = [
           
           .qa-modal-content {
             max-width: 95% !important;
-            max-height: 95vh !important;
+            max-height: 98vh !important;
             border-radius: 20px !important;
             overflow-y: auto !important;
           }
           
           .qa-modal-header {
-            padding: 18px 25px 12px 25px !important;
+            padding: 12px 20px 8px 20px !important;
           }
           
           .qa-modal-title {
@@ -2936,7 +2933,7 @@ const services = [
           }
           
           .qa-modal-body {
-            padding: 0 10px 10px 10px !important;
+            padding: 0 5px 5px 5px !important;
           }
           
           .qa-example-image {
@@ -2968,14 +2965,14 @@ const services = [
           
           .qa-modal-content {
             max-width: 98% !important;
-            max-height: 98vh !important;
+            max-height: 99vh !important;
             border-radius: 16px !important;
             margin: 0 !important;
             overflow-y: auto !important;
           }
           
           .qa-modal-header {
-            padding: 16px 20px 8px 20px !important;
+            padding: 12px 15px 6px 15px !important;
             border-radius: 16px 16px 0 0 !important;
           }
           
@@ -2992,7 +2989,7 @@ const services = [
           }
           
           .qa-modal-body {
-            padding: 0 10px 10px 10px !important;
+            padding: 0 5px 5px 5px !important;
           }
           
           .qa-example-image {
@@ -3029,10 +3026,11 @@ const services = [
             border-radius: 12px !important;
             margin: 0 !important;
             overflow-y: auto !important;
+            padding: 0 !important;
           }
           
           .qa-modal-header {
-            padding: 14px 18px 6px 18px !important;
+            padding: 10px 12px 4px 12px !important;
             border-radius: 12px 12px 0 0 !important;
           }
           
@@ -3049,7 +3047,7 @@ const services = [
           }
           
           .qa-modal-body {
-            padding: 0 10px 10px 10px !important;
+            padding: 0 5px 5px 5px !important;
           }
           
           .qa-example-image {
@@ -3086,7 +3084,7 @@ const services = [
           }
           
           .qa-modal-header {
-            padding: 12px 15px 4px 15px !important;
+            padding: 8px 10px 3px 10px !important;
             border-radius: 8px 8px 0 0 !important;
           }
           
@@ -3101,7 +3099,7 @@ const services = [
           }
           
           .qa-modal-body {
-            padding: 0 10px 10px 10px !important;
+            padding: 0 5px 5px 5px !important;
           }
           
           .qa-example-image {
@@ -3135,7 +3133,7 @@ const services = [
           }
           
           .qa-modal-header {
-            padding: 12px 20px 6px 20px !important;
+            padding: 8px 15px 4px 15px !important;
           }
           
           .qa-modal-title {
@@ -3153,7 +3151,7 @@ const services = [
           }
           
           .qa-modal-body {
-            padding: 0 10px 10px 10px !important;
+            padding: 0 5px 5px 5px !important;
           }
         }
 
@@ -4992,18 +4990,18 @@ const services = [
             </div>
             
             <div className="qa-modal-body">
-            <button
-              className="qa-modal-close"
-              onClick={() => {
-                setShowQAModal(false);
-                setImageZoomed(false);
-                setDragOffset({ x: 0, y: 0 });
-              }}
-            >
-              ×
-            </button>
-            <button
-              className="qa-zoom-btn"
+              <button
+                className="qa-modal-close"
+                onClick={() => {
+                  setShowQAModal(false);
+                  setImageZoomed(false);
+                  setDragOffset({ x: 0, y: 0 });
+                }}
+              >
+                ×
+              </button>
+              <button
+                className="qa-zoom-btn"
               onClick={() => {
                 setImageZoomed(!imageZoomed);
                 if (imageZoomed) {
