@@ -132,6 +132,16 @@ function Products() {
       document.head.appendChild(script);
     }
 
+    // Force hide LiveChat widget immediately on page load
+    const hideWidget = () => {
+      if (window.LiveChatWidget) {
+        window.LiveChatWidget.call("hide");
+      }
+    };
+
+    // Hide widget immediately
+    hideWidget();
+
     // Control LiveChat visibility based on selectedId
     const timer = setTimeout(() => {
       if (window.LiveChatWidget) {
@@ -143,13 +153,76 @@ function Products() {
           window.LiveChatWidget.call("hide");
         }
       }
-    }, 1000);
+    }, 1500);
+
+    // Additional check after longer delay
+    const longTimer = setTimeout(() => {
+      if (window.LiveChatWidget) {
+        if (selectedId === 'chatbot') {
+          window.LiveChatWidget.call("minimize");
+        } else {
+          window.LiveChatWidget.call("hide");
+        }
+      }
+    }, 3000);
 
     // Cleanup function
     return () => {
       clearTimeout(timer);
+      clearTimeout(longTimer);
+      // Force hide on cleanup
+      hideWidget();
     };
   }, [selectedId]);
+
+  // Additional effect to ensure widget is hidden on component mount
+  useEffect(() => {
+    const hideWidget = () => {
+      if (window.LiveChatWidget) {
+        window.LiveChatWidget.call("hide");
+      }
+    };
+
+    // Hide widget on mount
+    hideWidget();
+
+    // Set up interval to continuously hide widget if not chatbot
+    const interval = setInterval(() => {
+      if (selectedId !== 'chatbot' && window.LiveChatWidget) {
+        window.LiveChatWidget.call("hide");
+      }
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+      hideWidget();
+    };
+  }, [selectedId]);
+
+  // Force hide LiveChat widget on page load (runs once)
+  useEffect(() => {
+    const forceHideWidget = () => {
+      if (window.LiveChatWidget) {
+        window.LiveChatWidget.call("hide");
+      }
+    };
+
+    // Hide immediately
+    forceHideWidget();
+
+    // Hide after short delay
+    setTimeout(forceHideWidget, 500);
+    
+    // Hide after longer delay
+    setTimeout(forceHideWidget, 1000);
+    
+    // Hide after even longer delay
+    setTimeout(forceHideWidget, 2000);
+
+    return () => {
+      forceHideWidget();
+    };
+  }, []); // Empty dependency array - runs only once on mount
 
   const handleCardClick = id => {
     setSelectedId(id === selectedId ? null : id);
