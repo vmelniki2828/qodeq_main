@@ -373,24 +373,24 @@ function Home() {
           }
           
           .central-stats-circle {
-            width: 133px !important;
-            height: 133px !important;
-            padding: 17px !important;
+            width: 145px !important;
+            height: 145px !important;
+            padding: 20px !important;
           }
           
           .central-stats-circle p:first-child {
-            font-size: 2rem !important;
-            margin-bottom: 7px !important;
+            font-size: 2.2rem !important;
+            margin-bottom: 8px !important;
           }
           
           .central-stats-circle p:last-child {
-            font-size: 0.6rem !important;
-            line-height: 1.3 !important;
+            font-size: 0.65rem !important;
+            line-height: 1.4 !important;
           }
           
           .stats-circle {
-            width: 220px !important;
-            height: 220px !important;
+            width: 240px !important;
+            height: 240px !important;
             position: absolute !important;
             top: 50% !important;
             left: 50% !important;
@@ -399,22 +399,22 @@ function Home() {
           }
           
           .stats-block {
-            width: 80px !important;
-            height: 45px !important;
-            padding: 8px !important;
+            width: 95px !important;
+            height: 55px !important;
+            padding: 10px !important;
             position: absolute !important;
-            border-radius: 8px !important;
+            border-radius: 10px !important;
             z-index: 1 !important;
           }
           
           .stats-number {
-            font-size: 1rem !important;
-            margin-bottom: 3px !important;
+            font-size: 1.2rem !important;
+            margin-bottom: 4px !important;
           }
           
           .stats-description {
-            font-size: 0.43rem !important;
-            line-height: 1.2 !important;
+            font-size: 0.5rem !important;
+            line-height: 1.3 !important;
           }
         }
 
@@ -430,24 +430,24 @@ function Home() {
           }
           
           .central-stats-circle {
-            width: 113px !important;
-            height: 113px !important;
-            padding: 13px !important;
+            width: 125px !important;
+            height: 125px !important;
+            padding: 16px !important;
           }
           
           .central-stats-circle p:first-child {
-            font-size: 1.67rem !important;
-            margin-bottom: 5px !important;
+            font-size: 1.8rem !important;
+            margin-bottom: 6px !important;
           }
           
           .central-stats-circle p:last-child {
-            font-size: 0.53rem !important;
-            line-height: 1.2 !important;
+            font-size: 0.58rem !important;
+            line-height: 1.3 !important;
           }
           
           .stats-circle {
-            width: 190px !important;
-            height: 190px !important;
+            width: 210px !important;
+            height: 210px !important;
             position: absolute !important;
             top: 50% !important;
             left: 50% !important;
@@ -456,22 +456,22 @@ function Home() {
           }
           
           .stats-block {
-            width: 70px !important;
-            height: 40px !important;
-            padding: 6px !important;
+            width: 85px !important;
+            height: 50px !important;
+            padding: 8px !important;
             position: absolute !important;
-            border-radius: 6px !important;
+            border-radius: 8px !important;
             z-index: 1 !important;
           }
           
           .stats-number {
-            font-size: 0.9rem !important;
-            margin-bottom: 2px !important;
+            font-size: 1.1rem !important;
+            margin-bottom: 3px !important;
           }
           
           .stats-description {
-            font-size: 0.38rem !important;
-            line-height: 1.1 !important;
+            font-size: 0.45rem !important;
+            line-height: 1.2 !important;
           }
         }
 

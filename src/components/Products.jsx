@@ -551,6 +551,7 @@ function Products() {
           border-color: #000;
           transform: scale(1.1);
           box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+          border: 1px solid #fff;
         }
         
 
@@ -3487,7 +3488,7 @@ function Products() {
                   >
                     <Marquee
                       gradient={false}
-                      speed={40}
+                      speed={20}
                       pauseOnHover
                       style={{ height: '48px' }}
                     >
@@ -3506,7 +3507,7 @@ function Products() {
                     </Marquee>
                     <Marquee
                       gradient={false}
-                      speed={38}
+                      speed={20}
                       direction="right"
                       pauseOnHover
                       style={{ height: '48px' }}
@@ -3526,7 +3527,7 @@ function Products() {
                     </Marquee>
                     <Marquee
                       gradient={false}
-                      speed={36}
+                      speed={20}
                       pauseOnHover
                       style={{ height: '48px' }}
                     >
