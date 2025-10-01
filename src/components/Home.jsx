@@ -43,6 +43,51 @@ function Home() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isAutoPlayPaused, setIsAutoPlayPaused] = useState(false);
+  const [contactForm, setContactForm] = useState({
+    contact: '',
+    consent: false
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  // Функция отправки формы контактов
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    if (!contactForm.contact.trim() || !contactForm.consent) {
+      setSubmitStatus('error');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // Отправка на email (замените на ваш email)
+      const response = await fetch('https://formspree.io/f/xjkarbwo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          contact: contactForm.contact,
+          timestamp: new Date().toISOString(),
+          page: 'Home - Contact Form'
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setContactForm({ contact: '', consent: false });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Динамические массивы для переводов
   const valueProps = [
@@ -198,6 +243,128 @@ function Home() {
 
         .cta-button:hover {
           animation: pulse-glow 2s infinite;
+        }
+
+        /* Contact Form Styles - Black & White */
+        .contact-form {
+          background: #fff;
+          border: 2px solid #000;
+          border-radius: 20px;
+          padding: 40px;
+          margin: 30px auto;
+          max-width: 500px;
+          width: 100%;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-form h3 {
+          color: #000;
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-bottom: 25px;
+          text-align: center;
+        }
+
+        .form-group {
+          margin-bottom: 25px;
+        }
+
+        .form-input {
+          width: 100%;
+          padding: 15px 20px;
+          border: 2px solid #000;
+          border-radius: 12px;
+          background: #fff;
+          color: #000;
+          font-size: 1rem;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          box-sizing: border-box;
+        }
+
+        .form-input::placeholder {
+          color: #666;
+          font-weight: 400;
+        }
+
+        .form-input:focus {
+          outline: none;
+          border-color: #333;
+          background: #f9f9f9;
+          box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkbox-group {
+          display: flex;
+          align-items: flex-start;
+          gap: 15px;
+          margin-bottom: 25px;
+        }
+
+        .checkbox-input {
+          width: 20px;
+          height: 20px;
+          margin-top: 2px;
+          accent-color: #000;
+          border: 2px solid #000;
+        }
+
+        .checkbox-label {
+          color: #000;
+          font-size: 0.9rem;
+          font-weight: 500;
+          line-height: 1.4;
+          cursor: pointer;
+        }
+
+        .submit-button {
+          width: 100%;
+          padding: 15px 20px;
+          background: #000;
+          border: 2px solid #000;
+          border-radius: 12px;
+          color: #fff;
+          font-size: 1.1rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .submit-button:hover:not(:disabled) {
+          background: #333;
+          border-color: #333;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .submit-button:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          background: #666;
+          border-color: #666;
+        }
+
+        .status-message {
+          margin-top: 20px;
+          padding: 15px;
+          border-radius: 8px;
+          text-align: center;
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+
+        .status-success {
+          background: #f0f8f0;
+          color: #2d5a2d;
+          border: 2px solid #4a7c4a;
+        }
+
+        .status-error {
+          background: #fff0f0;
+          color: #8b0000;
+          border: 2px solid #dc143c;
         }
 
         /* Primary CTA Button (Get Started) */
@@ -357,6 +524,76 @@ function Home() {
           .cta-button {
             font-size: 0.9rem !important;
             padding: 10px 20px !important;
+          }
+        }
+
+        /* Contact Form Responsive - Black & White */
+        @media (max-width: 768px) {
+          .contact-form {
+            padding: 30px !important;
+            margin: 20px auto !important;
+            max-width: 90% !important;
+          }
+          
+          .contact-form h3 {
+            font-size: 1.3rem !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .form-input {
+            padding: 12px 15px !important;
+            font-size: 0.95rem !important;
+            font-weight: 500 !important;
+          }
+          
+          .submit-button {
+            padding: 12px 15px !important;
+            font-size: 1rem !important;
+            font-weight: 700 !important;
+          }
+          
+          .checkbox-label {
+            font-size: 0.85rem !important;
+            font-weight: 500 !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .contact-form {
+            padding: 25px !important;
+            margin: 15px auto !important;
+            max-width: 95% !important;
+          }
+          
+          .contact-form h3 {
+            font-size: 1.2rem !important;
+            margin-bottom: 18px !important;
+          }
+          
+          .form-input {
+            padding: 10px 12px !important;
+            font-size: 0.9rem !important;
+            font-weight: 500 !important;
+          }
+          
+          .submit-button {
+            padding: 10px 12px !important;
+            font-size: 0.95rem !important;
+            font-weight: 700 !important;
+          }
+          
+          .checkbox-group {
+            gap: 10px !important;
+          }
+          
+          .checkbox-input {
+            width: 18px !important;
+            height: 18px !important;
+          }
+          
+          .checkbox-label {
+            font-size: 0.8rem !important;
+            font-weight: 500 !important;
           }
         }
 
@@ -2404,6 +2641,75 @@ function Home() {
               >
 {t('startButton')}
               </motion.a>
+
+              {/* Contact Form */}
+              <motion.div
+                className="contact-form"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+              >
+                <h3>{language === 'ru' ? 'Оставьте контакты для связи' : 'Leave your contact details'}</h3>
+                <form onSubmit={handleContactSubmit}>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className="form-input"
+                      placeholder={language === 'ru' ? 'Telegram, email или номер телефона' : 'Telegram, email or phone number'}
+                      value={contactForm.contact}
+                      onChange={(e) => setContactForm({ ...contactForm, contact: e.target.value })}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="consent"
+                      className="checkbox-input"
+                      checked={contactForm.consent}
+                      onChange={(e) => setContactForm({ ...contactForm, consent: e.target.checked })}
+                      required
+                    />
+                    <label htmlFor="consent" className="checkbox-label">
+                      {language === 'ru' 
+                        ? 'Я согласен на обработку персональных данных'
+                        : 'I agree to the processing of personal data'
+                      }
+                    </label>
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    className="submit-button"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting 
+                      ? (language === 'ru' ? 'Отправляем...' : 'Sending...')
+                      : (language === 'ru' ? 'Отправить' : 'Submit')
+                    }
+                  </button>
+                  
+                  {submitStatus === 'success' && (
+                    <div className="status-message status-success">
+                      {language === 'ru' 
+                        ? 'Спасибо! Мы свяжемся с вами в ближайшее время.'
+                        : 'Thank you! We will contact you soon.'
+                      }
+                    </div>
+                  )}
+                  
+                  {submitStatus === 'error' && (
+                    <div className="status-message status-error">
+                      {language === 'ru' 
+                        ? 'Ошибка отправки. Попробуйте еще раз.'
+                        : 'Sending error. Please try again.'
+                      }
+                    </div>
+                  )}
+                </form>
+              </motion.div>
             </motion.div>
           </div>
 

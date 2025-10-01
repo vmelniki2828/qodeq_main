@@ -115,6 +115,68 @@ function Products() {
   const [showQAModal, setShowQAModal] = useState(false);
   const [imageZoomed, setImageZoomed] = useState(false);
   const [activeAudio, setActiveAudio] = useState(null);
+  const [contactForms, setContactForms] = useState({
+    chatbot: { contact: '', consent: false },
+    callcenter: { contact: '', consent: false },
+    payment: { contact: '', consent: false },
+    qa: { contact: '', consent: false }
+  });
+  const [isSubmitting, setIsSubmitting] = useState({
+    chatbot: false,
+    callcenter: false,
+    payment: false,
+    qa: false
+  });
+  const [submitStatus, setSubmitStatus] = useState({
+    chatbot: null,
+    callcenter: null,
+    payment: null,
+    qa: null
+  });
+
+  // Функция отправки формы контактов для продуктов
+  const handleProductContactSubmit = async (e, productId) => {
+    e.preventDefault();
+    const formData = contactForms[productId];
+    
+    if (!formData.contact.trim() || !formData.consent) {
+      setSubmitStatus(prev => ({ ...prev, [productId]: 'error' }));
+      return;
+    }
+
+    setIsSubmitting(prev => ({ ...prev, [productId]: true }));
+    setSubmitStatus(prev => ({ ...prev, [productId]: null }));
+
+    try {
+      const response = await fetch('https://formspree.io/f/xjkarbwo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          contact: formData.contact,
+          product: productId,
+          timestamp: new Date().toISOString(),
+          page: `Products - ${productId}`
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus(prev => ({ ...prev, [productId]: 'success' }));
+        setContactForms(prev => ({ 
+          ...prev, 
+          [productId]: { contact: '', consent: false } 
+        }));
+      } else {
+        setSubmitStatus(prev => ({ ...prev, [productId]: 'error' }));
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus(prev => ({ ...prev, [productId]: 'error' }));
+    } finally {
+      setIsSubmitting(prev => ({ ...prev, [productId]: false }));
+    }
+  };
 
   // LiveChat integration - only for Chatbot
   useEffect(() => {
@@ -2304,6 +2366,128 @@ function Products() {
           line-height: 1.6;
           margin: 0;
         }
+
+        /* Product Contact Form Styles - Black & White */
+        .product-contact-form {
+          background: #fff;
+          border: 2px solid #000;
+          border-radius: 20px;
+          padding: 40px;
+          margin: 40px auto;
+          max-width: 500px;
+          width: 100%;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-contact-form h3 {
+          color: #000;
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-bottom: 25px;
+          text-align: center;
+        }
+
+        .product-form-group {
+          margin-bottom: 25px;
+        }
+
+        .product-form-input {
+          width: 100%;
+          padding: 15px 20px;
+          border: 2px solid #000;
+          border-radius: 12px;
+          background: #fff;
+          color: #000;
+          font-size: 1rem;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          box-sizing: border-box;
+        }
+
+        .product-form-input::placeholder {
+          color: #666;
+          font-weight: 400;
+        }
+
+        .product-form-input:focus {
+          outline: none;
+          border-color: #333;
+          background: #f9f9f9;
+          box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-checkbox-group {
+          display: flex;
+          align-items: flex-start;
+          gap: 15px;
+          margin-bottom: 25px;
+        }
+
+        .product-checkbox-input {
+          width: 20px;
+          height: 20px;
+          margin-top: 2px;
+          accent-color: #000;
+          border: 2px solid #000;
+        }
+
+        .product-checkbox-label {
+          color: #000;
+          font-size: 0.9rem;
+          font-weight: 500;
+          line-height: 1.4;
+          cursor: pointer;
+        }
+
+        .product-submit-button {
+          width: 100%;
+          padding: 15px 20px;
+          background: #000;
+          border: 2px solid #000;
+          border-radius: 12px;
+          color: #fff;
+          font-size: 1.1rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .product-submit-button:hover:not(:disabled) {
+          background: #333;
+          border-color: #333;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-submit-button:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          background: #666;
+          border-color: #666;
+        }
+
+        .product-status-message {
+          margin-top: 20px;
+          padding: 15px;
+          border-radius: 8px;
+          text-align: center;
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+
+        .product-status-success {
+          background: #f0f8f0;
+          color: #2d5a2d;
+          border: 2px solid #4a7c4a;
+        }
+
+        .product-status-error {
+          background: #fff0f0;
+          color: #8b0000;
+          border: 2px solid #dc143c;
+        }
         
         /* Анимации */
         .btn-with-shine {
@@ -2903,6 +3087,76 @@ function Products() {
           .metric-label {
             font-size: 0.85rem !important;
             line-height: 1.1 !important;
+          }
+        }
+
+        /* Product Contact Form Responsive - Black & White */
+        @media (max-width: 768px) {
+          .product-contact-form {
+            padding: 30px !important;
+            margin: 30px auto !important;
+            max-width: 90% !important;
+          }
+          
+          .product-contact-form h3 {
+            font-size: 1.3rem !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .product-form-input {
+            padding: 12px 15px !important;
+            font-size: 0.95rem !important;
+            font-weight: 500 !important;
+          }
+          
+          .product-submit-button {
+            padding: 12px 15px !important;
+            font-size: 1rem !important;
+            font-weight: 700 !important;
+          }
+          
+          .product-checkbox-label {
+            font-size: 0.85rem !important;
+            font-weight: 500 !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .product-contact-form {
+            padding: 25px !important;
+            margin: 25px auto !important;
+            max-width: 95% !important;
+          }
+          
+          .product-contact-form h3 {
+            font-size: 1.2rem !important;
+            margin-bottom: 18px !important;
+          }
+          
+          .product-form-input {
+            padding: 10px 12px !important;
+            font-size: 0.9rem !important;
+            font-weight: 500 !important;
+          }
+          
+          .product-submit-button {
+            padding: 10px 12px !important;
+            font-size: 0.95rem !important;
+            font-weight: 700 !important;
+          }
+          
+          .product-checkbox-group {
+            gap: 10px !important;
+          }
+          
+          .product-checkbox-input {
+            width: 18px !important;
+            height: 18px !important;
+          }
+          
+          .product-checkbox-label {
+            font-size: 0.8rem !important;
+            font-weight: 500 !important;
           }
         }
 
@@ -3828,6 +4082,82 @@ function Products() {
               </motion.div>
             )}
 
+            {/* Chatbot Contact Form */}
+            {selectedId === 'chatbot' && (
+              <motion.div
+                className="product-contact-form"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                <h3>{language === 'ru' ? 'Оставьте контакты для связи' : 'Leave your contact details'}</h3>
+                <form onSubmit={(e) => handleProductContactSubmit(e, 'chatbot')}>
+                  <div className="product-form-group">
+                    <input
+                      type="text"
+                      className="product-form-input"
+                      placeholder={language === 'ru' ? 'Telegram, email или номер телефона' : 'Telegram, email or phone number'}
+                      value={contactForms.chatbot.contact}
+                      onChange={(e) => setContactForms(prev => ({ 
+                        ...prev, 
+                        chatbot: { ...prev.chatbot, contact: e.target.value } 
+                      }))}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="product-checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="chatbot-consent"
+                      className="product-checkbox-input"
+                      checked={contactForms.chatbot.consent}
+                      onChange={(e) => setContactForms(prev => ({ 
+                        ...prev, 
+                        chatbot: { ...prev.chatbot, consent: e.target.checked } 
+                      }))}
+                      required
+                    />
+                    <label htmlFor="chatbot-consent" className="product-checkbox-label">
+                      {language === 'ru' 
+                        ? 'Я согласен на обработку персональных данных'
+                        : 'I agree to the processing of personal data'
+                      }
+                    </label>
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    className="product-submit-button"
+                    disabled={isSubmitting.chatbot}
+                  >
+                    {isSubmitting.chatbot 
+                      ? (language === 'ru' ? 'Отправляем...' : 'Sending...')
+                      : (language === 'ru' ? 'Отправить' : 'Submit')
+                    }
+                  </button>
+                  
+                  {submitStatus.chatbot === 'success' && (
+                    <div className="product-status-message product-status-success">
+                      {language === 'ru' 
+                        ? 'Спасибо! Мы свяжемся с вами в ближайшее время.'
+                        : 'Thank you! We will contact you soon.'
+                      }
+                    </div>
+                  )}
+                  
+                  {submitStatus.chatbot === 'error' && (
+                    <div className="product-status-message product-status-error">
+                      {language === 'ru' 
+                        ? 'Ошибка отправки. Попробуйте еще раз.'
+                        : 'Sending error. Please try again.'
+                      }
+                    </div>
+                  )}
+                </form>
+              </motion.div>
+            )}
+
             {selectedId === 'callcenter' && (
               <motion.div
                 className="callcenter-info"
@@ -4296,6 +4626,82 @@ function Products() {
               </motion.div>
             )}
 
+            {/* Payment Contact Form */}
+            {selectedId === 'payment' && (
+              <motion.div
+                className="product-contact-form"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                <h3>{language === 'ru' ? 'Оставьте контакты для связи' : 'Leave your contact details'}</h3>
+                <form onSubmit={(e) => handleProductContactSubmit(e, 'payment')}>
+                  <div className="product-form-group">
+                    <input
+                      type="text"
+                      className="product-form-input"
+                      placeholder={language === 'ru' ? 'Telegram, email или номер телефона' : 'Telegram, email or phone number'}
+                      value={contactForms.payment.contact}
+                      onChange={(e) => setContactForms(prev => ({ 
+                        ...prev, 
+                        payment: { ...prev.payment, contact: e.target.value } 
+                      }))}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="product-checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="payment-consent"
+                      className="product-checkbox-input"
+                      checked={contactForms.payment.consent}
+                      onChange={(e) => setContactForms(prev => ({ 
+                        ...prev, 
+                        payment: { ...prev.payment, consent: e.target.checked } 
+                      }))}
+                      required
+                    />
+                    <label htmlFor="payment-consent" className="product-checkbox-label">
+                      {language === 'ru' 
+                        ? 'Я согласен на обработку персональных данных'
+                        : 'I agree to the processing of personal data'
+                      }
+                    </label>
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    className="product-submit-button"
+                    disabled={isSubmitting.payment}
+                  >
+                    {isSubmitting.payment 
+                      ? (language === 'ru' ? 'Отправляем...' : 'Sending...')
+                      : (language === 'ru' ? 'Отправить' : 'Submit')
+                    }
+                  </button>
+                  
+                  {submitStatus.payment === 'success' && (
+                    <div className="product-status-message product-status-success">
+                      {language === 'ru' 
+                        ? 'Спасибо! Мы свяжемся с вами в ближайшее время.'
+                        : 'Thank you! We will contact you soon.'
+                      }
+                    </div>
+                  )}
+                  
+                  {submitStatus.payment === 'error' && (
+                    <div className="product-status-message product-status-error">
+                      {language === 'ru' 
+                        ? 'Ошибка отправки. Попробуйте еще раз.'
+                        : 'Sending error. Please try again.'
+                      }
+                    </div>
+                  )}
+                </form>
+              </motion.div>
+            )}
+
             {selectedId === 'qa' && (
               <motion.div
                 className="qa-info"
@@ -4677,6 +5083,82 @@ function Products() {
               </motion.div>
             )}
 
+            {/* Call Center Contact Form */}
+            {selectedId === 'callcenter' && (
+              <motion.div
+                className="product-contact-form"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                <h3>{language === 'ru' ? 'Оставьте контакты для связи' : 'Leave your contact details'}</h3>
+                <form onSubmit={(e) => handleProductContactSubmit(e, 'callcenter')}>
+                  <div className="product-form-group">
+                    <input
+                      type="text"
+                      className="product-form-input"
+                      placeholder={language === 'ru' ? 'Telegram, email или номер телефона' : 'Telegram, email or phone number'}
+                      value={contactForms.callcenter.contact}
+                      onChange={(e) => setContactForms(prev => ({ 
+                        ...prev, 
+                        callcenter: { ...prev.callcenter, contact: e.target.value } 
+                      }))}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="product-checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="callcenter-consent"
+                      className="product-checkbox-input"
+                      checked={contactForms.callcenter.consent}
+                      onChange={(e) => setContactForms(prev => ({ 
+                        ...prev, 
+                        callcenter: { ...prev.callcenter, consent: e.target.checked } 
+                      }))}
+                      required
+                    />
+                    <label htmlFor="callcenter-consent" className="product-checkbox-label">
+                      {language === 'ru' 
+                        ? 'Я согласен на обработку персональных данных'
+                        : 'I agree to the processing of personal data'
+                      }
+                    </label>
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    className="product-submit-button"
+                    disabled={isSubmitting.callcenter}
+                  >
+                    {isSubmitting.callcenter 
+                      ? (language === 'ru' ? 'Отправляем...' : 'Sending...')
+                      : (language === 'ru' ? 'Отправить' : 'Submit')
+                    }
+                  </button>
+                  
+                  {submitStatus.callcenter === 'success' && (
+                    <div className="product-status-message product-status-success">
+                      {language === 'ru' 
+                        ? 'Спасибо! Мы свяжемся с вами в ближайшее время.'
+                        : 'Thank you! We will contact you soon.'
+                      }
+                    </div>
+                  )}
+                  
+                  {submitStatus.callcenter === 'error' && (
+                    <div className="product-status-message product-status-error">
+                      {language === 'ru' 
+                        ? 'Ошибка отправки. Попробуйте еще раз.'
+                        : 'Sending error. Please try again.'
+                      }
+                    </div>
+                  )}
+                </form>
+              </motion.div>
+            )}
+
             {selectedId === 'payment' && (
               <motion.div
                 className="payment-info"
@@ -4960,6 +5442,82 @@ function Products() {
                     </motion.div>
                   </div>
                 </div>
+              </motion.div>
+            )}
+
+            {/* QA Contact Form */}
+            {selectedId === 'qa' && (
+              <motion.div
+                className="product-contact-form"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                <h3>{language === 'ru' ? 'Оставьте контакты для связи' : 'Leave your contact details'}</h3>
+                <form onSubmit={(e) => handleProductContactSubmit(e, 'qa')}>
+                  <div className="product-form-group">
+                    <input
+                      type="text"
+                      className="product-form-input"
+                      placeholder={language === 'ru' ? 'Telegram, email или номер телефона' : 'Telegram, email or phone number'}
+                      value={contactForms.qa.contact}
+                      onChange={(e) => setContactForms(prev => ({ 
+                        ...prev, 
+                        qa: { ...prev.qa, contact: e.target.value } 
+                      }))}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="product-checkbox-group">
+                    <input
+                      type="checkbox"
+                      id="qa-consent"
+                      className="product-checkbox-input"
+                      checked={contactForms.qa.consent}
+                      onChange={(e) => setContactForms(prev => ({ 
+                        ...prev, 
+                        qa: { ...prev.qa, consent: e.target.checked } 
+                      }))}
+                      required
+                    />
+                    <label htmlFor="qa-consent" className="product-checkbox-label">
+                      {language === 'ru' 
+                        ? 'Я согласен на обработку персональных данных'
+                        : 'I agree to the processing of personal data'
+                      }
+                    </label>
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    className="product-submit-button"
+                    disabled={isSubmitting.qa}
+                  >
+                    {isSubmitting.qa 
+                      ? (language === 'ru' ? 'Отправляем...' : 'Sending...')
+                      : (language === 'ru' ? 'Отправить' : 'Submit')
+                    }
+                  </button>
+                  
+                  {submitStatus.qa === 'success' && (
+                    <div className="product-status-message product-status-success">
+                      {language === 'ru' 
+                        ? 'Спасибо! Мы свяжемся с вами в ближайшее время.'
+                        : 'Thank you! We will contact you soon.'
+                      }
+                    </div>
+                  )}
+                  
+                  {submitStatus.qa === 'error' && (
+                    <div className="product-status-message product-status-error">
+                      {language === 'ru' 
+                        ? 'Ошибка отправки. Попробуйте еще раз.'
+                        : 'Sending error. Please try again.'
+                      }
+                    </div>
+                  )}
+                </form>
               </motion.div>
             )}
           </div>
