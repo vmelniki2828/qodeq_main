@@ -367,6 +367,118 @@ function Home() {
           border: 2px solid #dc143c;
         }
 
+        /* Contact Form Responsive - Black & White */
+        @media (max-width: 768px) {
+          .contact-form {
+            padding: 30px !important;
+            margin: 30px auto !important;
+            max-width: calc(100vw - 60px) !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+          }
+          
+          .contact-form h3 {
+            font-size: 1.3rem !important;
+            margin-bottom: 20px !important;
+          }
+          
+          .form-input {
+            padding: 12px 15px !important;
+            font-size: 0.95rem !important;
+            font-weight: 500 !important;
+          }
+          
+          .submit-button {
+            padding: 12px 15px !important;
+            font-size: 1rem !important;
+            font-weight: 700 !important;
+          }
+          
+          .checkbox-label {
+            font-size: 0.85rem !important;
+            font-weight: 500 !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .contact-form {
+            padding: 25px !important;
+            margin: 25px auto !important;
+            max-width: calc(100vw - 50px) !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+          }
+          
+          .contact-form h3 {
+            font-size: 1.2rem !important;
+            margin-bottom: 18px !important;
+          }
+          
+          .form-input {
+            padding: 10px 12px !important;
+            font-size: 0.9rem !important;
+            font-weight: 500 !important;
+          }
+          
+          .submit-button {
+            padding: 10px 12px !important;
+            font-size: 0.95rem !important;
+            font-weight: 700 !important;
+          }
+          
+          .checkbox-group {
+            gap: 10px !important;
+          }
+          
+          .checkbox-input {
+            width: 18px !important;
+            height: 18px !important;
+          }
+          
+          .checkbox-label {
+            font-size: 0.8rem !important;
+            font-weight: 500 !important;
+          }
+        }
+
+        @media (max-width: 360px) {
+          .contact-form {
+            padding: 20px !important;
+            margin: 20px auto !important;
+            max-width: calc(100vw - 40px) !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+          }
+          
+          .contact-form h3 {
+            font-size: 1.1rem !important;
+            margin-bottom: 15px !important;
+          }
+          
+          .form-input {
+            padding: 8px 12px !important;
+            font-size: 0.85rem !important;
+          }
+          
+          .submit-button {
+            padding: 8px 12px !important;
+            font-size: 0.9rem !important;
+          }
+          
+          .checkbox-group {
+            gap: 8px !important;
+          }
+          
+          .checkbox-input {
+            width: 16px !important;
+            height: 16px !important;
+          }
+          
+          .checkbox-label {
+            font-size: 0.75rem !important;
+          }
+        }
+
         /* Primary CTA Button (Get Started) */
         .cta-primary {
           padding: 18px 40px;
