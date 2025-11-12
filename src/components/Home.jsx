@@ -2686,12 +2686,11 @@ function Home() {
           id="cta"
           style={{
             position: 'relative',
-            height: '100vh',
+            minHeight: '100vh',
             background: '#000',
             color: '#fff',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-between',
             zIndex: 20,
             overflow: 'hidden'
           }}
@@ -2703,7 +2702,7 @@ function Home() {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: '40px 20px',
+            padding: '40px 20px 20px 20px',
             textAlign: 'center',
             position: 'relative'
           }}>
@@ -2828,8 +2827,9 @@ function Home() {
           {/* Footer */}
           <footer style={{
             borderTop: '1px solid rgba(255,255,255,0.1)',
-            padding: '30px 0',
-            width: '100%'
+            padding: '20px 0',
+            width: '100%',
+            marginTop: 'auto'
           }}>
             <div style={{
               maxWidth: '1200px',
