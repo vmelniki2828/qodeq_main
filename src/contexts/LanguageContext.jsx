@@ -129,7 +129,7 @@ const translations = {
     
     // Products page specific texts
     productsPageTitle: 'Продукты',
-    chatbotHeroTitle: 'Qodeq: автоматизируй до 55% запросов без операторов',
+    chatbotHeroTitle: 'Qodeq: автоматизируй до 60% запросов без операторов',
     chatbotHeroSubtitle: 'Сократи расходы на поддержку, ускорь ответы и обеспечь круглосуточную помощь клиентам.',
     calculateCostButton: 'Рассчитать стоимость',
     examplesTitle: 'Примеры',
@@ -512,7 +512,7 @@ const translations = {
     
     // Products page specific texts
     productsPageTitle: 'Products',
-    chatbotHeroTitle: 'Qodeq: automate up to 55% of requests without operators',
+    chatbotHeroTitle: 'Qodeq: automate up to 60% of requests without operators',
     chatbotHeroSubtitle: 'Reduce support costs, speed up responses and provide 24/7 customer assistance.',
     calculateCostButton: 'Calculate cost',
     examplesTitle: 'Examples',
