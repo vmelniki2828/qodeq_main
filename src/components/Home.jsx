@@ -151,7 +151,7 @@ function Home() {
 
   // Анимированные счетчики для статистики
   // Периферийные блоки анимируются сразу после выезда соответствующих блоков
-  const chatCounter = useDelayedCounter(statsRef, 40, 1300, 1500); // блок появляется в 1.3 сек, счетчик 1.5 сек
+  const chatCounter = useDelayedCounter(statsRef, 60, 1300, 1500); // блок появляется в 1.3 сек, счетчик 1.5 сек
   const callCounter = useDelayedCounter(statsRef, 80, 1800, 1500); // блок появляется в 1.8 сек, счетчик 1.5 сек  
   const paymentCounter = useDelayedCounter(statsRef, 70, 2300, 1500); // блок появляется в 2.3 сек, счетчик 1.5 сек
   const qaCounter = useDelayedCounter(statsRef, 80, 2800, 1500); // блок появляется в 2.8 сек, счетчик 1.5 сек
