@@ -20,7 +20,7 @@ const translations = {
     // Home page
     heroTitle: 'Qodeq — автоматизация поддержки, которая работает с первого дня',
     heroSubtitle: 'Узнайте, как наши ИИ-боты помогут сократить расходы и повысить качество сервиса',
-    heroDescription: 'Qodeq — AI платформа для автоматизации поддержки, колл-центра и платежей',
+    heroDescription: 'Qodeq — AI платформа автоматизирующая операционные процессы в IGaming',
     whyQodeqTitle: 'Почему Qodeq',
     startButton: 'Начать',
     productsTitle: 'Продукты платформы',
@@ -406,7 +406,7 @@ const translations = {
     // Home page
     heroTitle: 'Qodeq — support automation that works from day one',
     heroSubtitle: 'Learn how our AI bots can help reduce costs and improve service quality',
-    heroDescription: 'Qodeq — AI platform for support, call center and payment automation',
+    heroDescription: 'Qodeq — Qodeq - AI platform automating operations in iGaming',
     whyQodeqTitle: 'Why Qodeq',
     startButton: 'Start',
     productsTitle: 'Platform Products',
