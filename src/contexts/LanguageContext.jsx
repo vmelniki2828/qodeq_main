@@ -406,7 +406,7 @@ const translations = {
     // Home page
     heroTitle: 'Qodeq — support automation that works from day one',
     heroSubtitle: 'Learn how our AI bots can help reduce costs and improve service quality',
-    heroDescription: 'Qodeq — Qodeq - AI platform automating operations in iGaming',
+    heroDescription: 'Qodeq - AI platform automating operations in iGaming',
     whyQodeqTitle: 'Why Qodeq',
     startButton: 'Start',
     productsTitle: 'Platform Products',
