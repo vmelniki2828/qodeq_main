@@ -2854,7 +2854,7 @@ function Home() {
                 gap: '8px'
               }}>
                 <div style={{fontSize:'0.95rem',opacity:0.7}}>
-{t('footerTelegram')} <a href="https://t.me/qodeq_ai" style={{color:'#fff',textDecoration:'underline',opacity:0.7}}>@qodeq_ai</a>
+{t('footerTelegram')} <a href="https://t.me/qodeq" style={{color:'#fff',textDecoration:'underline',opacity:0.7}}>@qodeq</a>
                 </div>
                 <div style={{fontSize:'0.95rem',opacity:0.7}}>
                   <a href="https://www.linkedin.com/company/qodeqai" target="_blank" rel="noopener noreferrer" style={{color:'#fff',textDecoration:'underline',opacity:0.7}}>linkedin.com/company/qodeqai</a>
