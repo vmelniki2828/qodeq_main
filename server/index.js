@@ -110,6 +110,7 @@ app.post('/api/contact-leads', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Contact API listening on http://127.0.0.1:${PORT}`);
+/** 0.0.0.0 — чтобы Nginx из другого контейнера мог подключиться (не только localhost внутри контейнера). */
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Contact API listening on http://0.0.0.0:${PORT}`);
 });
