@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Starfall from './animations/Starfall';
 import Navigation from './Navigation';
 import { useLanguage } from '../contexts/LanguageContext';
+import { submitContactLead } from '../api/contactLead';
 import {
   IoChatbubbleEllipsesOutline,
   IoCallOutline,
@@ -148,17 +149,12 @@ function Products() {
     setSubmitStatus(prev => ({ ...prev, [productId]: null }));
 
     try {
-      const response = await fetch('https://formspree.io/f/xjkarbwo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contact: formData.contact,
-          product: productId,
-          timestamp: new Date().toISOString(),
-          page: `Products - ${productId}`
-        }),
+      const response = await submitContactLead({
+        contact: formData.contact,
+        consent: formData.consent,
+        product: productId,
+        timestamp: new Date().toISOString(),
+        page: `Products - ${productId}`,
       });
 
       if (response.ok) {

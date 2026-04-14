@@ -6,6 +6,7 @@ import { ParallaxProvider } from 'react-scroll-parallax';
 import Navigation from './Navigation';
 import { IoChatbubbleEllipsesOutline, IoCallOutline, IoWalletOutline, IoHelpCircleOutline } from 'react-icons/io5';
 import { useLanguage } from '../contexts/LanguageContext';
+import { submitContactLead } from '../api/contactLead';
 
 // Хук для анимированного счетчика с задержкой
 function useDelayedCounter(ref, end, delay = 0, duration = 2000) {
@@ -62,17 +63,11 @@ function Home() {
     setSubmitStatus(null);
 
     try {
-      // Отправка на email (замените на ваш email)
-      const response = await fetch('https://formspree.io/f/xjkarbwo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contact: contactForm.contact,
-          timestamp: new Date().toISOString(),
-          page: 'Home - Contact Form'
-        }),
+      const response = await submitContactLead({
+        contact: contactForm.contact,
+        consent: contactForm.consent,
+        timestamp: new Date().toISOString(),
+        page: 'Home - Contact Form',
       });
 
       if (response.ok) {
