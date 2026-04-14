@@ -1,10 +1,16 @@
 require('dotenv').config();
 
+const dns = require('dns');
 const express = require('express');
 const nodemailer = require('nodemailer');
 
 const PORT = Number(process.env.PORT || 3001);
 const NOTIFY_EMAIL = (process.env.NOTIFY_EMAIL || '').trim();
+
+/** В Docker часто ломается SMTP по IPv6 — при проблемах поставьте true в server/.env */
+if (String(process.env.SMTP_IPV4_FIRST || '').toLowerCase() === 'true') {
+  dns.setDefaultResultOrder('ipv4first');
+}
 
 const app = express();
 app.use(express.json({ limit: '32kb' }));
@@ -14,15 +20,33 @@ function buildTransporter() {
   if (!host) return null;
 
   const port = Number(process.env.SMTP_PORT || 587);
-  const secure = String(process.env.SMTP_SECURE || '').toLowerCase() === 'true';
+  const secureEnv = String(process.env.SMTP_SECURE || '').trim().toLowerCase();
+  let secure = secureEnv === 'true';
+  if (secureEnv === 'false') {
+    secure = false;
+  } else if (secureEnv === '' && port === 465) {
+    secure = true;
+  }
+
   const user = (process.env.SMTP_USER || '').trim();
   const pass = (process.env.SMTP_PASS || '').trim();
+
+  const tls = {};
+  if (String(process.env.SMTP_TLS_REJECT_UNAUTHORIZED || 'true').toLowerCase() === 'false') {
+    tls.rejectUnauthorized = false;
+  }
+
+  const smtpDebug = String(process.env.SMTP_DEBUG || '').toLowerCase() === 'true';
 
   return nodemailer.createTransport({
     host,
     port,
     secure,
     auth: user ? { user, pass } : undefined,
+    requireTLS: port === 587 && !secure,
+    ...(Object.keys(tls).length ? { tls } : {}),
+    logger: smtpDebug,
+    debug: smtpDebug,
   });
 }
 
@@ -73,7 +97,15 @@ app.post('/api/contact-leads', async (req, res) => {
     });
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('sendMail error:', err);
+    const code = err.code || err.errno || '';
+    const resp = err.response || err.responseCode || '';
+    console.error(
+      'sendMail error:',
+      err.message,
+      code ? `code=${code}` : '',
+      resp ? `smtp=${String(resp).slice(0, 200)}` : '',
+      err.command ? `command=${err.command}` : ''
+    );
     return res.status(500).json({ error: 'mail send failed' });
   }
 });
