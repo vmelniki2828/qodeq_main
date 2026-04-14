@@ -1,4 +1,15 @@
 services:
+  contact-api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: qodeq-contact-api
+    restart: unless-stopped
+    env_file:
+      - ./server/.env
+    expose:
+      - "3001"
+
   react-build:
     build:
       context: .
@@ -11,6 +22,8 @@ services:
   nginx:
     image: nginx:latest
     container_name: nginx
+    depends_on:
+      - contact-api
     ports:
       - "80:80"
       - "443:443"
